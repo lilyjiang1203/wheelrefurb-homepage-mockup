@@ -64,6 +64,8 @@ const collections: Collection[] = [
   { name: "Miscellaneous", groups: [{ items: ["GunWash"] }] },
 ];
 
+const fallbackCollection: Collection = { name: "Paint", groups: [] };
+
 const primaryLinks = ["Home", "Products", "Collection", "About Us", "Contact Us"];
 
 function Brand() {
@@ -81,7 +83,7 @@ function Brand() {
 
 function DesktopCollections() {
   const [active, setActive] = useState(0);
-  const selected = collections[active];
+  const selected = collections[active] ?? fallbackCollection;
 
   return (
     <div className="collection-nav">
