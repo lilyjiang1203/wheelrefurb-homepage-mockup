@@ -1,6 +1,6 @@
 import { BadgeDollarSign, ArrowRight, Boxes, Headset } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import wholesaleWorkshop from "@/assets/wholesale-workshop.jpg";
+import wholesalePartners from "@/assets/wholesale-partners.jpg";
 
 /**
  * Placeholder benefits — swap the labels and copy for the company's real
@@ -54,8 +54,8 @@ export function WholesaleProgram() {
 
         <div className="wholesale-media">
           <img
-            src={wholesaleWorkshop}
-            alt="Technician spraying an alloy wheel in a professional refinishing workshop"
+            src={wholesalePartners}
+            alt="Refinished alloy wheels and refinishing supplies laid out on a workshop bench"
             loading="lazy"
             width={1280}
             height={1024}
