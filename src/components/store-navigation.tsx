@@ -66,7 +66,7 @@ const collections: Collection[] = [
 
 const fallbackCollection: Collection = { name: "Paint", groups: [] };
 
-const primaryLinks = ["Home", "Products", "Collection", "About Us", "Contact Us"];
+const primaryLinks = ["Home", "About Us", "Contact Us"];
 
 function Brand() {
   return (
@@ -88,9 +88,9 @@ function DesktopCollections() {
   return (
     <div className="collection-nav">
       <button className="nav-link collection-trigger active" type="button" aria-haspopup="true">
-        Collection <ChevronDown aria-hidden="true" />
+        Shop <ChevronDown aria-hidden="true" />
       </button>
-      <div className="collection-menu" aria-label="Collection menu">
+      <div className="collection-menu" aria-label="Shop menu">
         <div className="collection-level-one">
           <p className="menu-label">Shop collections</p>
           {collections.map((collection, index) => (
@@ -156,7 +156,7 @@ function MobileCollections() {
   return (
     <div className="mobile-collections">
       <button type="button" className="mobile-nav-row" onClick={() => setOpen((value) => !value)}>
-        Collection <ChevronDown className={open ? "rotated" : ""} aria-hidden="true" />
+        Shop <ChevronDown className={open ? "rotated" : ""} aria-hidden="true" />
       </button>
       {open ? (
         <div className="mobile-collection-list">
@@ -228,7 +228,6 @@ export function StoreNavigation() {
         <Brand />
         <div className="desktop-links">
           <a className="nav-link" href="#home">Home</a>
-          <a className="nav-link" href="#products">Products</a>
           <DesktopCollections />
           <a className="nav-link" href="#about-us">About Us</a>
           <a className="nav-link" href="#contact-us">Contact Us</a>
@@ -251,11 +250,11 @@ export function StoreNavigation() {
       </nav>
       {mobileOpen ? (
         <div className="mobile-menu" ref={mobilePanelRef}>
-          {primaryLinks.slice(0, 2).map((link) => (
+          {primaryLinks.slice(0, 1).map((link) => (
             <a className="mobile-nav-row" href={`#${link.toLowerCase()}`} key={link}>{link}</a>
           ))}
           <MobileCollections />
-          {primaryLinks.slice(3).map((link) => (
+          {primaryLinks.slice(1).map((link) => (
             <a className="mobile-nav-row" href={`#${link.toLowerCase().replaceAll(" ", "-")}`} key={link}>{link}</a>
           ))}
         </div>
