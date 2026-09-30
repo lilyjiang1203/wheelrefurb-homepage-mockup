@@ -158,7 +158,7 @@ export function ColorFinder() {
             {selectedBrand ? `Ready to view ${selectedBrand} wheel colors.` : "Select a vehicle brand first."}
           </p>
           <p className="finder-help">
-            Can't find your brand? <a href="#contact">Contact us for assistance.</a>
+            Can't find your brand? <a href="#contact-us">Contact us for assistance.</a>
           </p>
         </div>
       </div>
