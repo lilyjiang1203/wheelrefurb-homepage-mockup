@@ -3,9 +3,9 @@ import { Button } from "./ui/button";
 import bannerImage from "../assets/workshop-banner.jpg";
 
 const bannerFacts = [
-  { label: "OEM-Matched Finishes", text: "Professional wheel paint solutions" },
-  { label: "Professional-Grade", text: "Products for wheel refinishing" },
-  { label: "Complete System", text: "Paints, coatings & refinishing supplies" },
+  "Wheel paints & primers",
+  "Clear coats & powders",
+  "Refinishing supplies",
 ];
 
 export function HomeBanner() {
@@ -37,12 +37,7 @@ export function HomeBanner() {
         </div>
         <ul className="home-banner-facts">
           {bannerFacts.map((fact) => (
-            <li key={fact.label}>
-              <span className="home-banner-fact">
-                <span className="home-banner-fact-label">{fact.label}</span>
-                <span className="home-banner-fact-text">{fact.text}</span>
-              </span>
-            </li>
+            <li key={fact}>{fact}</li>
           ))}
         </ul>
       </div>
