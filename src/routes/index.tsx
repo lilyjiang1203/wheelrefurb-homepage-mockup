@@ -27,8 +27,8 @@ function Index() {
       <main>
         <HomeBanner />
         <ShopByCategory />
-        <ColorFinder />
         <FeaturedProducts />
+        <ColorFinder />
       </main>
     </div>
   );
