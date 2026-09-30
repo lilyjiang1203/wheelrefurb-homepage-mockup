@@ -113,18 +113,32 @@ function DesktopCollections() {
           </div>
           {selected.groups.length ? (
             <div className="submenu-groups">
-              {selected.groups.map((group, groupIndex) => (
-                <section key={`${selected.name}-${group.name ?? groupIndex}`}>
-                  {group.name ? <p>{group.name}</p> : null}
-                  <div className={group.items.length > 10 ? "submenu-items brand-grid" : "submenu-items"}>
-                    {group.items.map((item) => (
-                      <a href={`#${item.toLowerCase().replaceAll(" ", "-")}`} key={item}>
-                        {item}
-                      </a>
-                    ))}
-                  </div>
-                </section>
-              ))}
+              {selected.groups.map((group, groupIndex) => {
+                const hasNamedGroup = selected.groups.some((entry) => entry.name);
+                return (
+                  <section
+                    key={`${selected.name}-${group.name ?? groupIndex}`}
+                    className={group.name ? "submenu-group has-label" : "submenu-group no-label"}
+                  >
+                    {group.name ? <p>{group.name}</p> : null}
+                    <div
+                      className={
+                        group.items.length > 10
+                          ? "submenu-items brand-grid"
+                          : hasNamedGroup && !group.name
+                            ? "submenu-items standalone"
+                            : "submenu-items"
+                      }
+                    >
+                      {group.items.map((item) => (
+                        <a href={`#${item.toLowerCase().replaceAll(" ", "-")}`} key={item}>
+                          {item}
+                        </a>
+                      ))}
+                    </div>
+                  </section>
+                );
+              })}
             </div>
           ) : (
             <p className="empty-collection">Explore all {selected.name} products.</p>
@@ -161,16 +175,26 @@ function MobileCollections() {
                 {expanded ? (
                   <div className="mobile-submenu">
                     {collection.groups.length ? (
-                      collection.groups.map((group, index) => (
-                        <section key={`${collection.name}-${group.name ?? index}`}>
-                          {group.name ? <p>{group.name}</p> : null}
-                          {group.items.map((item) => (
-                            <a href={`#${item.toLowerCase().replaceAll(" ", "-")}`} key={item}>
-                              {item}
-                            </a>
-                          ))}
-                        </section>
-                      ))
+                      collection.groups.map((group, index) => {
+                        const hasNamedGroup = collection.groups.some((entry) => entry.name);
+                        return (
+                          <section
+                            key={`${collection.name}-${group.name ?? index}`}
+                            className={group.name ? "submenu-group has-label" : "submenu-group no-label"}
+                          >
+                            {group.name ? <p>{group.name}</p> : null}
+                            {group.items.map((item) => (
+                              <a
+                                href={`#${item.toLowerCase().replaceAll(" ", "-")}`}
+                                key={item}
+                                className={hasNamedGroup && !group.name ? "standalone-item" : undefined}
+                              >
+                                {item}
+                              </a>
+                            ))}
+                          </section>
+                        );
+                      })
                     ) : (
                       <a href={`#${collection.name.toLowerCase()}`}>View all {collection.name}</a>
                     )}
