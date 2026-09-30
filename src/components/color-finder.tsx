@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, Check, ChevronDown, Search } from "lucide-react";
-import finishedWheel from "../assets/finished-graphite-wheel.jpg";
+import finishedWheel from "../assets/wheel-finish-closeup.jpg";
 import { Button } from "./ui/button";
 
 const vehicleBrands = [
@@ -57,13 +57,14 @@ export function ColorFinder() {
           <div className="wheel-image-wrap">
             <img
               src={finishedWheel}
-              alt="Finished alloy wheel in a graphite and machined silver paint finish"
+              alt="Close-up of a professionally refinished alloy wheel spoke with metallic paint coating"
               width={1408}
               height={1104}
               loading="lazy"
             />
           </div>
-          <div className="finish-row" aria-label="Popular wheel paint finishes">
+          <p className="finish-heading">Popular wheel finishes</p>
+          <div className="finish-row">
             {finishes.map((finish) => (
               <div className="finish-option" key={finish.name}>
                 <span className={`finish-swatch ${finish.className}`} aria-hidden="true" />
@@ -76,7 +77,7 @@ export function ColorFinder() {
         <div className="finder-copy">
           <p className="finder-kicker">Color finder</p>
           <h1 id="color-finder-title">Find your wheel color</h1>
-          <p className="finder-intro">Find OEM-matched wheel paint for your vehicle.</p>
+          <p className="finder-intro">Browse wheel paint colors available for your vehicle brand.</p>
 
           <div className="brand-combobox" ref={containerRef}>
             <label htmlFor="vehicle-brand-search">Select your vehicle brand</label>
@@ -155,6 +156,9 @@ export function ColorFinder() {
           )}
           <p className="finder-status" role="status">
             {selectedBrand ? `Ready to view ${selectedBrand} wheel colors.` : "Select a vehicle brand first."}
+          </p>
+          <p className="finder-help">
+            Can't find your brand? <a href="#contact-us">Contact us for assistance.</a>
           </p>
         </div>
       </div>
