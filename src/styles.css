@@ -70,7 +70,7 @@
   --color-about-surface: var(--about-surface);
   --color-about-foreground: var(--about-foreground);
   --color-about-muted: var(--about-muted);
-  --color-about-card: var(--about-card);
+  --color-about-media: var(--about-media);
   --color-about-line: var(--about-line);
 }
 
@@ -115,11 +115,11 @@
   --banner-scrim: oklch(0.19 0.02 245);
   --banner-foreground: oklch(0.985 0.004 240);
   --banner-muted: oklch(0.9 0.012 240);
-  --about-surface: oklch(0.2 0.05 253);
+  --about-surface: oklch(0.17 0.004 265);
   --about-foreground: oklch(0.985 0.004 240);
-  --about-muted: oklch(0.83 0.02 240);
-  --about-card: oklch(0.26 0.05 252);
-  --about-line: oklch(0.38 0.05 250);
+  --about-muted: oklch(0.8 0.006 250);
+  --about-media: oklch(0.02 0 0);
+  --about-line: oklch(0.35 0.005 265);
 }
 
 .dark {
