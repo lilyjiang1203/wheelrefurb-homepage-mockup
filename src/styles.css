@@ -72,6 +72,10 @@
   --color-about-muted: var(--about-muted);
   --color-about-media: var(--about-media);
   --color-about-line: var(--about-line);
+  --color-wholesale-surface: var(--wholesale-surface);
+  --color-wholesale-foreground: var(--wholesale-foreground);
+  --color-wholesale-muted: var(--wholesale-muted);
+  --color-wholesale-line: var(--wholesale-line);
 }
 
 :root {
@@ -1438,5 +1442,152 @@ html { scroll-behavior: smooth; }
   .about-stat-label { font-size: 10px; letter-spacing: .08em; }
   .about-title { font-size: 26px; }
   .about-cta { width: 100%; justify-content: center; }
+}
+
+/* ── Wholesale Partner Program (dark B2B band) ───────── */
+@utility wholesale-section {
+  padding-block: clamp(48px, 5vw, 72px);
+}
+
+@utility wholesale-panel {
+  display: grid;
+  gap: clamp(24px, 3vw, 44px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  align-items: center;
+  background: var(--color-wholesale-surface);
+  border: 1px solid var(--color-wholesale-line);
+  border-radius: 8px;
+  padding: clamp(24px, 3vw, 40px);
+}
+
+@utility wholesale-copy {
+  min-width: 0;
+}
+
+@utility wholesale-label {
+  color: var(--color-brand);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+@utility wholesale-title {
+  color: var(--color-wholesale-foreground);
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 700;
+  letter-spacing: .04em;
+  line-height: 1.15;
+  margin: 10px 0 0;
+  text-transform: uppercase;
+}
+
+@utility wholesale-intro {
+  color: var(--color-wholesale-muted);
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 12px 0 0;
+  max-width: 52ch;
+}
+
+@utility wholesale-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 22px;
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+}
+
+@utility wholesale-benefit {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+@utility wholesale-benefit-icon {
+  align-items: center;
+  border: 1px solid var(--color-wholesale-line);
+  border-radius: 6px;
+  color: var(--color-brand);
+  display: flex;
+  height: 30px;
+  justify-content: center;
+  width: 30px;
+
+  & svg {
+    height: 15px;
+    width: 15px;
+  }
+}
+
+@utility wholesale-benefit-label {
+  color: var(--color-wholesale-foreground);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+@utility wholesale-actions {
+  margin-top: 24px;
+}
+
+@utility wholesale-cta {
+  /* .wholesale-cta doubled so it outranks the button variant's bg-primary */
+  &.wholesale-cta {
+    background: var(--color-brand);
+    color: var(--color-background);
+  }
+
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+
+  & svg {
+    height: 15px;
+    width: 15px;
+    transition: transform .2s ease;
+  }
+
+  &:hover {
+    background: color-mix(in oklab, var(--color-brand) 88%, var(--color-foreground));
+  }
+
+  &:hover svg {
+    transform: translateX(3px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-wholesale-foreground);
+    outline-offset: 3px;
+  }
+}
+
+@utility wholesale-media {
+  border-radius: 8px;
+  min-height: clamp(220px, 30vw, 340px);
+  overflow: hidden;
+
+  & img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 1050px) {
+  .wholesale-panel { grid-template-columns: minmax(0, 1fr); }
+  .wholesale-media { order: -1; min-height: clamp(200px, 40vw, 300px); }
+}
+
+@media (max-width: 620px) {
+  .wholesale-benefits { gap: 10px; }
+  .wholesale-title { font-size: 24px; }
+  .wholesale-cta { width: 100%; justify-content: center; }
 }
 
