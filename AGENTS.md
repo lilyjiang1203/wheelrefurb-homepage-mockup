@@ -11,3 +11,5 @@
 
 - Keep storefront navigation data in the navigation component; it is a static catalogue derived from the supplied workbook.
 - Keep the vehicle-brand color finder as a homepage section; its catalogue is static and collection links remain temporary until Shopify URLs are supplied.
+- Keep each homepage section in its own component under src/components and render them in display order from the index route, so section order is readable in one place.
+
