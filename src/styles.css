@@ -378,11 +378,26 @@
 
 @utility submenu-groups {
   padding-top: 20px;
-  display: grid;
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 20px 40px;
 
+  & .submenu-group.has-label { flex: 1 1 0; min-width: 300px; }
+  & .submenu-group.no-label { flex: 0 0 140px; }
   & section > p {
     margin: 0 0 12px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  & .no-label .submenu-items.standalone {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  & .no-label a {
+    color: var(--color-foreground);
     font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
@@ -461,6 +476,7 @@
   .mobile-submenu section { display: contents; }
   .mobile-submenu p { grid-column: 1 / -1; margin: 6px 0 0; font-weight: 700; }
   .mobile-submenu a { color: var(--color-muted-foreground); font-size: 14px; text-decoration: none; }
+  .mobile-submenu a.standalone-item { color: var(--color-foreground); font-weight: 700; text-transform: uppercase; }
 }
 
 @media (max-width: 520px) {
