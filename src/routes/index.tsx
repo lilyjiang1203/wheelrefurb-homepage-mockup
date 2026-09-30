@@ -33,6 +33,7 @@ function Index() {
         <ProfessionalSolutions />
         <ColorFinder />
         <AboutSection />
+        <WholesaleProgram />
       </main>
     </div>
   );
