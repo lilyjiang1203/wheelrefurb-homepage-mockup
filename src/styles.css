@@ -284,6 +284,9 @@
   }
 }
 
+.collection-trigger.active::after { inset-inline: 0; }
+
+
 @utility nav-actions {
   justify-self: end;
   display: flex;
