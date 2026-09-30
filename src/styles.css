@@ -124,6 +124,10 @@
   --about-muted: oklch(0.8 0.006 250);
   --about-media: oklch(0.02 0 0);
   --about-line: oklch(0.35 0.005 265);
+  --wholesale-surface: oklch(0.14 0.005 265);
+  --wholesale-foreground: oklch(0.985 0.004 240);
+  --wholesale-muted: oklch(0.78 0.008 250);
+  --wholesale-line: oklch(0.32 0.006 265);
 }
 
 .dark {
