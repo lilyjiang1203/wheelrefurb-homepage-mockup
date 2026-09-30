@@ -404,7 +404,7 @@
   color: var(--color-muted-foreground);
 }
 
-@utility mobile-menu-trigger { display: none !important; }
+@utility mobile-menu-trigger { display: none; }
 @utility mobile-menu { display: none; }
 @utility nav-preview-space { min-height: calc(100vh - 113px); }
 
@@ -415,7 +415,7 @@
   .desktop-links { display: none; }
   .nav-actions > a:nth-child(2),
   .nav-actions > a:nth-child(3) { display: none; }
-  .mobile-menu-trigger { display: grid !important; }
+  .mobile-menu-trigger { display: grid; }
   .mobile-menu {
     display: block;
     position: absolute;
