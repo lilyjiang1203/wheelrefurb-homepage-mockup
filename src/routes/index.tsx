@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { StoreNavigation } from "../components/store-navigation";
 import { ColorFinder } from "../components/color-finder";
 import { HomeBanner } from "../components/home-banner";
+import { ShopByCategory } from "../components/shop-by-category";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,7 +25,9 @@ function Index() {
       <StoreNavigation />
       <main>
         <HomeBanner />
+        <ShopByCategory />
         <ColorFinder />
+
       </main>
     </div>
   );
