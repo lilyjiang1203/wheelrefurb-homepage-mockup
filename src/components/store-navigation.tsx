@@ -87,7 +87,7 @@ function DesktopCollections() {
 
   return (
     <div className="collection-nav">
-      <button className="nav-link collection-trigger" type="button" aria-haspopup="true">
+      <button className="nav-link collection-trigger active" type="button" aria-haspopup="true">
         Collection <ChevronDown aria-hidden="true" />
       </button>
       <div className="collection-menu" aria-label="Collection menu">
@@ -231,7 +231,7 @@ export function StoreNavigation() {
           <a className="nav-link" href="#products">Products</a>
           <DesktopCollections />
           <a className="nav-link" href="#about-us">About Us</a>
-          <a className="nav-link active" href="#contact-us">Contact Us</a>
+          <a className="nav-link" href="#contact-us">Contact Us</a>
         </div>
         <div className="nav-actions">
           <a href="#search" aria-label="Search"><Search /></a>
