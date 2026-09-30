@@ -947,3 +947,177 @@ html { scroll-behavior: smooth; }
   .category-intro { font-size: 16px; }
 }
 
+@utility featured-section {
+  scroll-margin-top: 112px;
+  padding: clamp(56px, 6vw, 96px) clamp(24px, 5vw, 76px);
+  background: var(--color-background);
+}
+
+@utility featured-inner {
+  width: min(1280px, 100%);
+  margin-inline: auto;
+}
+
+@utility featured-head {
+  max-width: 620px;
+}
+
+@utility featured-title {
+  margin: 0;
+  color: var(--color-foreground);
+  font-size: clamp(30px, 3.4vw, 46px);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -.01em;
+  text-transform: uppercase;
+}
+
+@utility featured-intro {
+  margin: 12px 0 0;
+  color: var(--color-muted-foreground);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+@utility featured-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 1.6vw, 24px);
+  margin: clamp(28px, 3.5vw, 44px) 0 0;
+  padding: 0;
+  list-style: none;
+
+  & li { min-width: 0; display: flex; }
+}
+
+@utility featured-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  transition: border-color .18s ease, box-shadow .18s ease;
+
+  &:hover {
+    border-color: color-mix(in oklab, var(--color-brand) 40%, var(--color-border));
+    box-shadow: 0 12px 28px -20px var(--color-menu-shadow);
+  }
+
+  &:hover .featured-media img { transform: scale(1.045); }
+  &:hover .featured-cta svg { transform: translateX(4px); }
+  &:focus-visible { outline: 2px solid var(--color-brand); outline-offset: 3px; }
+}
+
+@utility featured-media {
+  display: block;
+  flex: none;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--color-muted);
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .35s ease;
+  }
+}
+
+@utility featured-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 18px 20px;
+}
+
+@utility featured-label {
+  color: var(--color-brand);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+@utility featured-name {
+  color: var(--color-foreground);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+@utility featured-finish {
+  color: var(--color-muted-foreground);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+@utility featured-price {
+  margin-top: auto;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-muted-foreground);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+@utility featured-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 12px;
+  color: var(--color-brand);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+
+  & svg { width: 14px; height: 14px; transition: transform .18s ease; }
+}
+
+@utility featured-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(28px, 3.5vw, 44px);
+}
+
+@utility featured-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  height: 52px;
+  padding: 0 30px;
+  border-radius: 4px;
+  background: var(--color-brand);
+  color: var(--color-background);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background .18s ease;
+
+  &:hover { background: color-mix(in oklab, var(--color-brand) 88%, var(--color-foreground)); }
+  &:hover svg { transform: translateX(4px); }
+  &:focus-visible { outline: 2px solid var(--color-brand); outline-offset: 3px; }
+
+  & svg { width: 16px; height: 16px; transition: transform .18s ease; }
+}
+
+@media (max-width: 1050px) {
+  .featured-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 620px) {
+  .featured-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .featured-title { font-size: 28px; }
+  .featured-intro { font-size: 16px; }
+  .featured-all { width: 100%; justify-content: center; }
+}
+

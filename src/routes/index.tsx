@@ -3,6 +3,7 @@ import { StoreNavigation } from "../components/store-navigation";
 import { ColorFinder } from "../components/color-finder";
 import { HomeBanner } from "../components/home-banner";
 import { ShopByCategory } from "../components/shop-by-category";
+import { FeaturedProducts } from "../components/featured-products";
 
 
 export const Route = createFileRoute("/")({
@@ -27,7 +28,7 @@ function Index() {
         <HomeBanner />
         <ShopByCategory />
         <ColorFinder />
-
+        <FeaturedProducts />
       </main>
     </div>
   );
