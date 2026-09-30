@@ -1,1 +1,1 @@
-- [ ] Paint menu: BBS and OZ Racing should sit in their own labeled group at the same level as Car Brand (group name TBD from spreadsheet)
+- [x] Paint menu: BBS and OZ Racing rendered as top-level siblings of Car Brand (verified on desktop and mobile)
