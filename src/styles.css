@@ -67,6 +67,11 @@
   --color-banner-scrim: var(--banner-scrim);
   --color-banner-foreground: var(--banner-foreground);
   --color-banner-muted: var(--banner-muted);
+  --color-about-surface: var(--about-surface);
+  --color-about-foreground: var(--about-foreground);
+  --color-about-muted: var(--about-muted);
+  --color-about-card: var(--about-card);
+  --color-about-line: var(--about-line);
 }
 
 :root {
@@ -110,6 +115,11 @@
   --banner-scrim: oklch(0.19 0.02 245);
   --banner-foreground: oklch(0.985 0.004 240);
   --banner-muted: oklch(0.9 0.012 240);
+  --about-surface: oklch(0.2 0.05 253);
+  --about-foreground: oklch(0.985 0.004 240);
+  --about-muted: oklch(0.83 0.02 240);
+  --about-card: oklch(0.26 0.05 252);
+  --about-line: oklch(0.38 0.05 250);
 }
 
 .dark {
