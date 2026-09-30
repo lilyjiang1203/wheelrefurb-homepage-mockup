@@ -1,1 +1,2 @@
 - [x] Paint menu: BBS and OZ Racing rendered as top-level siblings of Car Brand (verified on desktop and mobile)
+- [ ] Move Find Your Color onto the homepage with searchable brand filtering and wheel finish swatches

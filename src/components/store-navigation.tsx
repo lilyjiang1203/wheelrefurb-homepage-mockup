@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "@tanstack/react-router";
 import {
   ChevronDown,
   ChevronRight,
@@ -82,14 +81,14 @@ function Brand() {
   );
 }
 
-function DesktopCollections({ navActive }: { navActive: "shop" | "finder" }) {
+function DesktopCollections() {
   const [active, setActive] = useState(0);
   const selected = collections[active] ?? fallbackCollection;
 
   return (
     <div className="collection-nav">
       <button
-        className={`nav-link collection-trigger${navActive === "shop" ? " active" : ""}`}
+        className="nav-link collection-trigger active"
         type="button"
         aria-haspopup="true"
       >
@@ -214,7 +213,7 @@ function MobileCollections() {
   );
 }
 
-export function StoreNavigation({ active = "shop" }: { active?: "shop" | "finder" }) {
+export function StoreNavigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const mobilePanelRef = useRef<HTMLDivElement>(null);
 
@@ -233,13 +232,8 @@ export function StoreNavigation({ active = "shop" }: { active?: "shop" | "finder
         <Brand />
         <div className="desktop-links">
           <a className="nav-link" href="#home">Home</a>
-          <DesktopCollections navActive={active} />
-          <Link
-            to="/find-your-color"
-            className={active === "finder" ? "nav-link active" : "nav-link"}
-          >
-            Find Your Color
-          </Link>
+          <DesktopCollections />
+          <a className="nav-link" href="/#find-your-color">Find Your Color</a>
           <a className="nav-link" href="#about-us">About Us</a>
           <a className="nav-link" href="#contact-us">Contact Us</a>
         </div>
@@ -265,12 +259,9 @@ export function StoreNavigation({ active = "shop" }: { active?: "shop" | "finder
             <a className="mobile-nav-row" href={`#${link.toLowerCase()}`} key={link}>{link}</a>
           ))}
           <MobileCollections />
-          <Link
-            to="/find-your-color"
-            className={active === "finder" ? "mobile-nav-row active" : "mobile-nav-row"}
-          >
+          <a className="mobile-nav-row" href="/#find-your-color" onClick={() => setMobileOpen(false)}>
             Find Your Color
-          </Link>
+          </a>
           {primaryLinks.slice(1).map((link) => (
             <a className="mobile-nav-row" href={`#${link.toLowerCase().replaceAll(" ", "-")}`} key={link}>{link}</a>
           ))}
