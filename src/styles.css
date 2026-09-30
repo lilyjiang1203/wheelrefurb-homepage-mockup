@@ -828,8 +828,6 @@ html { scroll-behavior: smooth; }
   }
   .home-banner-title { font-size: 34px; }
   .home-banner-facts { flex-direction: column; gap: 12px; }
-  .home-banner-fact-label { font-size: 11px; }
-  .home-banner-fact-text { font-size: 12px; }
 }
 
 @utility category-section {
