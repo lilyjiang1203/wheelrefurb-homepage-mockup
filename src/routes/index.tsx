@@ -5,6 +5,7 @@ import { HomeBanner } from "../components/home-banner";
 import { ShopByCategory } from "../components/shop-by-category";
 import { FeaturedProducts } from "../components/featured-products";
 import { ProfessionalSolutions } from "../components/professional-solutions";
+import { AboutSection } from "../components/about-section";
 
 
 export const Route = createFileRoute("/")({
@@ -31,6 +32,7 @@ function Index() {
         <FeaturedProducts />
         <ProfessionalSolutions />
         <ColorFinder />
+        <AboutSection />
       </main>
     </div>
   );
