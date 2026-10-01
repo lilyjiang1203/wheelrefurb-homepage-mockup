@@ -1727,16 +1727,6 @@ html { scroll-behavior: smooth; }
   text-transform: uppercase;
 }
 
-@utility ah-scale {
-  position: absolute;
-  z-index: 1;
-  inset-inline: 0;
-  bottom: 0;
-  height: 24px;
-  border-top: 1px solid color-mix(in oklab, var(--color-background) 40%, transparent);
-  background: linear-gradient(180deg, transparent, color-mix(in oklab, var(--color-background) 62%, transparent)),
-    repeating-linear-gradient(90deg, color-mix(in oklab, var(--color-background) 55%, transparent) 0 1px, transparent 1px 28px);
-}
 
 @utility who-section {
   scroll-margin-top: 112px;
