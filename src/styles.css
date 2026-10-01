@@ -2352,7 +2352,7 @@ html { scroll-behavior: smooth; }
   .ed-spec div + div { border-left: 0; padding-left: 0; border-top: 1px solid var(--color-border); }
   .ah-display { font-size: clamp(28px, 8.2vw, 38px); letter-spacing: -.025em; }
   .ah-kicker { font-size: 11px; letter-spacing: .18em; }
-  .ah-meta { flex-wrap: wrap; align-items: flex-start; row-gap: 6px; font-size: 10px; letter-spacing: .12em; }
+  .ah-meta { flex-wrap: wrap; align-items: flex-start; row-gap: 6px; margin-top: 18px; padding-top: 15px; font-size: 10px; letter-spacing: .12em; }
   .ah-dot { align-self: flex-start; margin-top: 3px; }
   .ah-meta-sep { display: none; }
   .ah-meta-field { flex-basis: 100%; margin-left: 16px; }
