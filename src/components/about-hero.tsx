@@ -1,5 +1,3 @@
-import { ArrowRight } from "lucide-react";
-import { Button } from "./ui/button";
 import heroImage from "../assets/about-hero.jpg";
 
 export function AboutHero() {
@@ -15,13 +13,6 @@ export function AboutHero() {
           and coating company, supplying OEM-quality wheel paints, primers,
           clear coats, powders and refinishing supplies.
         </p>
-        <div className="about-hero-actions">
-          <Button asChild size="lg" className="about-hero-cta">
-            <a href="/collections/all">
-              Shop products <ArrowRight aria-hidden="true" />
-            </a>
-          </Button>
-        </div>
         <img
           className="about-hero-media"
           src={heroImage}
