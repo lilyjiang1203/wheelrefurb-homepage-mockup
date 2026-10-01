@@ -34,24 +34,30 @@ export function FreilackeSection() {
             </p>
           </div>
           <div className="fl-band-media">
-            <figure className="fl-band-tile">
-              <img
-                src={freilackeSign.url}
-                alt="FreiLacke lettering on a wall at the coating manufacturer"
-                width={1920}
-                height={1280}
-                loading="lazy"
-              />
-            </figure>
-            <figure className="fl-band-tile">
-              <img
-                src={coatingPowders.url}
-                alt="Colored coating powders in sample bowls"
-                width={494}
-                height={330}
-                loading="lazy"
-              />
-            </figure>
+            <div className="fl-band-step">
+              <figure className="fl-band-tile">
+                <img
+                  src={freilackeSign.url}
+                  alt="FreiLacke lettering on a wall at the coating manufacturer"
+                  width={1920}
+                  height={1280}
+                  loading="lazy"
+                />
+              </figure>
+              <p className="fl-band-label">The manufacturer</p>
+            </div>
+            <div className="fl-band-step">
+              <figure className="fl-band-tile">
+                <img
+                  src={coatingPowders.url}
+                  alt="Colored coating powders in sample bowls"
+                  width={494}
+                  height={330}
+                  loading="lazy"
+                />
+              </figure>
+              <p className="fl-band-label">Coating systems</p>
+            </div>
           </div>
         </div>
         <dl className="fl-band-spec">
