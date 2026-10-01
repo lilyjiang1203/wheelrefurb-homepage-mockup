@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { StoreNavigation } from "../components/store-navigation";
 import { AboutHero } from "../components/about-hero";
 import { WhoWeAre } from "../components/who-we-are";
-import { CoatingSolutions } from "../components/coating-solutions";
+import { FreilackeSection } from "../components/freilacke-section";
 import { WhyChoose } from "../components/why-choose";
 import { AboutPageCta } from "../components/about-page-cta";
 
@@ -35,7 +35,7 @@ function AboutPage() {
       <main>
         <AboutHero />
         <WhoWeAre />
-        <CoatingSolutions />
+        <FreilackeSection />
         <WhyChoose />
         <AboutPageCta />
       </main>
