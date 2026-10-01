@@ -2284,3 +2284,5 @@ html { scroll-behavior: smooth; }
   .fl-ed-themes, .ed-spec { grid-template-columns: minmax(0, 1fr); }
   .ed-spec div + div { border-left: 0; padding-left: 0; border-top: 1px solid var(--color-border); }
 }
+.fl-ed-media .ed-caption { padding-left: clamp(24px, 5vw, 76px); }
+@media (max-width: 1050px) { .fl-ed-media .ed-caption { padding-left: 0; } }
