@@ -1,3 +1,6 @@
+import powdersAsset from "../assets/coating-powders.jpg.asset.json";
+const powdersImage = powdersAsset.url;
+
 export function WhyChoose() {
   return (
     <section className="ed-close" aria-labelledby="close-title">
@@ -18,6 +21,15 @@ export function WhyChoose() {
             Customized solutions
           </p>
         </div>
+        <figure className="ed-close-media">
+          <img
+            src={powdersImage}
+            alt="Pans of colored coating powder"
+            width={500}
+            height={500}
+            loading="lazy"
+          />
+        </figure>
       </div>
     </section>
   );
