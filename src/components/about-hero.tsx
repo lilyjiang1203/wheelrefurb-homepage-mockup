@@ -1,4 +1,4 @@
-import boothImg from "../assets/about-hero-booth.webp.asset.json";
+import finishesImg from "../assets/about-hero-finishes.jpg";
 
 export function AboutHero() {
   return (
@@ -11,10 +11,10 @@ export function AboutHero() {
       </div>
       <figure className="ah-media">
         <img
-          src={boothImg.url}
-          alt="A masked wheel being coated in a workshop spray booth"
+          src={finishesImg}
+          alt="A row of alloy wheels shown in different coating finishes"
           width={1920}
-          height={865}
+          height={768}
           loading="eager"
           fetchPriority="high"
           decoding="async"
@@ -22,17 +22,17 @@ export function AboutHero() {
       </figure>
       <div className="ah-inner ah-foot">
         <p className="ah-lede">
-          Professional wheel refinishing, restoration and coating solutions
-          backed by advanced coating technology and industry expertise.
+          Professional wheel refinishing and coating solutions backed by
+          advanced coating technology and industry expertise.
         </p>
         <dl className="ah-facts">
           <div>
-            <dt>Location</dt>
-            <dd>Edmonton, Alberta</dd>
+            <dt>Specialty</dt>
+            <dd>Wheel Refinishing &amp; Coating</dd>
           </div>
           <div>
-            <dt>Field</dt>
-            <dd>Professional wheel refinishing</dd>
+            <dt>Serving</dt>
+            <dd>Professionals &amp; Wheel Refinishers</dd>
           </div>
         </dl>
       </div>

@@ -13,7 +13,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "FreiLack WheelRefurb is an authorized FreiLacke partner in Edmonton, Alberta — professional automotive wheel refinishing, restoration and coating with OEM-matched wheel paints, clear coats and powders.",
+          "FreiLack WheelRefurb is an authorized FreiLacke partner — professional wheel refinishing and coating solutions with OEM-matched wheel paints, clear coats and powders, serving professionals and wheel refinishers.",
       },
       { property: "og:title", content: "About Us — FreiLack WheelRefurb" },
       {
