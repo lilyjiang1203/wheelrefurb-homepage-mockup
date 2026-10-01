@@ -13,15 +13,14 @@ export function WhoWeAre() {
             Focused on the finish.
           </h2>
           <p className="ed-lede">
-            Wheel Refurb specializes in professional automotive wheel
-            refinishing, restoration and coating. From surface preparation to
-            the final finish, we focus on consistent results, durable
-            protection and attention to detail.
+            From surface preparation to the final coating, every stage matters.
+            We focus on the materials, processes and finishing systems required
+            to achieve consistent, durable results for automotive wheels.
           </p>
           <p className="ed-body">
-            We also supply professional coating products for wheel
-            refinishing, including paints, primers, clear coats and powders
-            from established manufacturers.
+            Alongside our refinishing expertise, we supply professional paints,
+            primers, clear coats and powders selected for wheel finishing
+            applications.
           </p>
           <ul className="ed-disciplines" aria-label="What we do">
             {disciplines.map((d) => (
