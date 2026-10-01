@@ -31,8 +31,8 @@ export function AboutHero() {
             <dd>Wheel Refinishing &amp; Coating</dd>
           </div>
           <div>
-            <dt>Serving</dt>
-            <dd>Professionals &amp; Wheel Refinishers</dd>
+            <dt>Products</dt>
+            <dd>Paints, Primers, Clear Coats &amp; Powders</dd>
           </div>
         </dl>
       </div>
