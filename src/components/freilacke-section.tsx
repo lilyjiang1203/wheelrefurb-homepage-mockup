@@ -1,4 +1,3 @@
-import freilackeLogo from "../assets/FreiLacke_Logo.png.asset.json";
 import freilackeSign from "../assets/freilacke-sign.webp.asset.json";
 import coatingPowders from "../assets/coating-powders-clean.jpg.asset.json";
 
@@ -13,17 +12,7 @@ export function FreilackeSection() {
   return (
     <section className="fl-band" aria-labelledby="fl-title">
       <div className="ed-wrap">
-        <div className="fl-band-head">
-          <p className="ed-index fl-band-index">Coating technology / FreiLacke</p>
-          <img
-            className="fl-band-logo"
-            src={freilackeLogo.url}
-            alt="FreiLacke"
-            width={1972}
-            height={477}
-            loading="lazy"
-          />
-        </div>
+        <p className="ed-index fl-band-index">Coating technology / FreiLacke</p>
         <div className="fl-band-cols">
           <div>
             <p className="fl-band-status">Authorized FreiLacke Partner</p>
