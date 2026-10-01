@@ -2349,6 +2349,7 @@ html { scroll-behavior: smooth; }
   .fl-band-spec { grid-template-columns: minmax(0, 1fr); }
   .fl-band-status { letter-spacing: .16em; }
   .fl-band-media { flex-direction: column; }
+  .fl-band-tile { flex: 0 0 auto; }
   .ah-display { font-size: clamp(26px, 7vw, 30px); max-width: 12ch; }
   .ah-kicker { font-size: 11px; }
   .ah-facts { grid-template-columns: minmax(0, 1fr); gap: 16px; }
