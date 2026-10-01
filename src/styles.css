@@ -2085,3 +2085,91 @@ html { scroll-behavior: smooth; }
 }
 
 
+
+/* FreiLacke + Cerakote brand sections */
+@utility fl-section {
+  padding: clamp(56px, 6vw, 96px) clamp(24px, 5vw, 76px);
+  background: color-mix(in oklab, var(--color-brand) 4%, var(--color-background));
+  border-block: 1px solid var(--color-border);
+}
+@utility fl-top {
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 64px); align-items: center;
+  & .coating-intro + .coating-intro { margin-top: 14px; }
+}
+@utility fl-logo {
+  display: inline-grid; place-items: center; min-width: 220px; height: 72px; padding: 0 28px;
+  background: var(--color-card); border: 1px solid var(--color-border); border-radius: 4px;
+  margin-bottom: 26px;
+}
+@utility fl-kicker { display: flex; align-items: center; gap: 8px; }
+@utility fl-media {
+  margin: 0; overflow: hidden; border-radius: 4px; border: 1px solid var(--color-border);
+  & img { display: block; width: 100%; height: 100%; aspect-ratio: 5 / 4; object-fit: cover; }
+}
+@utility fl-process {
+  margin-top: clamp(40px, 5vw, 64px); padding: clamp(22px, 2.6vw, 34px);
+  background: var(--color-card); border: 1px solid var(--color-border); border-radius: 4px;
+}
+@utility fl-process-label {
+  margin: 0 0 20px; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--color-foreground);
+}
+@utility fl-steps {
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; margin: 0; padding: 0; list-style: none;
+}
+@utility fl-step {
+  position: relative; display: flex; flex-direction: column; gap: 6px; padding: 18px 18px 0 0;
+  border-top: 2px solid var(--color-border);
+  &::before {
+    content: ""; position: absolute; top: -7px; left: 0; width: 12px; height: 12px; border-radius: 999px;
+    background: var(--color-brand); box-shadow: 0 0 0 4px var(--color-card);
+  }
+}
+@utility fl-step-num { color: var(--color-brand); font-size: 13px; font-weight: 800; letter-spacing: .1em; }
+@utility fl-step-title { color: var(--color-foreground); font-size: 15px; font-weight: 700; }
+@utility fl-step-text { color: var(--color-muted-foreground); font-size: 14px; line-height: 1.5; }
+@utility fl-benefits {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2vw, 24px);
+  margin: clamp(28px, 3.5vw, 40px) 0 0; padding: 0; list-style: none;
+}
+@utility fl-benefit {
+  display: flex; flex-direction: column; gap: 8px; padding: 24px;
+  background: var(--color-card); border: 1px solid var(--color-border); border-radius: 4px;
+  transition: border-color .18s ease, box-shadow .18s ease;
+  &:hover { border-color: color-mix(in oklab, var(--color-brand) 40%, var(--color-border)); box-shadow: 0 12px 28px -20px var(--color-menu-shadow); }
+}
+@utility fl-benefit-icon {
+  display: grid; place-items: center; width: 40px; height: 40px; flex: none; border-radius: 4px;
+  color: var(--color-brand); background: color-mix(in oklab, var(--color-brand) 10%, transparent);
+  margin-bottom: 6px;
+}
+@utility fl-benefit-label { display: block; color: var(--color-foreground); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+@utility fl-benefit-text { display: block; margin-top: 4px; color: var(--color-muted-foreground); font-size: 14px; line-height: 1.55; }
+@utility ck-section { padding: clamp(56px, 6vw, 96px) clamp(24px, 5vw, 76px); background: var(--color-background); }
+@utility ck-grid {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(28px, 4vw, 64px); align-items: center;
+}
+@utility ck-media {
+  margin: 0; overflow: hidden; border-radius: 4px; border: 1px solid var(--color-border);
+  & img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+}
+@utility ck-features {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 24px; margin: 28px 0 0; padding: 0; list-style: none;
+}
+@utility ck-feature {
+  display: flex; gap: 14px; align-items: flex-start;
+  & .fl-benefit-icon { width: 34px; height: 34px; margin: 0; }
+}
+@media (max-width: 1050px) {
+  .fl-top, .ck-grid { grid-template-columns: minmax(0, 1fr); }
+  .fl-steps { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .fl-step { border-top: 0; border-left: 2px solid var(--color-border); padding: 0 0 20px 22px; }
+  .fl-step::before { top: 2px; left: -7px; }
+  .fl-benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ck-media img { aspect-ratio: 16 / 10; }
+}
+@media (max-width: 620px) {
+  .fl-benefits, .ck-features { grid-template-columns: minmax(0, 1fr); }
+  .fl-logo { min-width: 0; width: 100%; }
+}
