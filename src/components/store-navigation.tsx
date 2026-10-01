@@ -235,7 +235,12 @@ export function StoreNavigation() {
             Home
           </Link>
           <DesktopCollections />
-          <Link className="nav-link" to="/" hash="find-your-color">
+          <Link
+            className="nav-link"
+            to="/"
+            hash="find-your-color"
+            activeOptions={{ exact: true, includeHash: true }}
+          >
             Find Your Color
           </Link>
           <Link className="nav-link" to="/about" activeProps={{ className: "active" }}>
