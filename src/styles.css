@@ -2231,6 +2231,11 @@ html { scroll-behavior: smooth; }
   display: block; box-sizing: content-box; width: auto; height: clamp(30px, 2.6vw, 42px);
   padding: 8px 14px; border: 1px solid var(--color-border); border-radius: 4px; background: var(--color-card);
 }
+@utility fl-ed-status {
+  margin: clamp(24px, 2.6vw, 34px) 0 0; color: var(--color-brand);
+  font-size: clamp(13px, 1.15vw, 16px); font-weight: 800; letter-spacing: .2em;
+  text-transform: uppercase;
+}
 @utility fl-ed-grid {
   display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 80px);
   margin-top: clamp(40px, 5vw, 72px); align-items: start;
