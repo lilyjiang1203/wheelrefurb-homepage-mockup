@@ -24,3 +24,4 @@
 - [x] 2026-10-01 — User supplied JT20-704.jpg, lightly edited (cropped to 1024x1280, slight contrast lift) as the Who We Are photo.
 - [x] 2026-10-01 — Removed the "02 — Coating technology / FreiLacke" section from /about; Cerakote renumbered to 02 and "Back to the wheel" to 03 so the sequence stays contiguous (verified 1280/927/390, no console errors).
 - [x] 2026-10-01 — Section 03 ("Back to the wheel") on /about: all text centered in one narrower centered column (verified 1280/927/390, no console errors).
+- [ ] 2026-10-01 — Section 02 text: user supplied a FreiLacke copy block (Authorized FreiLacke Partner / More than paint / 1926, 100 years, 30+ years, complete systems, tested & supported) — placement to be confirmed.
