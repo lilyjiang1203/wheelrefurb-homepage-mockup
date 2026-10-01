@@ -2222,8 +2222,8 @@ html { scroll-behavior: smooth; }
 }
 @utility fl-ed-head { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
 @utility fl-ed-logo {
-  padding: 12px 22px; border: 1px solid var(--color-border); border-radius: 4px; background: var(--color-card);
-  color: var(--color-foreground); font-size: 15px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase;
+  display: block; width: auto; height: clamp(28px, 2.3vw, 38px);
+  padding: 8px 14px; border: 1px solid var(--color-border); border-radius: 4px; background: var(--color-card);
 }
 @utility fl-ed-grid {
   display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 80px);
@@ -2261,8 +2261,8 @@ html { scroll-behavior: smooth; }
 @utility ck-ed-inner { padding: clamp(56px, 7vw, 112px) clamp(24px, 5vw, 76px); }
 @utility ck-ed-index { color: var(--color-about-muted); }
 @utility ck-ed-logo {
-  display: inline-block; margin-top: 28px; padding: 10px 20px; border: 1px solid var(--color-about-line); border-radius: 4px;
-  color: var(--color-about-foreground); font-size: 14px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase;
+  display: block; width: auto; height: clamp(26px, 2.1vw, 34px); margin-top: 28px;
+  padding: 8px 14px; border-radius: 4px; background: var(--color-card);
 }
 @utility ck-ed-display { color: var(--color-about-foreground); font-size: clamp(38px, 5vw, 76px); }
 @utility ck-ed-lede { margin: 24px 0 0; max-width: 480px; color: var(--color-about-muted); font-size: 17px; line-height: 1.6; }
