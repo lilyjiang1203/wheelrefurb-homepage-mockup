@@ -13,7 +13,7 @@ export function FreilackeSection() {
     <section className="fl-band" aria-labelledby="fl-title">
       <div className="ed-wrap">
         <div className="fl-band-head">
-          <p className="ed-index fl-band-index">02 — Coating technology / FreiLacke</p>
+          <p className="ed-index fl-band-index">Coating technology / FreiLacke</p>
           <img
             className="fl-band-logo"
             src={freilackeLogo.url}

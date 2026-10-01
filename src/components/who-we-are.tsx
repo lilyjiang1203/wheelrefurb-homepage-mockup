@@ -8,7 +8,7 @@ export function WhoWeAre() {
     <section className="ed-intro" aria-labelledby="who-title">
       <div className="ed-wrap ed-intro-grid">
         <div className="ed-intro-copy">
-          <p className="ed-index">01 — Wheel Refurb</p>
+          <p className="ed-index">Wheel Refurb</p>
           <h2 id="who-title" className="ed-h2">
             Focused on the finish.
           </h2>
