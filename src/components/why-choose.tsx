@@ -10,7 +10,7 @@ export function WhyChoose() {
   return (
     <section className="ed-close" aria-labelledby="close-title">
       <div className="ed-wrap ed-close-grid">
-        <p className="ed-index">03 — Back to the wheel</p>
+        <p className="ed-index">Back to the wheel</p>
         <div>
           <h2 id="close-title" className="ed-h2">
             The right system, applied with care.
