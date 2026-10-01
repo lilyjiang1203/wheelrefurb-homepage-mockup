@@ -2333,7 +2333,15 @@ html { scroll-behavior: smooth; }
 @utility ck-ed-title { display: block; color: var(--color-about-foreground); font-size: 15px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
 @utility ck-ed-text { display: block; margin-top: 4px; color: var(--color-about-muted); font-size: 14px; line-height: 1.55; }
 @utility ed-close { padding: clamp(64px, 8vw, 128px) clamp(24px, 5vw, 76px) clamp(32px, 4vw, 56px); }
-@utility ed-close-grid { display: grid; grid-template-columns: minmax(0, .4fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 80px); & .ed-h2 { margin-top: 0; } }
+@utility ed-close-grid {
+  width: min(920px, 100%);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 34px);
+  text-align: center;
+  & .ed-h2 { margin-top: 0; }
+  & .ed-lede { margin-inline: auto; max-width: 58ch; }
+}
 @utility ed-close-note { margin-top: 28px; color: var(--color-foreground); font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 @media (max-width: 1050px) {
   .ed-intro-grid, .fl-ed-grid, .ck-ed, .ed-close-grid { grid-template-columns: minmax(0, 1fr); }
