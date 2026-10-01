@@ -36,9 +36,6 @@ export function AboutHero() {
             fetchPriority="high"
             decoding="async"
           />
-          <figcaption className="ah-figcaption">
-            In the booth — masked wheel, mid-application
-          </figcaption>
         </figure>
       </div>
     </section>
