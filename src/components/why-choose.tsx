@@ -36,7 +36,7 @@ export function WhyChoose() {
               loading="lazy"
             />
           </figure>
-          <figure className="ed-close-tile">
+          <figure className="ed-close-tile ed-close-tile-sign">
             <img
               src={signImage}
               alt="FreiLacke signage with its color band"
