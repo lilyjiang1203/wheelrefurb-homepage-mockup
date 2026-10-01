@@ -2334,5 +2334,6 @@ html { scroll-behavior: smooth; }
   .ah-kicker { font-size: 11px; }
   .ah-facts { grid-template-columns: minmax(0, 1fr); gap: 5px; }
   .ah-facts > div + div { padding-left: 0; border-left: 0; }
-  .ed-close-strip img { aspect-ratio: 1 / 1; }
+  .ed-close-strip { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .ed-close-strip img { aspect-ratio: 16 / 9; }
 }
