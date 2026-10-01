@@ -2240,6 +2240,12 @@ html { scroll-behavior: smooth; }
 @utility ed-intro-media {
   margin: 0; & img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 4px; }
 }
+
+/* Section-scoped: tighter rhythm between headline and copy (01 — Wheel Refurb only) */
+.ed-intro .ed-h2 { margin-top: 16px; }
+.ed-intro .ed-lede { margin-top: 14px; }
+.ed-intro .ed-body { margin-top: 10px; }
+.ed-intro .ed-disciplines { margin-top: 26px; }
 @utility ed-disciplines {
   display: flex; flex-wrap: wrap; gap: 0; margin: 32px 0 0; padding: 0; list-style: none;
   border-top: 1px solid var(--color-border);
