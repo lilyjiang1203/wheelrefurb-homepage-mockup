@@ -11,3 +11,4 @@
 
 - [x] About Us hero redesigned as a full-width editorial split (kicker, large two-line headline with blue accent, lede, Edmonton location line, "Fig. 01" macro wheel plate) with the supplied copy; no cards, icons or Shop Products button; Cerakote and FreiLacke sections untouched. Also fixed: SHOP underline is now hover-only (it showed on every page, so /about had two underlines), the phone dot alignment, and an orphaned blue slash at the start of a wrapped line in the Refinishing/Restoration list
 - [x] About Us hero converted to a typography-led editorial section: image removed entirely (asset deleted), full available width, larger headline, no cards/icons/buttons/graphics, kept compact so the first content section is visible without scrolling
+- [x] About Us hero refinements: headline ~12% smaller, tighter vertical spacing, Edmonton metadata line and thin rule kept, still image/icon/card/button free
