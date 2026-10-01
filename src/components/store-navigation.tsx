@@ -9,6 +9,7 @@ import {
   UserRound,
   X,
 } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 type Collection = {
   name: string;
@@ -66,18 +67,17 @@ const collections: Collection[] = [
 
 const fallbackCollection: Collection = { name: "Paint", groups: [] };
 
-const primaryLinks = ["Home", "About Us", "Contact Us"];
 
 function Brand() {
   return (
-    <a className="brand" href="#home" aria-label="FreiLack WheelRefurb home">
+    <Link className="brand" to="/" aria-label="FreiLack WheelRefurb home">
       <span className="brand-name">FreiLack</span>
       <span className="brand-mark" aria-hidden="true">
         <span className="brand-wheel" />
         <span className="brand-sub">wheelRefurb</span>
         <span className="brand-lines" />
       </span>
-    </a>
+    </Link>
   );
 }
 
@@ -231,10 +231,21 @@ export function StoreNavigation() {
       <nav className="main-nav" aria-label="Main navigation">
         <Brand />
         <div className="desktop-links">
-          <a className="nav-link" href="#home">Home</a>
+          <Link className="nav-link" to="/" activeOptions={{ exact: true }}>
+            Home
+          </Link>
           <DesktopCollections />
-          <a className="nav-link" href="/#find-your-color">Find Your Color</a>
-          <a className="nav-link" href="#about-us">About Us</a>
+          <Link
+            className="nav-link"
+            to="/"
+            hash="find-your-color"
+            activeOptions={{ exact: true, includeHash: true }}
+          >
+            Find Your Color
+          </Link>
+          <Link className="nav-link" to="/about" activeProps={{ className: "active" }}>
+            About Us
+          </Link>
           <a className="nav-link" href="#contact-us">Contact Us</a>
         </div>
         <div className="nav-actions">
@@ -255,16 +266,24 @@ export function StoreNavigation() {
       </nav>
       {mobileOpen ? (
         <div className="mobile-menu" ref={mobilePanelRef}>
-          {primaryLinks.slice(0, 1).map((link) => (
-            <a className="mobile-nav-row" href={`#${link.toLowerCase()}`} key={link}>{link}</a>
-          ))}
+          <Link className="mobile-nav-row" to="/" onClick={() => setMobileOpen(false)}>
+            Home
+          </Link>
           <MobileCollections />
-          <a className="mobile-nav-row" href="/#find-your-color" onClick={() => setMobileOpen(false)}>
+          <Link
+            className="mobile-nav-row"
+            to="/"
+            hash="find-your-color"
+            onClick={() => setMobileOpen(false)}
+          >
             Find Your Color
+          </Link>
+          <Link className="mobile-nav-row" to="/about" onClick={() => setMobileOpen(false)}>
+            About Us
+          </Link>
+          <a className="mobile-nav-row" href="#contact-us" onClick={() => setMobileOpen(false)}>
+            Contact Us
           </a>
-          {primaryLinks.slice(1).map((link) => (
-            <a className="mobile-nav-row" href={`#${link.toLowerCase().replaceAll(" ", "-")}`} key={link}>{link}</a>
-          ))}
         </div>
       ) : null}
     </header>
