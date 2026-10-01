@@ -2262,6 +2262,11 @@ html { scroll-behavior: smooth; }
 }
 @utility ck-ed-display { color: var(--color-about-foreground); font-size: clamp(38px, 5vw, 76px); }
 @utility ck-ed-lede { margin: 24px 0 0; max-width: 480px; color: var(--color-about-muted); font-size: 17px; line-height: 1.6; }
+@utility ck-ed-kicker {
+  margin: 30px 0 0; color: var(--color-brand); font-size: 12px; font-weight: 800;
+  letter-spacing: .2em; text-transform: uppercase;
+}
+@utility ck-ed-body { margin: 18px 0 0; max-width: 500px; color: var(--color-about-muted); font-size: 15px; line-height: 1.65; }
 @utility ck-ed-list {
   margin: 36px 0 0; padding: 0; list-style: none;
   & li { display: flex; gap: 20px; padding: 16px 0; border-top: 1px solid var(--color-about-line); }
