@@ -1615,65 +1615,71 @@ html { scroll-behavior: smooth; }
 }
 
 @utility ah-inner {
-  max-width: 1680px;
-  padding: clamp(20px, 2vw, 28px) clamp(24px, 5vw, 76px) clamp(18px, 1.8vw, 26px);
-  text-align: center;
+  width: min(1280px, 100%);
+  margin-inline: auto;
+  padding: clamp(40px, 4.5vw, 72px) clamp(24px, 5vw, 76px) clamp(36px, 4vw, 60px);
 }
 
 @utility ah-kicker {
-  margin: 0;
-  /* nudged right by one tracking space so the word marks as optically centered */
-  text-indent: .22em;
-  color: var(--color-brand);
+  margin: 0 0 clamp(20px, 2.2vw, 32px);
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-muted-foreground);
   font-size: 12px;
-  font-weight: 800;
-  letter-spacing: .22em;
+  font-weight: 700;
+  letter-spacing: .18em;
   text-transform: uppercase;
 }
 
+@utility ah-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 96px);
+  align-items: start;
+}
+
 @utility ah-display {
-  margin: clamp(12px, 1.3vw, 18px) 0 0;
+  margin: 0;
+  max-width: 14ch;
   color: var(--color-foreground);
-  font-size: clamp(32px, 4.8vw, 68px);
-  font-weight: 800;
-  line-height: .92;
-  letter-spacing: -.035em;
-  text-transform: uppercase;
+  font-size: clamp(28px, 2.9vw, 42px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -.02em;
 }
 
 @utility ah-accent {
   color: var(--color-brand);
 }
 
+@utility ah-body {
+  display: grid;
+  gap: clamp(20px, 2vw, 28px);
+}
+
 @utility ah-lede {
-  margin: clamp(12px, 1.4vw, 18px) auto 0;
-  max-width: 66ch;
+  margin: 0;
+  max-width: 52ch;
   color: var(--color-muted-foreground);
-  font-size: clamp(16px, 1.35vw, 19px);
-  line-height: 1.6;
+  font-size: clamp(16px, 1.2vw, 18px);
+  line-height: 1.65;
 }
 
-@utility ah-meta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin: clamp(14px, 1.6vw, 22px) auto 0;
-  padding-top: 12px;
+@utility ah-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
   border-top: 1px solid var(--color-border);
-  color: var(--color-foreground);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-}
-
-@utility ah-dot {
-  flex: none;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--color-brand);
+  & > div { padding-top: 14px; }
+  & > div + div { padding-left: 20px; border-left: 1px solid var(--color-border); }
+  & dt {
+    color: var(--color-muted-foreground);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  & dd { margin: 6px 0 0; color: var(--color-foreground); font-size: 15px; font-weight: 600; }
 }
 
 
@@ -2288,18 +2294,14 @@ html { scroll-behavior: smooth; }
   .ck-ed-media { min-height: 320px; }
   .ck-ed-media::after { background: linear-gradient(180deg, transparent 55%, var(--color-about-surface)); }
   .ed-intro-media img { aspect-ratio: 16 / 10; }
-  .ah-inner { padding: clamp(16px, 3.4vw, 24px) clamp(20px, 4vw, 44px) clamp(14px, 3vw, 20px); }
-  .ah-lede { max-width: 560px; }
+  .ah-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .ah-display { max-width: none; }
 }
 @media (max-width: 620px) {
   .fl-ed-themes, .ed-spec { grid-template-columns: minmax(0, 1fr); }
   .ed-spec div + div { border-left: 0; padding-left: 0; border-top: 1px solid var(--color-border); }
-  .ah-display { font-size: clamp(24px, 6.8vw, 31px); letter-spacing: -.025em; }
-  .ah-kicker { font-size: 11px; letter-spacing: .18em; text-indent: .18em; }
-  .ah-meta { flex-wrap: wrap; align-items: center; justify-content: center; row-gap: 6px; margin-top: 16px; padding-top: 13px; font-size: 10px; letter-spacing: .12em; }
-  .ah-dot { align-self: center; }
-  .ah-meta-sep { display: none; }
-  .ah-meta-field { flex-basis: 100%; margin-left: 0; }
+  .ah-display { font-size: clamp(26px, 7vw, 30px); }
+  .ah-kicker { font-size: 11px; }
 }
 .fl-ed-media .ed-caption { padding-left: clamp(24px, 5vw, 76px); }
 @media (max-width: 1050px) { .fl-ed-media .ed-caption { padding-left: 0; } }
