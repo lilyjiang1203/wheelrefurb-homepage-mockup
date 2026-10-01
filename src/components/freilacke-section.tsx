@@ -1,5 +1,5 @@
-import freilackeSign from "../assets/freilacke-sign.webp.asset.json";
-import coatingPowders from "../assets/coating-powders-clean.jpg.asset.json";
+import freilackeSignSrc from "../assets/freilacke-sign.webp";
+import coatingPowdersSrc from "../assets/coating-powders-clean.jpg";
 
 const freilackeSpec = [
   { term: "Since 1926", desc: "Coating expertise" },
@@ -37,7 +37,7 @@ export function FreilackeSection() {
             <div className="fl-band-step">
               <figure className="fl-band-tile">
                 <img
-                  src={freilackeSign.url}
+                  src={freilackeSignSrc}
                   alt="FreiLacke lettering on a wall at the coating manufacturer"
                   width={1920}
                   height={1280}
@@ -49,7 +49,7 @@ export function FreilackeSection() {
             <div className="fl-band-step">
               <figure className="fl-band-tile">
                 <img
-                  src={coatingPowders.url}
+                  src={coatingPowdersSrc}
                   alt="Colored coating powders in sample bowls"
                   width={494}
                   height={330}

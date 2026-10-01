@@ -1,5 +1,4 @@
-import coatingAsset from "../assets/who-we-are-coating.webp.asset.json";
-const coatingImage = coatingAsset.url;
+import coatingImage from "../assets/who-we-are-coating.webp";
 
 const disciplines = ["Refinishing", "Restoration", "Coating", "Custom finishes"];
 

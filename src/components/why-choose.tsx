@@ -1,8 +1,7 @@
 import prepImg from "../assets/surface-prep.jpg";
-import boothAsset from "../assets/powder-application.webp.asset.json";
+import boothImage from "../assets/powder-application.webp";
 import finishImg from "../assets/wheel-finish-closeup.jpg";
 
-const boothImage = boothAsset.url;
 
 export function WhyChoose() {
   return (
