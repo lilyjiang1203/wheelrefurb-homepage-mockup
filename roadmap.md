@@ -14,3 +14,5 @@
 - [x] About Us hero refinements: headline ~12% smaller, tighter vertical spacing, Edmonton metadata line and thin rule kept, still image/icon/card/button free
 - [x] About Us hero centered-composition test: eyebrow/headline/description/metadata all center-aligned, blue line before the eyebrow removed, headline and vertical spacing reduced again, description capped so it stays two lines on desktop, bottom thin rule kept, still no image/icon/card/button (verified at 1280, 624 and 390)
 - [x] Place the real FreiLacke and Cerakote logos in the About page brand sections
+- [x] About Us intro reworked as a restrained corporate opening (inspired by FreiLacke's editorial/industrial feel, not copied): small headline with blue accent, description beside it, two plain details, compact and typography-only; the FreiLacke and Cerakote sections are now the page's visual highlights
+- [x] Add the confirmed "Authorized FreiLacke Partner" title to the FreiLacke section (blue label above the headline, kept in the /about page description), Cerakote wording unchanged
