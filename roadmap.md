@@ -30,3 +30,4 @@
 
 - [x] About intro: present Wheel Refurb as an online business — drop Edmonton LOCATION line and the storefront photo, use SPECIALTY / SERVING, add a wide coating/finish visual (2026-10-01)
 - [ ] Replace the About intro photo — the user does not like the generated wheel-row image; awaiting direction (real photo / new subject / no image)
+- [ ] About intro: swap in the user's uploaded wheels_2.webp, lightly adjusted to fit the band
