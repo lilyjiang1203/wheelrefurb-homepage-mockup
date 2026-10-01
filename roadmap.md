@@ -18,3 +18,5 @@
 - [x] Add the confirmed "Authorized FreiLacke Partner" title to the FreiLacke section (blue label above the headline, kept in the /about page description), Cerakote wording unchanged
 - [x] Put the user's own spray-booth photo into the About Us intro as a full-width editorial band below the type, with a short caption; kept compact so the next section is still in view (verified at 1280, 624 and 390)
 - [x] Bring the Location/Field strip back under the About intro description, slimmed to one line per item (~30px vs ~62px before; verified at 1280, 927 and 390)
+- [x] 2026-10-01 — Removed the white Street View arrow baked into the About hero photo (pixel-precise patch; rest of image untouched) and swapped to about-hero-booth.webp.
+- [x] 2026-10-01 — Location/Field strip now spans the full page width on desktop (full-bleed below the headline/lede grid); verified 1280/927/390, no horizontal scroll.

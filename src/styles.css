@@ -1610,6 +1610,7 @@ html { scroll-behavior: smooth; }
 /* ===== About Us page ===== */
 
 @utility ah {
+  overflow-x: clip;
   background: var(--color-background);
   border-top: 1px solid var(--color-border);
 }
@@ -1665,11 +1666,12 @@ html { scroll-behavior: smooth; }
   line-height: 1.65;
 }
 
-/* Slim details strip: label and value on one line each */
+/* Slim details strip: label and value on one line each; full page width on desktop */
 @utility ah-facts {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin: clamp(12px, 1.4vw, 18px) 0 0;
+  margin: clamp(12px, 1.4vw, 18px) calc(50% - 50vw) 0;
+  padding-inline: clamp(24px, 5vw, 76px);
   padding-top: 9px;
   border-top: 1px solid var(--color-border);
   & > div { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
