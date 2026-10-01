@@ -401,6 +401,8 @@
 @utility collection-level-two {
   padding: 25px 30px 30px;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 @utility submenu-heading {
@@ -453,8 +455,14 @@
 }
 
 @utility empty-collection {
-  margin-top: 28px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
   color: var(--color-muted-foreground);
+  font-size: 15px;
+  text-align: center;
 }
 
 @utility mobile-menu-trigger { display: none; }
