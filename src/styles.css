@@ -2244,7 +2244,7 @@ html { scroll-behavior: smooth; }
 }
 @utility ed-intro { padding: clamp(64px, 8vw, 128px) clamp(24px, 5vw, 76px); }
 @utility ed-intro-grid {
-  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: clamp(32px, 6vw, 110px); align-items: end;
+  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: clamp(32px, 6vw, 110px); align-items: start;
 }
 @utility ed-intro-media {
   margin: 0; & img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 4px; }
