@@ -88,7 +88,7 @@ function DesktopCollections() {
   return (
     <div className="collection-nav">
       <button
-        className="nav-link collection-trigger active"
+        className="nav-link collection-trigger"
         type="button"
         aria-haspopup="true"
       >
