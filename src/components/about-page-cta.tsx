@@ -7,10 +7,11 @@ export function AboutPageCta() {
       <div className="cta-panel">
         <p className="cta-kicker">Get started</p>
         <h2 id="about-page-cta-title" className="cta-title">
-          Ready to refinish your wheels?
+          Ready for a better finish?
         </h2>
         <p className="cta-intro">
-          Tell us about your project or browse the full product range.
+          Find the right products for your next wheel refinishing project or
+          talk to our team.
         </p>
         <div className="cta-actions">
           <Button asChild size="lg" className="cta-primary">
