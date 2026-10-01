@@ -28,4 +28,4 @@
 - [x] Choose the three photos for the /about section 03 row (user sent 4 more photos 2026-10-01 18:29)
 - [x] Add a subtle background tint to the /about hero + section 01 so they read apart from the white header (user 2026-10-01 18:35)
 
-- [ ] About intro: present Wheel Refurb as an online business — drop Edmonton LOCATION line and the storefront photo, use SPECIALTY / SERVING, add a wide coating/finish visual (2026-10-01)
+- [x] About intro: present Wheel Refurb as an online business — drop Edmonton LOCATION line and the storefront photo, use SPECIALTY / SERVING, add a wide coating/finish visual (2026-10-01)
