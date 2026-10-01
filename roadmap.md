@@ -13,3 +13,4 @@
 - [x] About Us hero converted to a typography-led editorial section: image removed entirely (asset deleted), full available width, larger headline, no cards/icons/buttons/graphics, kept compact so the first content section is visible without scrolling
 - [x] About Us hero refinements: headline ~12% smaller, tighter vertical spacing, Edmonton metadata line and thin rule kept, still image/icon/card/button free
 - [x] About Us hero centered-composition test: eyebrow/headline/description/metadata all center-aligned, blue line before the eyebrow removed, headline and vertical spacing reduced again, description capped so it stays two lines on desktop, bottom thin rule kept, still no image/icon/card/button (verified at 1280, 624 and 390)
+- [x] Place the real FreiLacke and Cerakote logos in the About page brand sections
