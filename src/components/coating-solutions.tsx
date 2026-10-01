@@ -25,10 +25,10 @@ const freilackeThemes = [
 ];
 
 const cerakoteThemes = [
-  { title: "Durability", text: "A hard, thin-film ceramic surface that resists abrasion and impact." },
-  { title: "Corrosion resistance", text: "Protection for metal against moisture, salt and oxidation." },
-  { title: "Heat & chemical resistance", text: "Holds up to high temperatures, cleaners, fuels and brake dust." },
-  { title: "Custom finishes", text: "A wide palette of colors and specialized finishes for individual builds." },
+  { title: "Durability", text: "Built for demanding applications" },
+  { title: "Corrosion resistance", text: "Enhanced surface protection" },
+  { title: "Chemical & wear resistance", text: "Engineered for lasting performance" },
+  { title: "Custom finishes", text: "Distinctive colors and finishes" },
 ];
 
 export function CoatingSolutions() {
@@ -102,15 +102,21 @@ export function CoatingSolutions() {
         <div className="ck-ed-inner">
           <p className="ed-index ck-ed-index">03 — Coating technology / Cerakote</p>
           <span className="ck-ed-logo" aria-label="Cerakote logo placeholder">Cerakote</span>
+          <p className="ck-ed-kicker">Advanced ceramic coating technology</p>
           <h2 id="ck-title" className="ed-display ck-ed-display">
-            Ceramic,
+            Performance
             <br />
-            engineered thin.
+            meets customization.
           </h2>
           <p className="ck-ed-lede">
-            Cerakote is a specialized thin-film ceramic coating — built for
-            parts that face heat, chemicals and harsh conditions, without
-            giving up on appearance.
+            Cerakote is an advanced ceramic coating technology designed for
+            applications where both performance and appearance matter.
+          </p>
+          <p className="ck-ed-body">
+            Its thin-film ceramic coatings combine durability, corrosion
+            resistance, chemical resistance and excellent wear performance with
+            a wide range of colors and finishes — making Cerakote an exciting
+            option for distinctive, high-performance wheel finishes.
           </p>
           <ul className="ck-ed-list">
             {cerakoteThemes.map((t, i) => (
