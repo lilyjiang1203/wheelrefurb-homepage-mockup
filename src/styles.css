@@ -1665,6 +1665,25 @@ html { scroll-behavior: smooth; }
   line-height: 1.65;
 }
 
+/* Slim details strip: label and value on one line each */
+@utility ah-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: clamp(12px, 1.4vw, 18px) 0 0;
+  padding-top: 9px;
+  border-top: 1px solid var(--color-border);
+  & > div { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+  & > div + div { padding-left: 20px; border-left: 1px solid var(--color-border); }
+  & dt {
+    flex: none;
+    color: var(--color-muted-foreground);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  & dd { margin: 0; color: var(--color-foreground); font-size: 13px; font-weight: 600; }
+}
 
 @utility ah-media {
   margin: clamp(28px, 3vw, 46px) 0 0;
@@ -2316,6 +2335,8 @@ html { scroll-behavior: smooth; }
   .ah-display { font-size: clamp(26px, 7vw, 30px); }
   .ah-media img { height: clamp(180px, 45vw, 250px); }
   .ah-kicker { font-size: 11px; }
+  .ah-facts { grid-template-columns: minmax(0, 1fr); gap: 5px; }
+  .ah-facts > div + div { padding-left: 0; border-left: 0; }
 }
 .fl-ed-media .ed-caption { padding-left: clamp(24px, 5vw, 76px); }
 @media (max-width: 1050px) { .fl-ed-media .ed-caption { padding-left: 0; } }
