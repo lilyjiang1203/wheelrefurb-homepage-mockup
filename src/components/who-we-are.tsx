@@ -1,35 +1,42 @@
 import craftImage from "../assets/about-craft.jpg";
 
+const disciplines = ["Refinishing", "Restoration", "Coating", "Custom finishes"];
+
 export function WhoWeAre() {
   return (
-    <section className="who-section" aria-labelledby="who-title">
-      <div className="who-inner">
-        <div className="who-grid">
-          <div className="who-copy">
-            <p className="who-kicker">Who we are</p>
-            <h2 id="who-title" className="who-title">
-              Built around wheel finishes
-            </h2>
-            <p className="who-text">
-              Wheel Refurb focuses on professional wheel refinishing,
-              restoration, coating and custom finishes for alloy wheels.
-            </p>
-            <p className="who-text">
-              Everything in the range is chosen for workmanship, quality
-              materials and attention to detail — durable, professional
-              finishes built to hold up to daily use.
-            </p>
-          </div>
-          <div className="who-media">
-            <img
-              src={craftImage}
-              alt="Close-up of a technician prepping an alloy wheel spoke before refinishing"
-              width={1024}
-              height={1024}
-              loading="lazy"
-            />
-          </div>
+    <section className="ed-intro" aria-labelledby="who-title">
+      <div className="ed-wrap ed-intro-grid">
+        <div className="ed-intro-copy">
+          <p className="ed-index">01 — Wheel Refurb</p>
+          <h2 id="who-title" className="ed-h2">
+            Wheel finishes are our whole focus.
+          </h2>
+          <p className="ed-lede">
+            Wheel Refurb works in one discipline: professional refinishing of
+            automotive alloy wheels. We restore, prepare, coat and finish wheels
+            — and supply the paints, primers, clear coats and powders that
+            professionals rely on to do the same.
+          </p>
+          <p className="ed-body">
+            Good work starts with good materials. That is why we build around
+            advanced coating technology from established manufacturers, applied
+            with careful preparation and attention to detail.
+          </p>
+          <ul className="ed-disciplines" aria-label="What we do">
+            {disciplines.map((d) => (
+              <li key={d}>{d}</li>
+            ))}
+          </ul>
         </div>
+        <figure className="ed-intro-media">
+          <img
+            src={craftImage}
+            alt="Technician prepping an alloy wheel spoke before refinishing"
+            width={1024}
+            height={1024}
+            loading="lazy"
+          />
+        </figure>
       </div>
     </section>
   );
