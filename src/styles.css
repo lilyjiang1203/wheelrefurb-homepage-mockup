@@ -2277,12 +2277,7 @@ html { scroll-behavior: smooth; }
   background: var(--color-about-surface); color: var(--color-about-foreground);
   padding: clamp(64px, 8vw, 120px) clamp(24px, 5vw, 76px);
 }
-@utility fl-band-head { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
 @utility fl-band-index { color: var(--color-about-muted); }
-@utility fl-band-logo {
-  display: block; box-sizing: content-box; width: auto; height: clamp(28px, 2.4vw, 38px);
-  padding: 8px 14px; border-radius: 4px; background: var(--color-card);
-}
 @utility fl-band-status {
   margin: clamp(22px, 2.4vw, 32px) 0 0; color: var(--color-brand);
   font-size: clamp(13px, 1.15vw, 16px); font-weight: 800; letter-spacing: .2em;
