@@ -25,4 +25,4 @@
 - [x] 2026-10-01 — Removed the "02 — Coating technology / FreiLacke" section from /about; Cerakote renumbered to 02 and "Back to the wheel" to 03 so the sequence stays contiguous (verified 1280/927/390, no console errors).
 - [x] 2026-10-01 — Section 03 ("Back to the wheel") on /about: all text centered in one narrower centered column (verified 1280/927/390, no console errors).
 - [x] 2026-10-01 — Section 02 replaced: Cerakote section removed, the user's FreiLacke copy block now runs as the dark band 02 (verified 1280/927/390, no console errors).
-- [ ] Choose the three photos for the /about section 03 row (user sent 4 more photos 2026-10-01 18:29)
+- [x] Choose the three photos for the /about section 03 row (user sent 4 more photos 2026-10-01 18:29)
