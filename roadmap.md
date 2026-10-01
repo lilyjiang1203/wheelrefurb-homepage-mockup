@@ -21,5 +21,5 @@
 - [x] 2026-10-01 — Removed the white Street View arrow baked into the About hero photo (pixel-precise patch; rest of image untouched) and swapped to about-hero-booth.webp.
 - [x] 2026-10-01 — Location/Field strip now spans the full page width on desktop (full-bleed below the headline/lede grid); verified 1280/927/390, no horizontal scroll.
 - [x] 2026-10-01 — Who We Are section: new verbatim copy ("Focused on the finish."), tightened headline-to-copy spacing, AI-heavy technician photo replaced with product-focused coating still life.
-- [ ] 2026-10-01 — User will supply their own image to lightly edit as the section photo (replaces the generated one when it arrives).
+- [x] 2026-10-01 — User supplied JT20-704.jpg, lightly edited (cropped to 1024x1280, slight contrast lift) as the Who We Are photo.
 - [x] 2026-10-01 — Removed the "02 — Coating technology / FreiLacke" section from /about; Cerakote renumbered to 02 and "Back to the wheel" to 03 so the sequence stays contiguous (verified 1280/927/390, no console errors).
