@@ -32,7 +32,7 @@ export function WhoWeAre() {
         <figure className="ed-intro-media">
           <img
             src={coatingImage}
-            alt="Wheel coating supplies: paint tins in blue, silver and red, spray cans and metallic coating powder"
+            alt="Technician spray-coating a gloss black wheel in the booth"
             width={1024}
             height={1280}
             loading="lazy"
