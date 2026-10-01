@@ -1,9 +1,7 @@
-import powdersAsset from "../assets/coating-powders-clean.jpg.asset.json";
-import signAsset from "../assets/freilacke-sign.webp.asset.json";
+import prepImg from "../assets/surface-prep.jpg";
 import boothAsset from "../assets/powder-application.webp.asset.json";
+import finishImg from "../assets/wheel-finish-closeup.jpg";
 
-const powdersImage = powdersAsset.url;
-const signImage = signAsset.url;
 const boothImage = boothAsset.url;
 
 export function WhyChoose() {
@@ -27,33 +25,42 @@ export function WhyChoose() {
           </p>
         </div>
         <div className="ed-close-strip">
-          <figure className="ed-close-tile">
-            <img
-              src={boothImage}
-              alt="Coating being applied with a spray gun"
-              width={500}
-              height={375}
-              loading="lazy"
-            />
-          </figure>
-          <figure className="ed-close-tile ed-close-tile-sign">
-            <img
-              src={signImage}
-              alt="FreiLacke signage with its color band"
-              width={1920}
-              height={1280}
-              loading="lazy"
-            />
-          </figure>
-          <figure className="ed-close-tile">
-            <img
-              src={powdersImage}
-              alt="Pans of colored coating powder"
-              width={494}
-              height={330}
-              loading="lazy"
-            />
-          </figure>
+          <div className="ed-close-step">
+            <figure className="ed-close-tile">
+              <img
+                src={prepImg}
+                alt="Bare alloy wheel masked and primed on a prep bench"
+                width={1200}
+                height={912}
+                loading="lazy"
+              />
+            </figure>
+            <p className="ed-close-label">Prepare</p>
+          </div>
+          <div className="ed-close-step">
+            <figure className="ed-close-tile">
+              <img
+                src={boothImage}
+                alt="Coating being applied to a wheel with a spray gun"
+                width={500}
+                height={375}
+                loading="lazy"
+              />
+            </figure>
+            <p className="ed-close-label">Coat</p>
+          </div>
+          <div className="ed-close-step">
+            <figure className="ed-close-tile">
+              <img
+                src={finishImg}
+                alt="Finished alloy wheel in a dark metallic clear coat"
+                width={1408}
+                height={1104}
+                loading="lazy"
+              />
+            </figure>
+            <p className="ed-close-label">Finish</p>
+          </div>
         </div>
       </div>
     </section>
