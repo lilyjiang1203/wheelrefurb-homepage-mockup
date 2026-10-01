@@ -1,4 +1,4 @@
-import powdersAsset from "../assets/coating-powders.jpg.asset.json";
+import powdersAsset from "../assets/coating-powders-clean.jpg.asset.json";
 import signAsset from "../assets/freilacke-sign.webp.asset.json";
 import boothAsset from "../assets/powder-application.webp.asset.json";
 
@@ -50,7 +50,7 @@ export function WhyChoose() {
               src={powdersImage}
               alt="Pans of colored coating powder"
               width={500}
-              height={500}
+              height={340}
               loading="lazy"
             />
           </figure>
