@@ -2,7 +2,7 @@ import freilackeLogo from "../assets/FreiLacke_Logo.png.asset.json";
 import colorPanels from "../assets/freilacke-color-panels.jpg.asset.json";
 
 const freilackeSpec = [
-  { term: "100 Years", desc: "Coating expertise since 1926" },
+  { term: "Since 1926", desc: "Coating expertise" },
   { term: "30+ Years", desc: "Light-alloy wheel expertise" },
   { term: "Complete systems", desc: "Coordinated coating technologies" },
   { term: "Tested & supported", desc: "Performance testing and technical support" },
@@ -36,9 +36,10 @@ export function FreilackeSection() {
               technology to professional wheel refinishing.
             </p>
             <p className="fl-band-body">
-              Founded in 1926, FreiLacke combines 100 years of coating expertise with more than 30
-              years of experience in the light-alloy wheel industry. Its System Coatings approach
-              integrates compatible coating technologies with rigorous testing, technical expertise
+              Founded in 1926, FreiLacke brings decades of coating expertise and
+              more than 30 years of experience in the light-alloy wheel
+              industry. Its System Coatings approach integrates compatible
+              coating technologies with rigorous testing, technical expertise
               and ongoing support.
             </p>
           </div>
