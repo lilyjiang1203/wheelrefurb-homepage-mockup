@@ -77,7 +77,7 @@ export function ColorFinder() {
         <div className="finder-copy">
           <p className="finder-kicker">Color finder</p>
           <h2 id="color-finder-title">Find your wheel color</h2>
-          <p className="finder-intro">Browse wheel paint colors available for your vehicle brand.</p>
+          <p className="finder-intro">Find the right OEM-matched color for your wheel</p>
 
           <div className="brand-combobox" ref={containerRef}>
             <label htmlFor="vehicle-brand-search">Select your vehicle brand</label>
