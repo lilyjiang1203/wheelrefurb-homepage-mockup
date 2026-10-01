@@ -16,3 +16,4 @@
 - [x] Place the real FreiLacke and Cerakote logos in the About page brand sections
 - [x] About Us intro reworked as a restrained corporate opening (inspired by FreiLacke's editorial/industrial feel, not copied): small headline with blue accent, description beside it, two plain details, compact and typography-only; the FreiLacke and Cerakote sections are now the page's visual highlights
 - [x] Add the confirmed "Authorized FreiLacke Partner" title to the FreiLacke section (blue label above the headline, kept in the /about page description), Cerakote wording unchanged
+- [x] Put the user's own spray-booth photo into the About Us intro as a full-width editorial band below the type, with a short caption; kept compact so the next section is still in view (verified at 1280, 624 and 390)
