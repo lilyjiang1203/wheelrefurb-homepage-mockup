@@ -1620,6 +1620,9 @@ html { scroll-behavior: smooth; }
 }
 
 @utility ah-kicker {
+  display: flex;
+  align-items: center;
+  gap: 14px;
   margin: 0;
   color: var(--color-brand);
   font-size: 12px;
@@ -1629,12 +1632,18 @@ html { scroll-behavior: smooth; }
 
   &::before {
     content: "";
-    display: inline-block;
+    flex: none;
     width: 30px;
     height: 2px;
-    margin-right: 14px;
-    vertical-align: middle;
     background: var(--color-brand);
+  }
+
+  /* thin rule running to the right edge, so the label reads as a masthead */
+  &::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
   }
 }
 
