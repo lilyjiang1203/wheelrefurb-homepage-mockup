@@ -14,18 +14,18 @@ export function AboutHero() {
               Professional wheel refinishing, restoration and coating solutions
               backed by advanced coating technology and industry expertise.
             </p>
-            <dl className="ah-facts">
-              <div>
-                <dt>Location</dt>
-                <dd>Edmonton, Alberta</dd>
-              </div>
-              <div>
-                <dt>Field</dt>
-                <dd>Professional wheel refinishing</dd>
-              </div>
-            </dl>
           </div>
         </div>
+        <dl className="ah-facts">
+          <div>
+            <dt>Location</dt>
+            <dd>Edmonton, Alberta</dd>
+          </div>
+          <div>
+            <dt>Field</dt>
+            <dd>Professional wheel refinishing</dd>
+          </div>
+        </dl>
         <figure className="ah-media">
           <img
             src={boothImg.url}
