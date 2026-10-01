@@ -49,6 +49,7 @@ export function CoatingSolutions() {
               loading="lazy"
             />
           </div>
+          <p className="fl-ed-status">Authorized FreiLacke Partner</p>
           <h2 id="fl-title" className="ed-display">
             More than paint.
             <br />
