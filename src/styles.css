@@ -1610,21 +1610,13 @@ html { scroll-behavior: smooth; }
 /* ===== About Us page ===== */
 
 @utility ah {
-  position: relative;
   background: var(--color-background);
   border-top: 1px solid var(--color-border);
 }
 
-@utility ah-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.32fr) minmax(0, 1fr);
-  min-height: clamp(520px, 66vh, 680px);
-}
-
-@utility ah-copy {
-  display: flex; flex-direction: column; justify-content: center;
-  padding: clamp(44px, 5vw, 76px) clamp(28px, 3.2vw, 56px) clamp(36px, 4vw, 64px)
-    clamp(24px, 4vw, 64px);
+@utility ah-inner {
+  max-width: 1680px;
+  padding: clamp(32px, 3.6vw, 52px) clamp(24px, 5vw, 76px) clamp(26px, 3vw, 44px);
 }
 
 @utility ah-kicker {
@@ -1647,12 +1639,12 @@ html { scroll-behavior: smooth; }
 }
 
 @utility ah-display {
-  margin: clamp(22px, 2.4vw, 34px) 0 0;
+  margin: clamp(18px, 2vw, 28px) 0 0;
   color: var(--color-foreground);
-  font-size: clamp(34px, 4.6vw, 60px);
+  font-size: clamp(40px, 6.2vw, 88px);
   font-weight: 800;
-  line-height: .96;
-  letter-spacing: -.03em;
+  line-height: .92;
+  letter-spacing: -.035em;
   text-transform: uppercase;
 }
 
@@ -1661,10 +1653,10 @@ html { scroll-behavior: smooth; }
 }
 
 @utility ah-lede {
-  margin: clamp(22px, 2.4vw, 36px) 0 0;
-  max-width: 44ch;
+  margin: clamp(20px, 2.2vw, 30px) 0 0;
+  max-width: 58ch;
   color: var(--color-muted-foreground);
-  font-size: clamp(16px, 1.3vw, 18px);
+  font-size: clamp(16px, 1.35vw, 19px);
   line-height: 1.6;
 }
 
@@ -1688,43 +1680,6 @@ html { scroll-behavior: smooth; }
   height: 6px;
   border-radius: 50%;
   background: var(--color-brand);
-}
-
-@utility ah-media {
-  position: relative;
-  margin: clamp(14px, 1.7vw, 28px) clamp(14px, 1.7vw, 28px) clamp(14px, 1.7vw, 28px)
-    clamp(4px, .6vw, 12px);
-  border: 1px solid var(--color-border);
-  border-radius: 3px;
-  overflow: hidden;
-  background: color-mix(in oklab, var(--color-muted-foreground) 12%, var(--color-background));
-  box-shadow: 0 34px 70px -48px oklch(0.2 0.02 245 / .55);
-
-  & img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-}
-
-@utility ah-fig {
-  position: absolute;
-  z-index: 1;
-  top: 14px;
-  left: 14px;
-  padding: 7px 11px;
-  border: 1px solid color-mix(in oklab, var(--color-foreground) 12%, transparent);
-  border-radius: 3px;
-  background: color-mix(in oklab, var(--color-background) 80%, transparent);
-  backdrop-filter: blur(6px);
-  color: var(--color-muted-foreground);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: .2em;
-  text-transform: uppercase;
 }
 
 
@@ -2339,18 +2294,13 @@ html { scroll-behavior: smooth; }
   .ck-ed-media { min-height: 320px; }
   .ck-ed-media::after { background: linear-gradient(180deg, transparent 55%, var(--color-about-surface)); }
   .ed-intro-media img { aspect-ratio: 16 / 10; }
-  .ah-grid { grid-template-columns: minmax(0, 1fr); min-height: 0; }
-  .ah-copy { padding-top: clamp(40px, 6vw, 64px); padding-bottom: clamp(36px, 5vw, 56px); }
-  .ah-display { max-width: 680px; }
+  .ah-inner { padding: clamp(30px, 5vw, 46px) clamp(20px, 4vw, 44px) clamp(26px, 4vw, 40px); }
   .ah-lede { max-width: 620px; }
-  .ah-media { min-height: clamp(280px, 44vw, 440px); margin: 0 clamp(14px, 3vw, 26px) clamp(16px, 3vw, 28px); }
-  .ah-fig { top: 18px; left: 18px; }
-  .ah-meta { max-width: 520px; margin-top: clamp(32px, 6vw, 56px); }
 }
 @media (max-width: 620px) {
   .fl-ed-themes, .ed-spec { grid-template-columns: minmax(0, 1fr); }
   .ed-spec div + div { border-left: 0; padding-left: 0; border-top: 1px solid var(--color-border); }
-  .ah-display { font-size: clamp(28px, 8.2vw, 38px); letter-spacing: -.025em; }
+  .ah-display { font-size: clamp(30px, 8.4vw, 38px); letter-spacing: -.025em; }
   .ah-kicker { font-size: 11px; letter-spacing: .18em; }
   .ah-meta { flex-wrap: wrap; align-items: flex-start; row-gap: 6px; margin-top: 18px; padding-top: 15px; font-size: 10px; letter-spacing: .12em; }
   .ah-dot { align-self: flex-start; margin-top: 3px; }
