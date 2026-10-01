@@ -2294,18 +2294,13 @@ html { scroll-behavior: smooth; }
   .ck-ed-media { min-height: 320px; }
   .ck-ed-media::after { background: linear-gradient(180deg, transparent 55%, var(--color-about-surface)); }
   .ed-intro-media img { aspect-ratio: 16 / 10; }
-  .ah-grid { grid-template-columns: minmax(0, 1fr); min-height: 0; }
-  .ah-copy { padding-top: clamp(40px, 6vw, 64px); padding-bottom: clamp(36px, 5vw, 56px); }
-  .ah-display { max-width: 680px; }
+  .ah-inner { padding: clamp(30px, 5vw, 46px) clamp(20px, 4vw, 44px) clamp(26px, 4vw, 40px); }
   .ah-lede { max-width: 620px; }
-  .ah-media { min-height: clamp(280px, 44vw, 440px); margin: 0 clamp(14px, 3vw, 26px) clamp(16px, 3vw, 28px); }
-  .ah-fig { top: 18px; left: 18px; }
-  .ah-meta { max-width: 520px; margin-top: clamp(32px, 6vw, 56px); }
 }
 @media (max-width: 620px) {
   .fl-ed-themes, .ed-spec { grid-template-columns: minmax(0, 1fr); }
   .ed-spec div + div { border-left: 0; padding-left: 0; border-top: 1px solid var(--color-border); }
-  .ah-display { font-size: clamp(28px, 8.2vw, 38px); letter-spacing: -.025em; }
+  .ah-display { font-size: clamp(30px, 8.4vw, 38px); letter-spacing: -.025em; }
   .ah-kicker { font-size: 11px; letter-spacing: .18em; }
   .ah-meta { flex-wrap: wrap; align-items: flex-start; row-gap: 6px; margin-top: 18px; padding-top: 15px; font-size: 10px; letter-spacing: .12em; }
   .ah-dot { align-self: flex-start; margin-top: 3px; }
