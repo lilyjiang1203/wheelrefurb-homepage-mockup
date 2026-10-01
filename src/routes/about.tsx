@@ -35,8 +35,8 @@ function AboutPage() {
       <main>
         <div className="ah-intro-band">
           <AboutHero />
-          <WhoWeAre />
         </div>
+        <WhoWeAre />
         <FreilackeSection />
         <WhyChoose />
         <AboutPageCta />
