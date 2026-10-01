@@ -1,4 +1,4 @@
-import boothImg from "../assets/about-hero-booth.png.asset.json";
+import boothImg from "../assets/about-hero-booth.webp.asset.json";
 
 export function AboutHero() {
   return (
