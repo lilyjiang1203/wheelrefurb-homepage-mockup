@@ -25,10 +25,10 @@ const freilackeThemes = [
 ];
 
 const cerakoteThemes = [
-  { title: "Durability", text: "A hard, thin-film ceramic surface that resists abrasion and impact." },
-  { title: "Corrosion resistance", text: "Protection for metal against moisture, salt and oxidation." },
-  { title: "Heat & chemical resistance", text: "Holds up to high temperatures, cleaners, fuels and brake dust." },
-  { title: "Custom finishes", text: "A wide palette of colors and specialized finishes for individual builds." },
+  { title: "Durability", text: "Built for demanding applications" },
+  { title: "Corrosion resistance", text: "Enhanced surface protection" },
+  { title: "Chemical & wear resistance", text: "Engineered for lasting performance" },
+  { title: "Custom finishes", text: "Distinctive colors and finishes" },
 ];
 
 export function CoatingSolutions() {
