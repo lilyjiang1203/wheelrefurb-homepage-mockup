@@ -1698,17 +1698,15 @@ html { scroll-behavior: smooth; }
   padding-bottom: clamp(40px, 4.5vw, 66px);
 }
 
-/* Meta row: a single hairline, label above value, spread edge to edge */
+/* Meta row: a single hairline above a balanced two-column grid, labels above values */
 @utility ah-facts {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(24px, 3vw, 44px);
   width: 100%;
   padding-top: 14px;
   border-top: 1px solid var(--color-border);
   & > div { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
-  & > div + div { text-align: right; }
   & dt {
     color: var(--color-muted-foreground);
     font-size: 10px;
@@ -2343,8 +2341,7 @@ html { scroll-behavior: smooth; }
   .ah-display { font-size: clamp(26px, 7vw, 30px); max-width: 12ch; }
   .ah-media img { height: auto; aspect-ratio: 5 / 2; }
   .ah-kicker { font-size: 11px; }
-  .ah-facts { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .ah-facts > div + div { text-align: left; }
+  .ah-facts { grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .ed-close-strip { grid-template-columns: minmax(0, 1fr); gap: 10px; }
   .ed-close-strip img { aspect-ratio: 16 / 9; }
 }
