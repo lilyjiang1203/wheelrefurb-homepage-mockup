@@ -2317,6 +2317,8 @@ html { scroll-behavior: smooth; }
 @media (max-width: 1050px) {
   .ed-intro-grid, .ed-close-grid { grid-template-columns: minmax(0, 1fr); }
   .fl-band-spec { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fl-band-cols { grid-template-columns: minmax(0, 1fr); }
+  .fl-band-media img { aspect-ratio: 16 / 9; }
   .ed-intro-media img { aspect-ratio: 16 / 10; }
   .ah-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
   .ah-display { max-width: none; }
