@@ -6,6 +6,6 @@
 - [x] Professional Solutions section between Featured Products and Find Your Wheel Color: kicker, heading, supporting line, SHOP PRODUCTS button, studio wheel photo and three feature items (OEM-Matched Finishes, Professional-Grade, Complete System) — placeholder link
 - [x] About Us section in the uploaded dark two-column design (heading, paragraph, three stats, VIEW ALL button, wheel on a glowing pedestal), FreiLack wording, wired to the ABOUT US header link
 - [x] Wholesale Partner Program section near the bottom before the footer: FOR PROFESSIONALS label, WHOLESALE PARTNER PROGRAM heading, supporting copy, three placeholder benefits (Dealer Pricing, Bulk Ordering, Dedicated Support), BECOME A PARTNER CTA, one professional workshop image, dark premium styling, not too tall
-- [ ] About Us page at /about per the uploaded brief: hero, Who We Are, What We Do, Premium Coating Solutions (FreiLacke + Cerakote, no authorized-dealer claims), Why Choose Wheel Refurb, CTA — fully consistent with the Home page design system; About Us nav link connects to it; Home page left untouched
+- [x] About Us page at /about per the uploaded brief: hero, Who We Are, What We Do, Premium Coating Solutions (FreiLacke + Cerakote, no authorized-dealer claims), Why Choose Wheel Refurb, CTA — fully consistent with the Home page design system; About Us nav link connects to it; Home page left untouched
 
 
