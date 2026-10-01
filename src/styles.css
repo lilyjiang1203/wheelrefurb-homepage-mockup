@@ -348,7 +348,6 @@
   top: calc(100% - 1px);
   left: 50%;
   width: min(780px, calc(100vw - 48px));
-  min-height: 430px;
   display: grid;
   grid-template-columns: 230px 1fr;
   background: var(--color-background);
