@@ -1,4 +1,4 @@
-import finishesImg from "../assets/about-hero-finishes.jpg";
+import wheelsImg from "../assets/about-hero-wheels.jpg";
 
 export function AboutHero() {
   return (
@@ -11,10 +11,10 @@ export function AboutHero() {
       </div>
       <figure className="ah-media">
         <img
-          src={finishesImg}
-          alt="A row of alloy wheels shown in different coating finishes"
-          width={1920}
-          height={768}
+          src={wheelsImg}
+          alt="Finished alloy wheels shown together in different coating finishes"
+          width={2000}
+          height={714}
           loading="eager"
           fetchPriority="high"
           decoding="async"

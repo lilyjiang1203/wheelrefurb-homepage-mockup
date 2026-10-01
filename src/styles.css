@@ -1680,9 +1680,9 @@ html { scroll-behavior: smooth; }
   & img {
     display: block;
     width: 100%;
-    height: clamp(200px, 30vh, 380px);
+    height: auto;
+    aspect-ratio: 2000 / 714;
     object-fit: cover;
-    object-position: center 42%;
     border-radius: 4px;
     background: color-mix(in oklab, var(--color-brand) 6%, var(--color-background));
   }
