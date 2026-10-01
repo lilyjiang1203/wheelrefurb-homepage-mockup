@@ -9,3 +9,4 @@
 - [x] About Us page at /about per the uploaded brief: hero, Who We Are, What We Do, Premium Coating Solutions (FreiLacke + Cerakote, no authorized-dealer claims), Why Choose Wheel Refurb, CTA — fully consistent with the Home page design system; About Us nav link connects to it; Home page left untouched
 
 
+- [x] About Us hero redesigned as a full-width editorial split (kicker, large two-line headline with blue accent, lede, Edmonton location line, "Fig. 01" macro wheel plate) with the supplied copy; no cards, icons or Shop Products button; Cerakote and FreiLacke sections untouched. Also fixed: SHOP underline is now hover-only (it showed on every page, so /about had two underlines), the phone dot alignment, and an orphaned blue slash at the start of a wrapped line in the Refinishing/Restoration list
