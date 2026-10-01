@@ -49,8 +49,8 @@ export function WhyChoose() {
             <img
               src={powdersImage}
               alt="Pans of colored coating powder"
-              width={500}
-              height={340}
+              width={494}
+              height={330}
               loading="lazy"
             />
           </figure>
