@@ -2304,6 +2304,7 @@ html { scroll-behavior: smooth; }
 }
 @media (max-width: 620px) {
   .fl-ed-themes, .ed-spec { grid-template-columns: minmax(0, 1fr); }
+  .fl-ed-status { letter-spacing: .16em; }
   .ed-spec div + div { border-left: 0; padding-left: 0; border-top: 1px solid var(--color-border); }
   .ah-display { font-size: clamp(26px, 7vw, 30px); }
   .ah-kicker { font-size: 11px; }
