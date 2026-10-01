@@ -44,6 +44,7 @@
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
+  --color-surface-soft: var(--surface-soft);
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
@@ -94,6 +95,7 @@
   --muted-foreground: oklch(0.554 0.046 257.417);
   --accent: oklch(0.968 0.007 247.896);
   --accent-foreground: oklch(0.208 0.042 265.755);
+  --surface-soft: oklch(0.957 0.009 250);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
   --border: oklch(0.929 0.013 255.508);
@@ -142,6 +144,7 @@
   --secondary: oklch(0.279 0.041 260.031);
   --secondary-foreground: oklch(0.984 0.003 247.858);
   --muted: oklch(0.279 0.041 260.031);
+  --surface-soft: oklch(0.235 0.028 264.695);
   --muted-foreground: oklch(0.704 0.04 256.788);
   --accent: oklch(0.279 0.041 260.031);
   --accent-foreground: oklch(0.984 0.003 247.858);
@@ -1618,9 +1621,10 @@ html { scroll-behavior: smooth; }
 
 /* ===== About Us page ===== */
 
+@utility ah-intro-band { background: var(--color-surface-soft); }
+
 @utility ah {
   overflow-x: clip;
-  background: var(--color-background);
   border-top: 1px solid var(--color-border);
 }
 
@@ -2317,6 +2321,7 @@ html { scroll-behavior: smooth; }
 @utility ed-close-tile {
   margin: 0; & img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; }
 }
+.ed-close-tile-sign img { object-position: left center; }
 @media (max-width: 1050px) {
   .ed-intro-grid, .ed-close-grid { grid-template-columns: minmax(0, 1fr); }
   .fl-band-spec { grid-template-columns: repeat(2, minmax(0, 1fr)); }

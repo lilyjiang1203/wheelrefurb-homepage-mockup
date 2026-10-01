@@ -33,8 +33,10 @@ function AboutPage() {
     <div className="min-h-screen bg-background">
       <StoreNavigation />
       <main>
-        <AboutHero />
-        <WhoWeAre />
+        <div className="ah-intro-band">
+          <AboutHero />
+          <WhoWeAre />
+        </div>
         <FreilackeSection />
         <WhyChoose />
         <AboutPageCta />

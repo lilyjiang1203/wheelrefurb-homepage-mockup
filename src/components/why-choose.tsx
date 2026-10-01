@@ -1,9 +1,10 @@
 import powdersAsset from "../assets/coating-powders.jpg.asset.json";
 import signAsset from "../assets/freilacke-sign.webp.asset.json";
-import finishedWheel from "../assets/wheel-finish-closeup.jpg";
+import boothAsset from "../assets/powder-application.webp.asset.json";
 
 const powdersImage = powdersAsset.url;
 const signImage = signAsset.url;
+const boothImage = boothAsset.url;
 
 export function WhyChoose() {
   return (
@@ -28,14 +29,14 @@ export function WhyChoose() {
         <div className="ed-close-strip">
           <figure className="ed-close-tile">
             <img
-              src={finishedWheel}
-              alt="Close-up of a refinished wheel rim"
-              width={1408}
-              height={1104}
+              src={boothImage}
+              alt="Coating being applied with a spray gun"
+              width={500}
+              height={375}
               loading="lazy"
             />
           </figure>
-          <figure className="ed-close-tile">
+          <figure className="ed-close-tile ed-close-tile-sign">
             <img
               src={signImage}
               alt="FreiLacke signage with its color band"
