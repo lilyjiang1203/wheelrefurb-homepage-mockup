@@ -36,3 +36,5 @@
 - [x] 2026-10-01 — Section 03 rebuilt as a Prepare → Coat → Finish photo row (masked/primed wheel · coating applied · finished wheel) with small labels; FreiLacke sign and powder pans removed from the row (verified 1280/624/390, 0 console errors).
 - [x] 2026-10-01 — Closing CTA: "Ready for a better finish?" + the product-and-service intro line, CONTACT US / SHOP PRODUCTS (verified 1280/624/390).
 - [ ] Section 03 "Prepare" tile is a generated stand-in — replace with the user's own workshop photo once supplied.
+
+- [x] 2026-10-01 — Section 02 FreiLacke band: the single large photo replaced by the two freed photos stacked (FreiLacke sign over colored powders), both 3:2 so neither is cropped (verified 1280/624/390, 0 console errors).

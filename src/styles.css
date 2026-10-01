@@ -2295,7 +2295,11 @@ html { scroll-behavior: smooth; }
   display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(32px, 5vw, 72px); align-items: center;
 }
 @utility fl-band-media {
-  margin: 0; & img { display: block; width: 100%; aspect-ratio: 872 / 532; object-fit: cover; border-radius: 4px; }
+  display: flex; flex-direction: column; gap: clamp(12px, 1.4vw, 18px);
+}
+@utility fl-band-tile {
+  margin: 0; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 4px; background: var(--color-about-line);
+  & img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 @utility fl-band-spec {
   display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(20px, 3vw, 44px);
@@ -2336,13 +2340,16 @@ html { scroll-behavior: smooth; }
   .ed-intro-grid, .ed-close-grid { grid-template-columns: minmax(0, 1fr); }
   .fl-band-spec { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .fl-band-cols { grid-template-columns: minmax(0, 1fr); }
-  .fl-band-media img { aspect-ratio: 16 / 9; }
+  .fl-band-media { flex-direction: row; }
+  .fl-band-tile { flex: 1 1 0; min-width: 0; }
   .ed-intro-media img { aspect-ratio: 16 / 10; }
   .ah-display { max-width: none; }
 }
 @media (max-width: 620px) {
   .fl-band-spec { grid-template-columns: minmax(0, 1fr); }
   .fl-band-status { letter-spacing: .16em; }
+  .fl-band-media { flex-direction: column; }
+  .fl-band-tile { flex: 0 0 auto; }
   .ah-display { font-size: clamp(26px, 7vw, 30px); max-width: 12ch; }
   .ah-kicker { font-size: 11px; }
   .ah-facts { grid-template-columns: minmax(0, 1fr); gap: 16px; }

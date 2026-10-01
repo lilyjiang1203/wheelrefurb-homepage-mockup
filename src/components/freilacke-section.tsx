@@ -1,5 +1,6 @@
 import freilackeLogo from "../assets/FreiLacke_Logo.png.asset.json";
-import colorPanels from "../assets/freilacke-color-panels.jpg.asset.json";
+import freilackeSign from "../assets/freilacke-sign.webp.asset.json";
+import coatingPowders from "../assets/coating-powders-clean.jpg.asset.json";
 
 const freilackeSpec = [
   { term: "Since 1926", desc: "Coating expertise" },
@@ -43,15 +44,26 @@ export function FreilackeSection() {
               and ongoing support.
             </p>
           </div>
-          <figure className="fl-band-media">
-            <img
-              src={colorPanels.url}
-              alt="FreiLacke coating color sample panels"
-              width={872}
-              height={532}
-              loading="lazy"
-            />
-          </figure>
+          <div className="fl-band-media">
+            <figure className="fl-band-tile">
+              <img
+                src={freilackeSign.url}
+                alt="FreiLacke lettering on a wall at the coating manufacturer"
+                width={1920}
+                height={1280}
+                loading="lazy"
+              />
+            </figure>
+            <figure className="fl-band-tile">
+              <img
+                src={coatingPowders.url}
+                alt="Colored coating powders in sample bowls"
+                width={494}
+                height={330}
+                loading="lazy"
+              />
+            </figure>
+          </div>
         </div>
         <dl className="fl-band-spec">
           {freilackeSpec.map((item) => (
