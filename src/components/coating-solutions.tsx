@@ -1,5 +1,7 @@
 import freilackeImg from "../assets/freilacke-system.jpg";
 import cerakoteImg from "../assets/cerakote-finish.jpg";
+import freilackeLogo from "../assets/FreiLacke_Logo.png.asset.json";
+import cerakoteLogo from "../assets/cerakote_black_gold.png.asset.json";
 
 const freilackeThemes = [
   {
@@ -38,7 +40,14 @@ export function CoatingSolutions() {
         <div className="ed-wrap">
           <div className="fl-ed-head">
             <p className="ed-index">02 — Coating technology / FreiLacke</p>
-            <span className="fl-ed-logo" aria-label="FreiLacke logo placeholder">FreiLacke</span>
+            <img
+              className="fl-ed-logo"
+              src={freilackeLogo.url}
+              alt="FreiLacke"
+              width={1972}
+              height={477}
+              loading="lazy"
+            />
           </div>
           <h2 id="fl-title" className="ed-display">
             More than paint.
@@ -101,7 +110,14 @@ export function CoatingSolutions() {
         </div>
         <div className="ck-ed-inner">
           <p className="ed-index ck-ed-index">03 — Coating technology / Cerakote</p>
-          <span className="ck-ed-logo" aria-label="Cerakote logo placeholder">Cerakote</span>
+          <img
+            className="ck-ed-logo"
+            src={cerakoteLogo.url}
+            alt="Cerakote"
+            width={1024}
+            height={395}
+            loading="lazy"
+          />
           <p className="ck-ed-kicker">Advanced ceramic coating technology</p>
           <h2 id="ck-title" className="ed-display ck-ed-display">
             Performance
