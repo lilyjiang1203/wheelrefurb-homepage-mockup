@@ -1616,41 +1616,25 @@ html { scroll-behavior: smooth; }
 
 @utility ah-inner {
   max-width: 1680px;
-  padding: clamp(22px, 2.4vw, 34px) clamp(24px, 5vw, 76px) clamp(20px, 2.2vw, 30px);
+  padding: clamp(20px, 2vw, 28px) clamp(24px, 5vw, 76px) clamp(18px, 1.8vw, 26px);
+  text-align: center;
 }
 
 @utility ah-kicker {
-  display: flex;
-  align-items: center;
-  gap: 14px;
   margin: 0;
+  /* nudged right by one tracking space so the word marks as optically centered */
+  text-indent: .22em;
   color: var(--color-brand);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: .22em;
   text-transform: uppercase;
-
-  &::before {
-    content: "";
-    flex: none;
-    width: 30px;
-    height: 2px;
-    background: var(--color-brand);
-  }
-
-  /* thin rule running to the right edge, so the label reads as a masthead */
-  &::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--color-border);
-  }
 }
 
 @utility ah-display {
-  margin: clamp(14px, 1.5vw, 20px) 0 0;
+  margin: clamp(12px, 1.3vw, 18px) 0 0;
   color: var(--color-foreground);
-  font-size: clamp(35px, 5.4vw, 76px);
+  font-size: clamp(32px, 4.8vw, 68px);
   font-weight: 800;
   line-height: .92;
   letter-spacing: -.035em;
@@ -1662,8 +1646,8 @@ html { scroll-behavior: smooth; }
 }
 
 @utility ah-lede {
-  margin: clamp(14px, 1.6vw, 22px) 0 0;
-  max-width: 58ch;
+  margin: clamp(12px, 1.4vw, 18px) auto 0;
+  max-width: 66ch;
   color: var(--color-muted-foreground);
   font-size: clamp(16px, 1.35vw, 19px);
   line-height: 1.6;
@@ -1672,8 +1656,9 @@ html { scroll-behavior: smooth; }
 @utility ah-meta {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  margin: clamp(18px, 1.9vw, 26px) 0 0;
+  margin: clamp(14px, 1.6vw, 22px) auto 0;
   padding-top: 12px;
   border-top: 1px solid var(--color-border);
   color: var(--color-foreground);
@@ -2303,18 +2288,18 @@ html { scroll-behavior: smooth; }
   .ck-ed-media { min-height: 320px; }
   .ck-ed-media::after { background: linear-gradient(180deg, transparent 55%, var(--color-about-surface)); }
   .ed-intro-media img { aspect-ratio: 16 / 10; }
-  .ah-inner { padding: clamp(20px, 4vw, 30px) clamp(20px, 4vw, 44px) clamp(18px, 3.5vw, 26px); }
-  .ah-lede { max-width: 620px; }
+  .ah-inner { padding: clamp(16px, 3.4vw, 24px) clamp(20px, 4vw, 44px) clamp(14px, 3vw, 20px); }
+  .ah-lede { max-width: 560px; }
 }
 @media (max-width: 620px) {
   .fl-ed-themes, .ed-spec { grid-template-columns: minmax(0, 1fr); }
   .ed-spec div + div { border-left: 0; padding-left: 0; border-top: 1px solid var(--color-border); }
-  .ah-display { font-size: clamp(26px, 7.4vw, 34px); letter-spacing: -.025em; }
-  .ah-kicker { font-size: 11px; letter-spacing: .18em; }
-  .ah-meta { flex-wrap: wrap; align-items: flex-start; row-gap: 6px; margin-top: 18px; padding-top: 15px; font-size: 10px; letter-spacing: .12em; }
-  .ah-dot { align-self: flex-start; margin-top: 3px; }
+  .ah-display { font-size: clamp(24px, 6.8vw, 31px); letter-spacing: -.025em; }
+  .ah-kicker { font-size: 11px; letter-spacing: .18em; text-indent: .18em; }
+  .ah-meta { flex-wrap: wrap; align-items: center; justify-content: center; row-gap: 6px; margin-top: 16px; padding-top: 13px; font-size: 10px; letter-spacing: .12em; }
+  .ah-dot { align-self: center; }
   .ah-meta-sep { display: none; }
-  .ah-meta-field { flex-basis: 100%; margin-left: 16px; }
+  .ah-meta-field { flex-basis: 100%; margin-left: 0; }
 }
 .fl-ed-media .ed-caption { padding-left: clamp(24px, 5vw, 76px); }
 @media (max-width: 1050px) { .fl-ed-media .ed-caption { padding-left: 0; } }
