@@ -1,3 +1,5 @@
+import boothImg from "../assets/about-hero-booth.png.asset.json";
+
 export function AboutHero() {
   return (
     <section className="ah" aria-labelledby="about-page-title">
@@ -24,6 +26,20 @@ export function AboutHero() {
             </dl>
           </div>
         </div>
+        <figure className="ah-media">
+          <img
+            src={boothImg.url}
+            alt="A masked wheel being coated in a workshop spray booth"
+            width={1920}
+            height={865}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+          />
+          <figcaption className="ah-figcaption">
+            In the booth — masked wheel, mid-application
+          </figcaption>
+        </figure>
       </div>
     </section>
   );
