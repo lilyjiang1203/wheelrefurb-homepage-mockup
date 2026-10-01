@@ -459,7 +459,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0;
+  margin: 20px -30px -30px;
+  padding: 30px;
+  background: var(--color-nav-hover);
   color: var(--color-muted-foreground);
   font-size: 15px;
   text-align: center;
