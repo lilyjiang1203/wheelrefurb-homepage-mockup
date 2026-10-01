@@ -1635,7 +1635,7 @@ html { scroll-behavior: smooth; }
 }
 
 @utility ah-kicker {
-  margin: 0 0 clamp(20px, 2.2vw, 32px);
+  margin: 0 0 clamp(18px, 2vw, 26px);
   padding-bottom: 14px;
   border-bottom: 1px solid var(--color-border);
   color: var(--color-muted-foreground);
@@ -1645,11 +1645,9 @@ html { scroll-behavior: smooth; }
   text-transform: uppercase;
 }
 
-@utility ah-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: clamp(28px, 5vw, 96px);
-  align-items: start;
+/* Upper band: the label and the headline sit directly above the photograph */
+@utility ah-head {
+  padding-bottom: clamp(24px, 2.4vw, 34px);
 }
 
 @utility ah-display {
@@ -1666,11 +1664,6 @@ html { scroll-behavior: smooth; }
   color: var(--color-brand);
 }
 
-@utility ah-body {
-  display: grid;
-  gap: clamp(20px, 2vw, 28px);
-}
-
 @utility ah-lede {
   margin: 0;
   max-width: 52ch;
@@ -1679,29 +1672,11 @@ html { scroll-behavior: smooth; }
   line-height: 1.65;
 }
 
-/* Slim details strip: label and value on one line each; full page width on desktop */
-@utility ah-facts {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  margin: clamp(12px, 1.4vw, 18px) calc(50% - 50vw) 0;
-  padding-inline: clamp(24px, 5vw, 76px);
-  padding-top: 9px;
-  border-top: 1px solid var(--color-border);
-  & > div { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
-  & > div + div { padding-left: 20px; border-left: 1px solid var(--color-border); }
-  & dt {
-    flex: none;
-    color: var(--color-muted-foreground);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-  }
-  & dd { margin: 0; color: var(--color-foreground); font-size: 13px; font-weight: 600; }
-}
-
+/* The photograph is the base plane of the intro: column width, directly under the headline */
 @utility ah-media {
-  margin: clamp(28px, 3vw, 46px) 0 0;
+  width: min(1280px, 100%);
+  margin: 0 auto clamp(26px, 2.6vw, 38px);
+  padding-inline: clamp(24px, 5vw, 76px);
   & img {
     display: block;
     width: 100%;
@@ -1712,6 +1687,41 @@ html { scroll-behavior: smooth; }
     background: color-mix(in oklab, var(--color-brand) 6%, var(--color-background));
   }
 }
+
+/* Under the photograph: the intro sentence on the left, the details block on the right */
+@utility ah-foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(26px, 3vw, 54px);
+  padding-top: 0;
+  padding-bottom: clamp(40px, 4.5vw, 66px);
+  & > p { flex: 1 1 auto; min-width: 0; }
+}
+
+/* Details block: two hairlines, label above value, sitting flush right */
+@utility ah-facts {
+  flex: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(24px, 3vw, 44px);
+  min-width: min(340px, 100%);
+  padding: 13px 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  & > div { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  & > div + div { text-align: right; }
+  & dt {
+    color: var(--color-muted-foreground);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  & dd { margin: 0; color: var(--color-foreground); font-size: 13px; font-weight: 600; }
+}
+
 
 @utility ah-figcaption {
   margin-top: 12px;
@@ -2328,17 +2338,17 @@ html { scroll-behavior: smooth; }
   .fl-band-cols { grid-template-columns: minmax(0, 1fr); }
   .fl-band-media img { aspect-ratio: 16 / 9; }
   .ed-intro-media img { aspect-ratio: 16 / 10; }
-  .ah-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .ah-foot { flex-direction: column; align-items: flex-start; gap: 22px; }
   .ah-display { max-width: none; }
 }
 @media (max-width: 620px) {
   .fl-band-spec { grid-template-columns: minmax(0, 1fr); }
   .fl-band-status { letter-spacing: .16em; }
-  .ah-display { font-size: clamp(26px, 7vw, 30px); }
-  .ah-media img { height: clamp(180px, 45vw, 250px); }
+  .ah-display { font-size: clamp(26px, 7vw, 30px); max-width: 12ch; }
+  .ah-media img { height: auto; aspect-ratio: 5 / 2; }
   .ah-kicker { font-size: 11px; }
-  .ah-facts { grid-template-columns: minmax(0, 1fr); gap: 5px; }
-  .ah-facts > div + div { padding-left: 0; border-left: 0; }
+  .ah-facts { flex-direction: column; align-items: flex-start; gap: 14px; min-width: 0; }
+  .ah-facts > div + div { text-align: left; }
   .ed-close-strip { grid-template-columns: minmax(0, 1fr); gap: 10px; }
   .ed-close-strip img { aspect-ratio: 16 / 9; }
 }
