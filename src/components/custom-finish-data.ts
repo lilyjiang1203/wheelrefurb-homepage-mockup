@@ -22,11 +22,11 @@ export const effectOptions: { id: EffectType; title: string; description: string
 export const effectLabel = (id: EffectType) => effectOptions.find((e) => e.id === id)?.title ?? id;
 
 export const effectExamples: { label: string; effect: EffectType; swatch: string; text: string }[] = [
-  { label: "Candy", effect: "candy", swatch: effectOptions[0].swatch, text: "A see-through color over a bright base — glows like candy apple red." },
-  { label: "Color-Shifting", effect: "color_shift", swatch: effectOptions[1].swatch, text: "Changes color as you walk around the car, e.g. purple to green." },
+  { label: "Candy", effect: "candy", swatch: effectOptions[0]!.swatch, text: "A see-through color over a bright base — glows like candy apple red." },
+  { label: "Color-Shifting", effect: "color_shift", swatch: effectOptions[1]!.swatch, text: "Changes color as you walk around the car, e.g. purple to green." },
   { label: "Metallic", effect: "metallic_pearl", swatch: "radial-gradient(circle at 30% 25%,#e9ebee,#6b7078 60%,#2b2e33)", text: "Fine metal flake that sparkles in direct light." },
   { label: "Pearl", effect: "metallic_pearl", swatch: "radial-gradient(circle at 30% 25%,#ffffff,#f1e8d8 40%,#c9bfae 80%)", text: "Soft, glowing shimmer with a subtle color tint." },
-  { label: "Multi-Layer", effect: "multi_layer", swatch: effectOptions[3].swatch, text: "Several effects stacked — e.g. a color shift with a pearl top layer." },
+  { label: "Multi-Layer", effect: "multi_layer", swatch: effectOptions[3]!.swatch, text: "Several effects stacked — e.g. a color shift with a pearl top layer." },
 ];
 
 export const baseOptions: { id: BaseColor; title: string; swatch: string }[] = [
@@ -59,7 +59,7 @@ export const effectProducts: EffectProduct[] = [
 
 export type SystemProduct = { id: string; role: string; name: string; description: string; image: string; requirement_level: Requirement; coating_process: string };
 const it = (id: string, role: string, name: string, description: string, image: string, requirement_level: Requirement, coating_process = "Liquid Paint"): SystemProduct => ({ id, role, name, description, image, requirement_level, coating_process });
-const baseCoat = (b: BaseColor | null, req: Requirement = "Required") => it("base", "Base / Ground Coat", `${b ? b[0].toUpperCase() + b.slice(1) : "Black"} Ground Coat`, "Sets the color underneath the effect layer.", paintImage, req);
+const baseCoat = (b: BaseColor | null, req: Requirement = "Required") => it("base", "Base / Ground Coat", `${b ? b[0]!.toUpperCase() + b.slice(1) : "Black"} Ground Coat`, "Sets the color underneath the effect layer.", paintImage, req);
 
 /** system_group → ordered layers. "EFFECT" is replaced by the chosen product. Lengths differ on purpose. */
 const systems: Record<string, (p: EffectProduct) => (SystemProduct | "EFFECT")[]> = {
