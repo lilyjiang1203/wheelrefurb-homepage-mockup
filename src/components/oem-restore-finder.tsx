@@ -5,7 +5,8 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "./ui/dialog";
 import { ProductFinderHelp } from "./product-finder-help";
-import { createMockSystem, emptyVehicle, vehicleModels, wheelOptions, years, type FinderProduct, type VehicleDetails } from "./product-finder-data";
+import { createMockSystem, emptyVehicle, filterRecords, findRecord, makeOptions, modelOptions, sizeOptions, yearOptions, type FinderProduct, type VehicleDetails } from "./product-finder-data";
+import { WheelGlyph } from "./wheel-glyph";
 
 const steps = ["Vehicle", "OEM Color", "Color Product", "Recommended System"];
 export function OemRestoreFinder() {
@@ -19,11 +20,17 @@ export function OemRestoreFinder() {
   const stageRef = useRef<HTMLElement>(null);
   const products = createMockSystem(vehicle);
   const color = products.find((product) => product.id === "color");
-  const matchName = `${vehicle.make || "Sample"} OEM Silver`;
-  const update = (field: keyof VehicleDetails, value: string) => setVehicle((current) => ({ ...current, [field]: value, ...(field === "make" ? { model: "" } : {}) }));
+  const record = findRecord(vehicle);
+  const matchName = record?.oem_finish ?? `${vehicle.make || "Sample"} OEM Silver`;
+  const [unsure, setUnsure] = useState(false);
+  const [photos, setPhotos] = useState<string[]>([]);
+  const order: (keyof VehicleDetails)[] = ["make", "model", "year", "wheel", "style"];
+  const update = (field: keyof VehicleDetails, value: string) => { setUnsure(false); setVehicle((current) => { const next = { ...current, [field]: value }; order.slice(order.indexOf(field) + 1).forEach((k) => { if (field !== "code") next[k] = ""; }); return next; }); };
+  const styles = vehicle.wheel ? filterRecords(vehicle) : [];
   const move = (next: number) => { setStep(next); requestAnimationFrame(() => { stageRef.current?.scrollIntoView({ behavior: "auto", block: "start" }); stageRef.current?.focus({ preventScroll: true }); }); };
-  const reset = () => { setVehicle({ ...emptyVehicle }); setMethod("vehicle"); setSelected(["primer", "color", "clear"]); setCart(null); move(0); };
+  const reset = () => { setUnsure(false); setPhotos([]); setVehicle({ ...emptyVehicle }); setMethod("vehicle"); setSelected(["primer", "color", "clear"]); setCart(null); move(0); };
   const vehicleSummary = [vehicle.year, vehicle.make, vehicle.model].filter(Boolean).join(" ") || "OEM color code provided";
+  const yearRange = record ? `${record.year_from}–${record.year_to}` : "";
 
   return <main className="gpf-page">
     <div className="featured-inner">
@@ -38,24 +45,35 @@ export function OemRestoreFinder() {
           <p className="gpf-intro">Enter your vehicle information so we can help identify the original wheel color.</p>
           <div className="gpf-method" role="group" aria-label="Find by"><Button variant={method === "vehicle" ? "default" : "outline"} aria-pressed={method === "vehicle"} onClick={() => setMethod("vehicle")}>Vehicle Information</Button><Button variant={method === "code" ? "default" : "outline"} aria-pressed={method === "code"} onClick={() => setMethod("code")}>Already know your OEM color code?</Button></div>
           <form className="gpf-vehicle-form" onSubmit={(event) => { event.preventDefault(); if (method === "code") setVehicle((current) => ({ ...emptyVehicle, code: current.code.trim() })); else setVehicle((current) => ({ ...current, code: "" })); move(1); }}>
-            {method === "vehicle" ? <div className="gpf-fields">
-              <label>Vehicle Make<select aria-label="Vehicle Make" className="gpf-control" required value={vehicle.make} onChange={(event) => update("make", event.target.value)}><option value="">Select make</option>{Object.keys(vehicleModels).map((make) => <option key={make}>{make}</option>)}</select></label>
-              <label>Vehicle Model<select aria-label="Vehicle Model" className="gpf-control" required disabled={!vehicle.make} value={vehicle.model} onChange={(event) => update("model", event.target.value)}><option value="">Select model</option>{(vehicleModels[vehicle.make] || []).map((model) => <option key={model}>{model}</option>)}</select></label>
-              <label>Year<select aria-label="Year" className="gpf-control" required value={vehicle.year} onChange={(event) => update("year", event.target.value)}><option value="">Select year</option>{years.map((year) => <option key={year}>{year}</option>)}</select></label>
-              <label>Wheel Details<select aria-label="Wheel Details" className="gpf-control" required value={vehicle.wheel} onChange={(event) => update("wheel", event.target.value)}><option value="">Select wheel</option>{wheelOptions.map((wheel) => <option key={wheel}>{wheel}</option>)}</select></label>
-            </div> : <label>Enter OEM Color Code<Input required value={vehicle.code} maxLength={60} onChange={(event) => update("code", event.target.value)} placeholder="e.g. BMW-XYZ-001" /></label>}
-            <div className="gpf-actions"><Button type="submit" className="gpf-primary">Find My OEM Color<ArrowRight aria-hidden="true" /></Button><Button variant="link" type="button" onClick={() => setHelp(true)}>I'm Not Sure</Button></div>
+            {method === "vehicle" ? <><div className="gpf-fields">
+              <label>Vehicle Make<select aria-label="Vehicle Make" className="gpf-control" required value={vehicle.make} onChange={(event) => update("make", event.target.value)}><option value="">Select make</option>{makeOptions.map((make) => <option key={make}>{make}</option>)}</select></label>
+              <label>Vehicle Model<select aria-label="Vehicle Model" className="gpf-control" required disabled={!vehicle.make} value={vehicle.model} onChange={(event) => update("model", event.target.value)}><option value="">Select model</option>{modelOptions(vehicle.make).map((model) => <option key={model}>{model}</option>)}</select></label>
+              <label>Model Year<select aria-label="Model Year" className="gpf-control" required disabled={!vehicle.model} value={vehicle.year} onChange={(event) => update("year", event.target.value)}><option value="">Select year</option>{yearOptions(vehicle.make, vehicle.model).map((year) => <option key={year}>{year}</option>)}</select></label>
+              <label>Wheel Size<select aria-label="Wheel Size" className="gpf-control" required disabled={!vehicle.year} value={vehicle.wheel} onChange={(event) => update("wheel", event.target.value)}><option value="">Select size</option>{sizeOptions(vehicle).map((size) => <option key={size}>{size}</option>)}</select></label>
+            </div>
+            <fieldset className="gpf-style-field" disabled={!vehicle.wheel}><legend>Wheel Style / Design</legend><p className="gpf-style-hint">{vehicle.wheel ? "Pick the wheel that looks like yours." : "Choose your wheel size to see matching wheel designs."}</p>
+              {vehicle.wheel && <div className="gpf-style-grid" role="radiogroup" aria-label="Wheel Style / Design">
+                {styles.map((r, i) => <button type="button" role="radio" aria-checked={vehicle.style === r.wheel_style} key={r.wheel_style} className={`gpf-style-card ${vehicle.style === r.wheel_style ? "is-selected" : ""}`} onClick={() => { setUnsure(false); setVehicle((c) => ({ ...c, style: r.wheel_style })); }}><WheelGlyph variant={i} /><strong>{r.wheel_style}</strong><span>{r.wheel_size}</span></button>)}
+                <button type="button" role="radio" aria-checked={unsure} className={`gpf-style-card is-unsure ${unsure ? "is-selected" : ""}`} onClick={() => { setUnsure(true); setVehicle((c) => ({ ...c, style: "" })); }}><span className="gpf-unsure-mark" aria-hidden="true">?</span><strong>I'm Not Sure</strong><span>Get help identifying it</span></button>
+              </div>}
+            </fieldset>
+            {unsure && <div className="gpf-unsure-panel"><p>No problem — send us a photo of your wheel and our team will identify the style for you.</p><div className="gpf-actions"><label className="gpf-upload"><input type="file" accept="image/*" multiple onChange={(e) => setPhotos(Array.from(e.target.files ?? []).slice(0, 5).map((f) => f.name))} />Upload Wheel Photo</label><Button variant="outline" type="button" onClick={() => setHelp(true)}><Mail aria-hidden="true" />Email Our Team</Button></div>{photos.length > 0 && <p className="gpf-disclaimer">Selected (demo, not sent): {photos.join(", ")}</p>}</div>}
+          </> : <label>Enter OEM Color Code<Input required value={vehicle.code} maxLength={60} onChange={(event) => update("code", event.target.value)} placeholder="e.g. BMW-XYZ-001" /></label>}
+            <div className="gpf-actions"><Button type="submit" className="gpf-primary" disabled={method === "vehicle" && !vehicle.style}>Find My OEM Color<ArrowRight aria-hidden="true" /></Button><Button variant="link" type="button" onClick={() => setHelp(true)}>I'm Not Sure</Button></div>
           </form>
         </>}
         {step === 1 && <>
           <p className="gpf-intro">Based on the vehicle and wheel information provided, this is the closest matching OEM finish.</p>
-          <div className="gpf-match"><span className="gpf-oem-swatch" aria-label="Silver color swatch" /><div><span className="gpf-demo">Simulated match</span><h3>{matchName}</h3><p>OEM Color Code: {color?.oem_color_code}</p><p className="text-muted-foreground text-sm mt-2">{vehicleSummary}{vehicle.wheel ? ` · ${vehicle.wheel}` : ""}</p></div></div>
-          <p className="gpf-disclaimer">This is an example silver finish, not a verified OEM match. Your vehicle details or code have not been checked against a real color database.</p>
-          <div className="gpf-actions"><Button className="gpf-primary" onClick={() => move(2)}>Continue<ArrowRight aria-hidden="true" /></Button><Button variant="outline" onClick={reset}>Start Over</Button></div>
+          {record ? <div className="gpf-match-result"><span className="gpf-demo">Simulated match</span><h3>Matched OEM Wheel Finish</h3>
+            <div className="gpf-match"><span className="gpf-oem-swatch" style={{ background: record.swatch }} aria-label={`${record.oem_finish} color swatch`} /><dl className="gpf-details"><div><dt>Finish Name</dt><dd>{record.oem_finish}</dd></div><div><dt>Wheel</dt><dd>{vehicle.make} {vehicle.model} · {vehicle.year} ({yearRange}) · {record.wheel_size} · {record.wheel_style}</dd></div><div><dt>Matching Wheel Paint Product</dt><dd>{record.wheel_paint_product}</dd></div></dl></div>
+            <div className="gpf-match-product"><div className="featured-media"><img src={color?.image} alt="Placeholder wheel paint product" /></div><p>{record.wheel_paint_product}<small>Placeholder product image</small></p></div>
+          </div> : <div className="gpf-match"><span className="gpf-oem-swatch" aria-label="Silver color swatch" /><div><span className="gpf-demo">Simulated match</span><h3>{matchName}</h3><p>OEM Color Code: {color?.oem_color_code}</p><p className="text-muted-foreground text-sm mt-2">{vehicleSummary}</p></div></div>}
+          <p className="gpf-disclaimer">Sample data only. This result has not been checked against a real OEM color database.</p>
+          <div className="gpf-actions"><Button className="gpf-primary" onClick={() => move(2)}>Continue to Product Recommendation<ArrowRight aria-hidden="true" /></Button><Button variant="outline" onClick={reset}>Start Over</Button></div>
         </>}
         {step === 2 && color && <>
           <p className="gpf-intro">This is the primary color product matched to your vehicle and OEM finish.</p>
-          <div className="gpf-color-product"><div className="featured-media"><img src={color.image} alt="Example wheel paint product" /></div><div><span className="featured-label">Color Coat · Required</span><h3>{color.name}</h3><dl className="gpf-details"><div><dt>Product Role</dt><dd>Color Coat</dd></div><div><dt>Coating Process</dt><dd>Liquid Paint</dd></div><div><dt>OEM Color</dt><dd>{vehicle.make || "Sample"} Silver</dd></div></dl><p className="gpf-disclaimer">Example product image and recommendation. Compatibility is not verified.</p></div></div>
+          <div className="gpf-color-product"><div className="featured-media"><img src={color.image} alt="Example wheel paint product" /></div><div><span className="featured-label">Color Coat · Required</span><h3>{color.name}</h3><dl className="gpf-details"><div><dt>Product Role</dt><dd>Color Coat</dd></div><div><dt>Coating Process</dt><dd>Liquid Paint</dd></div><div><dt>OEM Color</dt><dd>{matchName}</dd></div></dl><p className="gpf-disclaimer">Example product image and recommendation. Compatibility is not verified.</p></div></div>
           <div className="gpf-actions"><Button className="gpf-primary" onClick={() => move(3)}>Continue to Recommended System<ArrowRight aria-hidden="true" /></Button><Button variant="outline" onClick={() => move(1)}><ArrowLeft aria-hidden="true" />Back</Button></div>
         </>}
         {step === 3 && <>

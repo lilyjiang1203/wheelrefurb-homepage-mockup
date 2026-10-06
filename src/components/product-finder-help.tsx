@@ -21,7 +21,7 @@ export function ProductFinderHelp({ open, onOpenChange, vehicle }: { open: boole
             <label>Vehicle Make<Input name="make" defaultValue={vehicle.make} /></label>
             <label>Vehicle Model<Input name="model" defaultValue={vehicle.model} /></label>
             <label>Year<Input name="year" type="number" min="1900" max="2027" defaultValue={vehicle.year} /></label>
-            <label>Wheel Details<Input name="wheel" defaultValue={vehicle.wheel} /></label>
+            <label>Wheel Details<Input name="wheel" defaultValue={[vehicle.wheel, vehicle.style].filter(Boolean).join(" · ")} /></label>
           </div>
           <label>OEM Color Code, if known<Input name="code" defaultValue={vehicle.code} /></label>
           <label>What are you trying to do?<Input name="goal" defaultValue="Restore the Original OEM Finish" required /></label>
