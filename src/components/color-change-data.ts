@@ -56,8 +56,10 @@ const systems: Record<string, (SystemItem | "COLOR")[]> = {
   "liquid-effect": [item("base", "Base / Ground Coat", "Black Ground Coat", "Dark base that maximizes the color shift.", paintImage, "Required", "Liquid Paint"), "COLOR", item("clear", "Clear Coat", "Professional Wheel Clear Coat", "Protects the effect layer.", clearImage, "Required", "Liquid Paint")],
 };
 
-export const processesFor = (family: FinishFamily): CoatingProcess[] =>
-  (["liquid", "powder"] as CoatingProcess[]).filter((p) => colorProducts.some((c) => c.finish_family === family && c.coating_process === p));
+/** Processes a finish can be applied with. A process may be valid while the catalog has no product for it yet
+ * (special_effect + powder), which produces the "No Matching Products Found" state. */
+const offeredProcesses: Record<FinishFamily, CoatingProcess[]> = { standard: ["liquid", "powder"], RAL: ["powder"], candy: ["liquid"], special_effect: ["liquid", "powder"] };
+export const processesFor = (family: FinishFamily): CoatingProcess[] => offeredProcesses[family];
 
 /** project_type = color_change AND finish_family AND coating_process */
 export const filterColors = (family: FinishFamily, process: CoatingProcess) =>

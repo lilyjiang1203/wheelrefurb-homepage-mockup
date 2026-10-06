@@ -29,7 +29,7 @@ export function ColorChangeFinder() {
   const continueFromFinish = () => {
     if (!family) return;
     const valid = processesFor(family);
-    if (valid.length === 1) { setProcess(valid[0]); setAutoProcess(true); move(2); }
+    if (valid.length === 1) { setProcess(valid[0]!); setAutoProcess(true); move(2); }
     else { setProcess(null); setAutoProcess(false); move(1); }
   };
   const pickColor = (c: ColorProduct) => { setColor(c); setSelected(buildSystem(c).filter((p) => p.requirement_level !== "Optional").map((p) => p.id)); move(3); };
@@ -59,7 +59,7 @@ export function ColorChangeFinder() {
         {step === 1 && family && <>
           <p className="gpf-intro">If you already know which coating process you are using, select it below. If not, choose "I'm Not Sure" and we can help.</p>
           <div className="gpf-style-grid" role="radiogroup" aria-label="Coating process">
-            {(["liquid", "powder"] as CoatingProcess[]).map((p) => <button type="button" role="radio" aria-checked={process === p} key={p} className={`gpf-style-card ${process === p ? "is-selected" : ""}`} onClick={() => { setProcess(p); setUnsure(""); }}><Swatch value={p === "liquid" ? "linear-gradient(160deg,#dfe6ef,#8a97a8)" : "radial-gradient(circle,#c9ccd1 2px,#9aa0a8 3px)"} /><strong>{processLabel[p]}</strong><span>{p === "liquid" ? "Sprayed wet coats" : "Electrostatic powder, oven cured"}</span></button>)}
+            {processesFor(family).map((p) => <button type="button" role="radio" aria-checked={process === p} key={p} className={`gpf-style-card ${process === p ? "is-selected" : ""}`} onClick={() => { setProcess(p); setUnsure(""); }}><Swatch value={p === "liquid" ? "linear-gradient(160deg,#dfe6ef,#8a97a8)" : "radial-gradient(circle,#c9ccd1 2px,#9aa0a8 3px)"} /><strong>{processLabel[p]}</strong><span>{p === "liquid" ? "Sprayed wet coats" : "Electrostatic powder, oven cured"}</span></button>)}
             <button type="button" role="radio" aria-checked={unsure === "process"} className={`gpf-style-card is-unsure ${unsure === "process" ? "is-selected" : ""}`} onClick={() => { setProcess(null); setUnsure("process"); }}><span className="gpf-unsure-mark" aria-hidden="true">?</span><strong>I'm Not Sure</strong><span>Help me decide</span></button>
           </div>
           {unsure === "process" && helpPanel}
