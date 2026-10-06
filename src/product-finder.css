@@ -12,7 +12,7 @@
 .gpf-page-head h1 { font-size: 40px; line-height: 1.12; font-weight: 700; text-transform: uppercase; margin: 12px 0 16px; }
 .gpf-page-head p:not(.finder-kicker), .gpf-intro { color: var(--color-muted-foreground); line-height: 1.65; font-size: 16px; }
 .gpf-demo { display: inline-block; color: var(--color-brand); background: var(--color-surface-soft); padding: 6px 10px; border-radius: 4px; font-size: 12px; margin-top: 14px; }
-.gpf-progress { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1px solid var(--color-border); gap: 12px; }
+.gpf-progress { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); grid-auto-flow: column; border-bottom: 1px solid var(--color-border); gap: 12px; }
 .gpf-progress li { border-bottom: 3px solid transparent; padding: 0 0 15px; }
 .gpf-progress li.is-current { border-color: var(--color-brand); }
 .gpf-progress button { height: auto; justify-content: flex-start; white-space: normal; width: 100%; padding: 4px 0; text-align: left; font-size: 13px; }

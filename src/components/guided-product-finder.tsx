@@ -7,9 +7,9 @@ import { Button } from "./ui/button";
 
 export function GuidedProductFinder() {
   const projects = [
-    { title: "Restore the Original OEM Finish", description: "Bring your wheels back to their original factory color and finish.", image: finishImage, active: true },
-    { title: "Change My Wheel Color", description: "Choose a different color or finish for your wheels.", image: colorImage, active: false },
-    { title: "Create a Custom / Special Finish", description: "Explore candy colors, special effects, and custom wheel finishes.", image: customImage, active: false },
+    { title: "Restore the Original OEM Finish", description: "Bring your wheels back to their original factory color and finish.", image: finishImage, to: "/product-finder/oem-restore" as const, cta: "Start Product Finder" },
+    { title: "Change My Wheel Color", description: "I want to choose a different color or finish for my wheels.", image: colorImage, to: "/product-finder/change-wheel-color" as const, cta: "Start Color Finder" },
+    { title: "Create a Custom / Special Finish", description: "Explore candy colors, special effects, and custom wheel finishes.", image: customImage, to: null, cta: "" },
   ];
   return <section className="featured-section gpf-entry" aria-labelledby="guided-finder-title">
     <div className="featured-inner">
@@ -17,7 +17,7 @@ export function GuidedProductFinder() {
       <div className="gpf-project-grid">{projects.map((project) => <article className="featured-card" key={project.title}>
         <div className="featured-media"><img src={project.image} alt={project.title} loading="lazy" /></div>
         <div className="featured-body gpf-project-body"><h3 className="featured-name">{project.title}</h3><p className="featured-finish">{project.description}</p>
-          {project.active ? <Button asChild className="gpf-primary"><Link to="/product-finder/oem-restore">Start Product Finder<ArrowRight aria-hidden="true" /></Link></Button> : <span className="gpf-coming">Coming Soon</span>}
+          {project.to ? <Button asChild className="gpf-primary"><Link to={project.to}>{project.cta}<ArrowRight aria-hidden="true" /></Link></Button> : <span className="gpf-coming">Coming Soon</span>}
         </div>
       </article>)}</div>
     </div>
