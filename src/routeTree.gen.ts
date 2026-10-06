@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as ProductFinderChangeWheelColorRouteImport } from './routes/product-finder.change-wheel-color'
 import { Route as ProductFinderOemRestoreRouteImport } from './routes/product-finder.oem-restore'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,12 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductFinderChangeWheelColorRoute =
+  ProductFinderChangeWheelColorRouteImport.update({
+    id: '/product-finder/change-wheel-color',
+    path: '/product-finder/change-wheel-color',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ProductFinderOemRestoreRoute = ProductFinderOemRestoreRouteImport.update({
   id: '/product-finder/oem-restore',
   path: '/product-finder/oem-restore',
@@ -32,30 +39,47 @@ const ProductFinderOemRestoreRoute = ProductFinderOemRestoreRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/product-finder/change-wheel-color': typeof ProductFinderChangeWheelColorRoute
   '/product-finder/oem-restore': typeof ProductFinderOemRestoreRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/product-finder/change-wheel-color': typeof ProductFinderChangeWheelColorRoute
   '/product-finder/oem-restore': typeof ProductFinderOemRestoreRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/product-finder/change-wheel-color': typeof ProductFinderChangeWheelColorRoute
   '/product-finder/oem-restore': typeof ProductFinderOemRestoreRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/product-finder/oem-restore'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/product-finder/change-wheel-color'
+    | '/product-finder/oem-restore'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/product-finder/oem-restore'
-  id: '__root__' | '/' | '/about' | '/product-finder/oem-restore'
+  to:
+    | '/'
+    | '/about'
+    | '/product-finder/change-wheel-color'
+    | '/product-finder/oem-restore'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/product-finder/change-wheel-color'
+    | '/product-finder/oem-restore'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  ProductFinderChangeWheelColorRoute: typeof ProductFinderChangeWheelColorRoute
   ProductFinderOemRestoreRoute: typeof ProductFinderOemRestoreRoute
 }
 
@@ -75,6 +99,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/product-finder/change-wheel-color': {
+      id: '/product-finder/change-wheel-color'
+      path: '/product-finder/change-wheel-color'
+      fullPath: '/product-finder/change-wheel-color'
+      preLoaderRoute: typeof ProductFinderChangeWheelColorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/product-finder/oem-restore': {
       id: '/product-finder/oem-restore'
       path: '/product-finder/oem-restore'
@@ -88,6 +119,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  ProductFinderChangeWheelColorRoute: ProductFinderChangeWheelColorRoute,
   ProductFinderOemRestoreRoute: ProductFinderOemRestoreRoute,
 }
 export const routeTree = rootRouteImport
