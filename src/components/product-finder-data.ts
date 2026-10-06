@@ -26,7 +26,7 @@ export const oemWheelRecords: OemWheelRecord[] = [
   { make: "Volkswagen", model: "Golf", year_from: 2020, year_to: 2024, wheel_size: '17"', wheel_style: "Style Dallas", oem_finish: "Sterling Silver", oem_color_code: "MOCK-VW-SS", swatch: "#bfc2c5", wheel_paint_product: "FreiLack Wheel Paint — Sterling Silver" },
 ];
 const uniq = (values: string[]) => [...new Set(values)];
-type Filter = { make?: string; model?: string; year?: string; wheel?: string };
+type Filter = { make?: string | undefined; model?: string | undefined; year?: string | undefined; wheel?: string | undefined };
 export function filterRecords(f: Filter) {
   return oemWheelRecords.filter((r) => (!f.make || r.make === f.make) && (!f.model || r.model === f.model)
     && (!f.year || (Number(f.year) >= r.year_from && Number(f.year) <= r.year_to)) && (!f.wheel || r.wheel_size === f.wheel));
