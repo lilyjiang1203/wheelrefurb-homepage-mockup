@@ -14,12 +14,19 @@ export type Requirement = "Required" | "Recommended" | "Optional";
 export const processLabel: Record<CoatingProcess, string> = { liquid: "Liquid Paint", powder: "Powder Coating" };
 
 export const finishOptions: { id: FinishFamily; title: string; description: string; swatch: string }[] = [
-  { id: "standard", title: "Standard / Solid Color", description: "A clean, single-color wheel finish.", swatch: "linear-gradient(135deg,#2b2d31,#4a4d52)" },
-  { id: "RAL", title: "RAL Color", description: "Choose from standardized RAL color options.", swatch: "conic-gradient(#0e0e10 0 33%,#383e42 0 66%,#f1f0ea 0)" },
-  { id: "candy", title: "Candy Color", description: "A deep, vibrant custom color effect.", swatch: "radial-gradient(circle at 35% 30%,#ff6b6b,#a3000f 55%,#3a0006)" },
+  { id: "standard", title: "Standard Colors", description: "Browse common wheel colors and finishes.", swatch: "linear-gradient(135deg,#2b2d31,#4a4d52)" },
+  { id: "RAL", title: "RAL Colors", description: "Choose a specific color from the standardized RAL color system.", swatch: "conic-gradient(#0e0e10 0 33%,#383e42 0 66%,#f1f0ea 0)" },
+  { id: "candy", title: "Candy Colors", description: "Deep, vibrant translucent color effects for a custom wheel finish.", swatch: "radial-gradient(circle at 35% 30%,#ff6b6b,#a3000f 55%,#3a0006)" },
   // backend may later map special_effect to the Freiflip collection; never shown to the customer first
-  { id: "special_effect", title: "Special Effect / Color-Shifting", description: "A finish that changes appearance depending on light or viewing angle.", swatch: "linear-gradient(135deg,#2d6cdf,#7b3fe4 45%,#1fb5a8 75%,#d9a400)" },
+  { id: "special_effect", title: "Special Effects", description: "Color-shifting and other unique visual finishes.", swatch: "linear-gradient(135deg,#2d6cdf,#7b3fe4 45%,#1fb5a8 75%,#d9a400)" },
 ];
+/** Plain-language examples shown by the "I'm Not Sure" card. */
+export const finishExamples: Record<FinishFamily, string> = {
+  standard: "Everyday wheel colors like gloss black, gunmetal, white or bronze. Pick by eye, no code needed.",
+  RAL: "Exact shades from the RAL color standard, chosen by number (e.g. RAL 9005). Separate from Standard Colors — best if you need to match a specific code.",
+  candy: "A translucent color layer over a bright base, giving a deep, glowing look like candy apple red.",
+  special_effect: "Finishes that change as light or viewing angle moves, such as blue-to-violet color shift.",
+};
 export const finishLabel = (id: FinishFamily) => finishOptions.find((f) => f.id === id)?.title ?? id;
 
 export type ColorProduct = {
@@ -50,7 +57,7 @@ const item = (id: string, role: string, name: string, description: string, image
 /** system_group → ordered compatible_products. "COLOR" is replaced by the chosen color product. Lengths differ on purpose. */
 const systems: Record<string, (SystemItem | "COLOR")[]> = {
   "liquid-solid": [item("prep", "Surface Prep / Cleaner", "Wheel Prep Cleaner", "Removes grease and residue before coating.", prepImage, "Recommended", "Liquid Paint"), item("primer", "Primer", "Wheel Refinishing Primer", "Even base that helps the color coat adhere.", primerImage, "Recommended", "Liquid Paint"), "COLOR", item("clear", "Clear Coat", "Professional Wheel Clear Coat", "Protects the color and sets the final gloss.", clearImage, "Required", "Liquid Paint")],
-  "powder-solid": [item("prep", "Surface Prep / Cleaner", "Pre-Treatment Cleaner", "Prepares bare metal for powder adhesion.", prepImage, "Required", "Powder Coating"), "COLOR"],
+  "powder-solid": ["COLOR", item("clear", "Clear Coat", "Clear Powder Topcoat", "Protects the color powder and adds gloss.", powderImage, "Recommended", "Powder Coating")],
   "powder-ral": [item("primer", "Primer", "Powder Primer", "Anti-corrosion powder base layer.", powderImage, "Recommended", "Powder Coating"), "COLOR", item("clear", "Clear Coat", "Clear Powder Topcoat", "Adds UV protection and gloss.", powderImage, "Optional", "Powder Coating")],
   "liquid-candy": [item("primer", "Primer", "Wheel Refinishing Primer", "Smooth foundation for the base coat.", primerImage, "Recommended", "Liquid Paint"), item("base", "Base / Ground Coat", "Bright Silver Ground Coat", "Reflective base that makes the candy glow.", paintImage, "Required", "Liquid Paint"), "COLOR", item("clear", "Clear Coat", "Professional Wheel Clear Coat", "Seals the candy layer with deep gloss.", clearImage, "Required", "Liquid Paint")],
   "liquid-effect": [item("base", "Base / Ground Coat", "Black Ground Coat", "Dark base that maximizes the color shift.", paintImage, "Required", "Liquid Paint"), "COLOR", item("clear", "Clear Coat", "Professional Wheel Clear Coat", "Protects the effect layer.", clearImage, "Required", "Liquid Paint")],

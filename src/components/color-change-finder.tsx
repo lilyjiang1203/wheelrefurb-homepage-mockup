@@ -4,9 +4,9 @@ import { ArrowLeft, ArrowRight, Check, Mail, ShoppingBag } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "./ui/dialog";
-import { buildSystem, filterColors, finishLabel, finishOptions, processesFor, processLabel, type CoatingProcess, type ColorProduct, type FinishFamily, type SystemProduct } from "./color-change-data";
+import { buildSystem, filterColors, finishExamples, finishLabel, finishOptions, processesFor, processLabel, type CoatingProcess, type ColorProduct, type FinishFamily, type SystemProduct } from "./color-change-data";
 
-const steps = ["Look", "Coating", "Color", "Color Product", "System"];
+const steps = ["Finish Type", "Coating", "Color", "Color Product", "System"];
 const isGradient = (s: string) => s.includes("gradient");
 const Swatch = ({ value, large }: { value: string; large?: boolean }) => <span className="gpf-finish-swatch" style={{ background: value, ...(large ? { width: 160, height: 160 } : {}) }} aria-hidden="true" data-gradient={isGradient(value) || undefined} />;
 
@@ -34,7 +34,7 @@ export function ColorChangeFinder() {
   };
   const pickColor = (c: ColorProduct) => { setColor(c); setSelected(buildSystem(c).filter((p) => p.requirement_level !== "Optional").map((p) => p.id)); move(3); };
   const reset = () => { setFamily(null); setProcess(null); setAutoProcess(false); setUnsure(""); setColor(null); setCart(null); move(0); };
-  const titles = ["What kind of look are you interested in?", "How will the wheels be coated?", colors.length === 0 ? "No Matching Products Found" : "Choose Your Color", "Selected Color Product", "Recommended System for Your Project"];
+  const titles = ["What type of color or finish are you looking for?", "How will the wheels be coated?", colors.length === 0 ? "No Matching Products Found" : "Choose Your Color", "Selected Color Product", "Recommended System for Your Project"];
   const helpPanel = <div className="gpf-unsure-panel"><h3 className="featured-name">Need Help Choosing a Finish?</h3><p>Tell us what kind of look you want, or send us a few inspiration photos, and our team can help recommend the right products.</p><div className="gpf-actions"><Button type="button" variant="outline" onClick={() => setHelp(true)}><Mail aria-hidden="true" />Email Our Team</Button></div></div>;
 
   return <main className="gpf-page">
@@ -50,9 +50,9 @@ export function ColorChangeFinder() {
         {step === 0 && <>
           <div className="gpf-style-grid" role="radiogroup" aria-label="Finish type">
             {finishOptions.map((f) => <button type="button" role="radio" aria-checked={family === f.id} key={f.id} className={`gpf-style-card ${family === f.id ? "is-selected" : ""}`} onClick={() => { setFamily(f.id); setUnsure(""); }}><Swatch value={f.swatch} /><strong>{f.title}</strong><span>{f.description}</span></button>)}
-            <button type="button" role="radio" aria-checked={unsure === "finish"} className={`gpf-style-card is-unsure ${unsure === "finish" ? "is-selected" : ""}`} onClick={() => { setFamily(null); setUnsure("finish"); }}><span className="gpf-unsure-mark" aria-hidden="true">?</span><strong>I'm Not Sure</strong><span>Show me examples or help me choose.</span></button>
+            <button type="button" role="radio" aria-checked={unsure === "finish"} className={`gpf-style-card is-unsure ${unsure === "finish" ? "is-selected" : ""}`} onClick={() => { setFamily(null); setUnsure("finish"); }}><span className="gpf-unsure-mark" aria-hidden="true">?</span><strong>I'm Not Sure</strong><span>Show me examples and help me choose.</span></button>
           </div>
-          {unsure === "finish" && helpPanel}
+          {unsure === "finish" && <div className="gpf-unsure-panel"><h3 className="featured-name">Finish Examples</h3><p>Here is how the four finish types differ. Pick the one closest to what you want.</p><div className="gpf-style-grid gpf-finish-grid">{finishOptions.map((f) => <article key={f.id} className="gpf-style-card"><Swatch value={f.swatch} /><strong>{f.title}</strong><span>{finishExamples[f.id]}</span><Button size="sm" variant="outline" onClick={() => { setFamily(f.id); setUnsure(""); }}>Choose {f.title}</Button></article>)}</div></div>}
           <div className="gpf-actions"><Button className="gpf-primary" disabled={!family} onClick={continueFromFinish}>Continue<ArrowRight aria-hidden="true" /></Button></div>
         </>}
 
@@ -62,7 +62,7 @@ export function ColorChangeFinder() {
             {processesFor(family).map((p) => <button type="button" role="radio" aria-checked={process === p} key={p} className={`gpf-style-card ${process === p ? "is-selected" : ""}`} onClick={() => { setProcess(p); setUnsure(""); }}><Swatch value={p === "liquid" ? "linear-gradient(160deg,#dfe6ef,#8a97a8)" : "radial-gradient(circle,#c9ccd1 2px,#9aa0a8 3px)"} /><strong>{processLabel[p]}</strong><span>{p === "liquid" ? "Sprayed wet coats" : "Electrostatic powder, oven cured"}</span></button>)}
             <button type="button" role="radio" aria-checked={unsure === "process"} className={`gpf-style-card is-unsure ${unsure === "process" ? "is-selected" : ""}`} onClick={() => { setProcess(null); setUnsure("process"); }}><span className="gpf-unsure-mark" aria-hidden="true">?</span><strong>I'm Not Sure</strong><span>Help me decide</span></button>
           </div>
-          {unsure === "process" && helpPanel}
+          {unsure === "process" && <div className="gpf-unsure-panel"><h3 className="featured-name">Liquid or Powder?</h3><p><strong>Liquid Paint</strong> is sprayed in thin coats and air or low-bake cured — ideal for spot repairs and most at-home or small-shop setups. <strong>Powder Coating</strong> is applied electrostatically and oven cured — very tough, but needs a curing oven. If you don't have an oven, choose Liquid Paint.</p><div className="gpf-actions">{processesFor(family).map((p) => <Button key={p} size="sm" variant="outline" onClick={() => { setProcess(p); setUnsure(""); }}>Use {processLabel[p]}</Button>)}</div></div>}
           <div className="gpf-actions"><Button className="gpf-primary" disabled={!process} onClick={() => move(2)}>Show Matching Colors<ArrowRight aria-hidden="true" /></Button><Button variant="outline" onClick={() => move(0)}><ArrowLeft aria-hidden="true" />Back</Button></div>
         </>}
 
