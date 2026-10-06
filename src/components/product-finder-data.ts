@@ -10,11 +10,13 @@ export const emptyVehicle: VehicleDetails = { make: "", model: "", year: "", whe
  * Make | Model | Year Range | Wheel Size | Wheel Style / ID | OEM Finish | Wheel Paint Product */
 export type OemWheelRecord = {
   make: string; model: string; year_from: number; year_to: number; wheel_size: string;
-  wheel_style: string; oem_finish: string; oem_color_code: string; swatch: string; wheel_paint_product: string;
+  wheel_style: string; oem_finish: string | null; oem_color_code: string; swatch: string; wheel_paint_product: string;
 };
 export const oemWheelRecords: OemWheelRecord[] = [
   { make: "BMW / MINI", model: "3 Series", year_from: 2021, year_to: 2022, wheel_size: '18"', wheel_style: "Style 790M", oem_finish: "Ferric Grey", oem_color_code: "MOCK-BMW-FG", swatch: "#5f6266", wheel_paint_product: "FreiLack Wheel Paint — Ferric Grey" },
   { make: "BMW / MINI", model: "3 Series", year_from: 2021, year_to: 2022, wheel_size: '19"', wheel_style: "Style 791M", oem_finish: "Silver", oem_color_code: "MOCK-BMW-SV", swatch: "#c4c7cb", wheel_paint_product: "FreiLack Wheel Paint — Silver" },
+  { make: "BMW / MINI", model: "3 Series", year_from: 2021, year_to: 2022, wheel_size: '19"', wheel_style: "Style 791M", oem_finish: "Shadow Silver", oem_color_code: "MOCK-BMW-SS", swatch: "#8d9095", wheel_paint_product: "FreiLack Wheel Paint — Shadow Silver" },
+  { make: "BMW / MINI", model: "3 Series", year_from: 2021, year_to: 2022, wheel_size: '18"', wheel_style: "Style 793M", oem_finish: null, oem_color_code: "", swatch: "", wheel_paint_product: "" },
   { make: "BMW / MINI", model: "3 Series", year_from: 2021, year_to: 2022, wheel_size: '19"', wheel_style: "Style 792M", oem_finish: "Jet Black", oem_color_code: "MOCK-BMW-JB", swatch: "#1d1e20", wheel_paint_product: "FreiLack Wheel Paint — Jet Black" },
   { make: "BMW / MINI", model: "5 Series", year_from: 2020, year_to: 2023, wheel_size: '19"', wheel_style: "Style 845M", oem_finish: "Orbit Grey", oem_color_code: "MOCK-BMW-OG", swatch: "#6c6f73", wheel_paint_product: "FreiLack Wheel Paint — Orbit Grey" },
   { make: "Audi", model: "Q5", year_from: 2020, year_to: 2023, wheel_size: '20"', wheel_style: "Style Q5-20A", oem_finish: "Graphite Grey", oem_color_code: "MOCK-AUDI-GG", swatch: "#4a4d51", wheel_paint_product: "FreiLack Wheel Paint — Graphite Grey" },
@@ -35,21 +37,26 @@ export const makeOptions = ["BMW / MINI", "Audi", "Mercedes-Benz", "Porsche", "T
 export const modelOptions = (make: string) => uniq(filterRecords({ make }).map((r) => r.model));
 export const yearOptions = (make: string, model: string) => uniq(filterRecords({ make, model }).flatMap((r) => Array.from({ length: r.year_to - r.year_from + 1 }, (_, i) => String(r.year_to - i)))).sort().reverse();
 export const sizeOptions = (v: Filter) => uniq(filterRecords({ make: v.make, model: v.model, year: v.year }).map((r) => r.wheel_size)).sort();
-export const findRecord = (v: VehicleDetails) => filterRecords(v).find((r) => r.wheel_style === v.style);
+export const styleOptions = (v: VehicleDetails) => uniq(filterRecords(v).map((r) => r.wheel_style));
+/** Possible OEM finishes for the selection: 0 = no match, 1 = exact, 2+ = customer must confirm. */
+export function findMatches(v: VehicleDetails): OemWheelRecord[] {
+  const code = v.code.trim().toUpperCase();
+  if (code) return oemWheelRecords.filter((r) => r.oem_finish && r.oem_color_code === code);
+  return filterRecords(v).filter((r) => r.wheel_style === v.style && r.oem_finish);
+}
 export type FinderProduct = {
   id: string; name: string; product_role: string; requirement_level: "Recommended" | "Required" | "Optional";
   description: string; image: string; coating_process: string; project_type: string; finish_family: string;
   vehicle_brand: string; vehicle_model: string; vehicle_year: string; oem_color_code: string;
   system_group: string; compatible_products: string[];
 };
-export function createMockSystem(vehicle: VehicleDetails): FinderProduct[] {
+export function createMockSystem(vehicle: VehicleDetails, record?: OemWheelRecord): FinderProduct[] {
   const brand = vehicle.make || "Sample";
-  const record = findRecord(vehicle);
   const code = vehicle.code.trim() || record?.oem_color_code || `${brand.toUpperCase()}-XYZ-001`;
   const shared = { coating_process: "Liquid Paint", project_type: "oem_restore", finish_family: "Silver", vehicle_brand: brand, vehicle_model: vehicle.model, vehicle_year: vehicle.year, oem_color_code: code, system_group: "demo-oem-silver", compatible_products: ["primer", "color", "clear", "prep"] };
   return [
     { ...shared, id: "primer", name: "Wheel Refinishing Primer", product_role: "Primer", requirement_level: "Recommended", description: "Creates an even base for the color coat and helps it adhere to the prepared surface.", image: primerImage },
-    { ...shared, id: "color", name: record?.wheel_paint_product ?? `${brand} OEM Silver Wheel Paint`, product_role: "Color Coat", requirement_level: "Required", description: "The matched silver color coat for the original factory-style appearance in this example system.", image: paintImage },
+    { ...shared, id: "color", name: record?.wheel_paint_product || `${brand} OEM Silver Wheel Paint`, product_role: "Color Coat", requirement_level: "Required", description: "The matched silver color coat for the original factory-style appearance in this example system.", image: paintImage },
     { ...shared, id: "clear", name: "Professional Wheel Clear Coat", product_role: "Clear Coat", requirement_level: "Required", description: "Protects the color coat and provides the final gloss finish.", image: clearImage },
     { ...shared, id: "prep", name: "Surface Prep Cleaner", product_role: "Preparation / Other Supplies", requirement_level: "Optional", description: "Helps remove surface contamination before refinishing. Shown with example preparation supplies.", image: prepImage },
   ];
