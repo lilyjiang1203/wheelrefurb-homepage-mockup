@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ProductFinderChangeWheelColorRouteImport } from './routes/product-finder.change-wheel-color'
+import { Route as ProductFinderCustomFinishRouteImport } from './routes/product-finder.custom-finish'
 import { Route as ProductFinderOemRestoreRouteImport } from './routes/product-finder.oem-restore'
 
 const IndexRoute = IndexRouteImport.update({
@@ -30,6 +31,12 @@ const ProductFinderChangeWheelColorRoute =
     path: '/product-finder/change-wheel-color',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ProductFinderCustomFinishRoute =
+  ProductFinderCustomFinishRouteImport.update({
+    id: '/product-finder/custom-finish',
+    path: '/product-finder/custom-finish',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ProductFinderOemRestoreRoute = ProductFinderOemRestoreRouteImport.update({
   id: '/product-finder/oem-restore',
   path: '/product-finder/oem-restore',
@@ -40,12 +47,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/product-finder/change-wheel-color': typeof ProductFinderChangeWheelColorRoute
+  '/product-finder/custom-finish': typeof ProductFinderCustomFinishRoute
   '/product-finder/oem-restore': typeof ProductFinderOemRestoreRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/product-finder/change-wheel-color': typeof ProductFinderChangeWheelColorRoute
+  '/product-finder/custom-finish': typeof ProductFinderCustomFinishRoute
   '/product-finder/oem-restore': typeof ProductFinderOemRestoreRoute
 }
 export interface FileRoutesById {
@@ -53,6 +62,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/product-finder/change-wheel-color': typeof ProductFinderChangeWheelColorRoute
+  '/product-finder/custom-finish': typeof ProductFinderCustomFinishRoute
   '/product-finder/oem-restore': typeof ProductFinderOemRestoreRoute
 }
 export interface FileRouteTypes {
@@ -61,18 +71,21 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/product-finder/change-wheel-color'
+    | '/product-finder/custom-finish'
     | '/product-finder/oem-restore'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/product-finder/change-wheel-color'
+    | '/product-finder/custom-finish'
     | '/product-finder/oem-restore'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/product-finder/change-wheel-color'
+    | '/product-finder/custom-finish'
     | '/product-finder/oem-restore'
   fileRoutesById: FileRoutesById
 }
@@ -80,6 +93,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ProductFinderChangeWheelColorRoute: typeof ProductFinderChangeWheelColorRoute
+  ProductFinderCustomFinishRoute: typeof ProductFinderCustomFinishRoute
   ProductFinderOemRestoreRoute: typeof ProductFinderOemRestoreRoute
 }
 
@@ -106,6 +120,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductFinderChangeWheelColorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/product-finder/custom-finish': {
+      id: '/product-finder/custom-finish'
+      path: '/product-finder/custom-finish'
+      fullPath: '/product-finder/custom-finish'
+      preLoaderRoute: typeof ProductFinderCustomFinishRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/product-finder/oem-restore': {
       id: '/product-finder/oem-restore'
       path: '/product-finder/oem-restore'
@@ -120,6 +141,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ProductFinderChangeWheelColorRoute: ProductFinderChangeWheelColorRoute,
+  ProductFinderCustomFinishRoute: ProductFinderCustomFinishRoute,
   ProductFinderOemRestoreRoute: ProductFinderOemRestoreRoute,
 }
 export const routeTree = rootRouteImport
