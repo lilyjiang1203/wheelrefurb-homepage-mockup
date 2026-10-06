@@ -1,6 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "./product-finder.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -80,6 +81,7 @@
 }
 
 :root {
+  --gpf-silver-swatch: linear-gradient(135deg, oklch(0.89 0.005 250), oklch(0.68 0.01 250) 45%, oklch(0.93 0.004 250) 70%, oklch(0.73 0.008 250));
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
