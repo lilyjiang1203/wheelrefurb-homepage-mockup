@@ -35,7 +35,6 @@ export function ColorChangeFinder() {
   const pickColor = (c: ColorProduct) => { setColor(c); setSelected(buildSystem(c).filter((p) => p.requirement_level !== "Optional").map((p) => p.id)); move(3); };
   const reset = () => { setFamily(null); setProcess(null); setAutoProcess(false); setUnsure(""); setColor(null); setCart(null); move(0); };
   const titles = ["What type of color or finish are you looking for?", "How will the wheels be coated?", colors.length === 0 ? "No Matching Products Found" : "Choose Your Color", "Selected Color Product", "Recommended System for Your Project"];
-  const helpPanel = <div className="gpf-unsure-panel"><h3 className="featured-name">Need Help Choosing a Finish?</h3><p>Tell us what kind of look you want, or send us a few inspiration photos, and our team can help recommend the right products.</p><div className="gpf-actions"><Button type="button" variant="outline" onClick={() => setHelp(true)}><Mail aria-hidden="true" />Email Our Team</Button></div></div>;
 
   return <main className="gpf-page">
     <div className="featured-inner">
@@ -76,7 +75,7 @@ export function ColorChangeFinder() {
         </>}
 
         {step === 3 && color && <>
-          <div className="gpf-color-product"><div className="featured-media" style={{ display: "grid", placeItems: "center" }}><Swatch value={color.swatch} large /></div><div><span className="featured-label">Color Coat · Required</span><h3>{color.name}</h3><dl className="gpf-details"><div><dt>Product Role</dt><dd>Color Coat</dd></div><div><dt>Finish Family</dt><dd>{finishLabel(color.finish_family)}</dd></div><div><dt>Coating Process</dt><dd>{processLabel[color.coating_process]}</dd></div></dl><p className="gpf-disclaimer">Example product. Swatch is illustrative.</p></div></div>
+          <div className="gpf-color-product"><div className="featured-media"><img src={system.find((p) => p.id === color.id)?.image} alt={`Example ${color.name}`} /></div><div><span className="featured-label">Color Coat · Required</span><h3>{color.name}</h3><dl className="gpf-details"><div><dt>Color / Finish</dt><dd style={{ display: "flex", alignItems: "center", gap: 8 }}><span className="gpf-finish-swatch" style={{ background: color.swatch, width: 22, height: 22 }} aria-hidden="true" />{color.color}</dd></div><div><dt>Product Role</dt><dd>Color Coat</dd></div><div><dt>Finish Family</dt><dd>{finishLabel(color.finish_family)}</dd></div><div><dt>Coating Process</dt><dd>{processLabel[color.coating_process]}</dd></div></dl><p className="gpf-disclaimer">Example product image. Color swatch is illustrative.</p></div></div>
           <div className="gpf-actions"><Button className="gpf-primary" onClick={() => move(4)}>Continue to Recommended System<ArrowRight aria-hidden="true" /></Button><Button variant="outline" onClick={() => move(2)}><ArrowLeft aria-hidden="true" />Back</Button></div>
         </>}
 
