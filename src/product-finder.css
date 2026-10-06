@@ -98,3 +98,5 @@
 .gpf-match-product { display: flex; gap: 18px; align-items: center; max-width: 420px; }
 .gpf-match-product .featured-media { width: 110px; flex: none; }
 .gpf-match-product small { display: block; font-size: 12px; color: var(--color-muted-foreground); }
+.gpf-finish-grid { margin: 14px 0 24px; }
+.gpf-finish-swatch { width: 84px; height: 84px; border-radius: 50%; border: 1px solid var(--color-border); }
