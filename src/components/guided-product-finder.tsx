@@ -9,7 +9,7 @@ export function GuidedProductFinder() {
   const projects = [
     { title: "Restore the Original OEM Finish", description: "Bring your wheels back to their original factory color and finish.", image: finishImage, to: "/product-finder/oem-restore" as const, cta: "Start Product Finder" },
     { title: "Change My Wheel Color", description: "I want to choose a different color or finish for my wheels.", image: colorImage, to: "/product-finder/change-wheel-color" as const, cta: "Start Color Finder" },
-    { title: "Create a Custom / Special Finish", description: "Explore candy colors, special effects, and custom wheel finishes.", image: customImage, to: null, cta: "" },
+    { title: "Create a Custom / Special Finish", description: "I want a unique, custom, or special-effect finish for my wheels.", image: customImage, to: "/product-finder/custom-finish" as const, cta: "Explore Special Finishes" },
   ];
   return <section className="featured-section gpf-entry" aria-labelledby="guided-finder-title">
     <div className="featured-inner">
