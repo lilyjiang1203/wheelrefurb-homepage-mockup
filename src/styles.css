@@ -214,61 +214,10 @@
   text-decoration: none;
 }
 
-@utility brand-name {
-  font-size: 36px;
-  font-weight: 700;
-  letter-spacing: 0;
-}
-
-@utility brand-mark {
-  position: relative;
-  width: 96px;
-  height: 66px;
-  margin-left: 8px;
+@utility brand-logo {
+  height: 68px;
+  width: auto;
   display: block;
-}
-
-@utility brand-wheel {
-  position: absolute;
-  top: 1px;
-  left: 5px;
-  width: 58px;
-  height: 58px;
-  border: 8px solid var(--color-muted-foreground);
-  border-radius: 999px;
-  opacity: 0.48;
-
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 15px -8px;
-    border-top: 5px solid var(--color-background);
-    border-bottom: 5px solid var(--color-background);
-    transform: rotate(38deg);
-  }
-
-  &::after { transform: rotate(-38deg); }
-}
-
-@utility brand-sub {
-  position: absolute;
-  left: 9px;
-  bottom: 2px;
-  font-size: 14px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-@utility brand-lines {
-  position: absolute;
-  right: 0;
-  bottom: -6px;
-  width: 43px;
-  height: 12px;
-  border-top: 2px solid var(--color-brand);
-  border-bottom: 2px solid var(--color-destructive);
-  transform: skewX(-28deg);
 }
 
 @utility desktop-links {
