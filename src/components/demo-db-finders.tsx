@@ -91,7 +91,7 @@ type CartItem = { key: string; name: string; role: string; images: string[] };
 const layerItem = (l: DemoLayer): CartItem | null => l.product ? { key: `l${l.id}`, name: l.product.product_name, role: `Layer ${l.layer_order} · ${l.coating_role ?? "Coat"}`, images: verifiedFinderImages(l.product) } : null;
 
 function CartDialog({ items, onClose, back }: { items: CartItem[] | null; onClose: () => void; back: string }) {
-  return <Dialog open={Boolean(items)} onOpenChange={(o) => { if (!o) onClose(); }}><DialogContent className="gpf-dialog"><DialogTitle>Added to Your Demo Cart</DialogTitle><DialogDescription>{items?.length} demo products selected. No real cart or order has been created.</DialogDescription><ul className="gpf-cart-list">{items?.map((p) => <li key={p.key}><img src={p.image} alt="" /><div><strong>{p.name}</strong><p>{p.role} · Qty 1</p></div><Check size={18} className="text-brand" aria-hidden="true" /></li>)}</ul><Button className="gpf-primary" onClick={onClose}>{back}</Button></DialogContent></Dialog>;
+  return <Dialog open={Boolean(items)} onOpenChange={(o) => { if (!o) onClose(); }}><DialogContent className="gpf-dialog"><DialogTitle>Added to Your Demo Cart</DialogTitle><DialogDescription>{items?.length} demo products selected. No real cart or order has been created.</DialogDescription><ul className="gpf-cart-list">{items?.map((p) => <li key={p.key}><FinderProductImage sources={p.images} name={p.name} compact /><div><strong>{p.name}</strong><p>{p.role} · Qty 1</p></div><Check size={18} className="text-brand" aria-hidden="true" /></li>)}</ul><Button className="gpf-primary" onClick={onClose}>{back}</Button></DialogContent></Dialog>;
 }
 
 function LayerCards({ layers, selected, toggle }: { layers: DemoLayer[]; selected: string[]; toggle: (key: string, on: boolean) => void }) {
@@ -118,7 +118,7 @@ function SystemForProduct({ product, summary, onBack, onReset }: { product: Demo
   const systems = useQuery({ ...fresh, queryKey: ["demo", "systems-for-product", product.id], queryFn: () => fetchSystemsForProduct(product.id) });
   const [systemId, setSystemId] = useState<number | null>(null);
   const system = systems.data?.find((s) => s.id === systemId) ?? systems.data?.[0] ?? null;
-  const layers = useQuery({ ...fresh, queryKey: ["demo", "system-layers", system?.id], queryFn: () => fetchSystemLayers(system!.id), enabled: system !== null });
+  const layers = useQuery({ ...fresh, queryKey: ["demo", "system-layers", system?.id], queryFn: () => system ? fetchSystemLayers(system.id) : Promise.resolve([]), enabled: system !== null });
   const [selected, setSelected] = useState<string[] | null>(null);
   const [cart, setCart] = useState<CartItem[] | null>(null);
   const colorItem: CartItem = { key: `p${product.id}`, name: product.product_name, role: "Color Coat", images: verifiedFinderImages(product) };
@@ -137,7 +137,7 @@ function SystemForProduct({ product, summary, onBack, onReset }: { product: Demo
       <p className="gpf-intro">No demo coating system includes this product yet. The color coat is shown below; primer and clear coat recommendations will appear here once they are linked in the database.</p>
       <div className="gpf-system-grid">
         <FutureCard role="Primer" text="Primer recommendations are not yet linked to this product." />
-        <article className="featured-card" data-testid="demo-layer"><div className="gpf-product-role"><h3>Color Coat</h3><span className="gpf-badge is-required">Demo data</span></div><div className="featured-media"><img src={imageFor(product)} alt={`Illustrative image for ${product.product_name}`} loading="lazy" /></div><div className="featured-body"><h4 className="featured-name">{product.product_name}</h4><label className="gpf-selection"><input type="checkbox" checked={chosen.includes(colorItem.key)} onChange={(e) => toggle(colorItem.key, e.target.checked)} />Select Color Coat</label><ProductLink product={product} /></div></article>
+        <article className="featured-card" data-testid="demo-layer"><div className="gpf-product-role"><h3>Color Coat</h3><span className="gpf-badge is-required">Demo data</span></div><FinderProductImage sources={verifiedFinderImages(product)} name={product.product_name} /><div className="featured-body"><h4 className="featured-name">{product.product_name}</h4><label className="gpf-selection"><input type="checkbox" checked={chosen.includes(colorItem.key)} onChange={(e) => toggle(colorItem.key, e.target.checked)} />Select Color Coat</label><ProductLink product={product} /></div></article>
         <FutureCard role="Clear Coat" text="Clear coat recommendations are not yet linked to this product." />
       </div>
     </>)}
@@ -163,11 +163,11 @@ export function OemRestoreDbFinder() {
   const vehicle = list.find((v) => v.brand === brand && v.model === model && String(v.year) === year) ?? null;
   const matches = useQuery({
     ...fresh, queryKey: ["demo", "oem-matches", search],
-    queryFn: () => search!.kind === "vehicle" ? fetchVehicleProducts(search!.id) : fetchProductsByCode(search!.code),
+    queryFn: () => !search ? Promise.resolve([]) : search.kind === "vehicle" ? fetchVehicleProducts(search.id) : fetchProductsByCode(search.code),
     enabled: search !== null,
   });
   const found = matches.data ?? [];
-  const record = found.length === 1 ? found[0]! : found.find((p) => p.id === chosenId) ?? null;
+  const record = found.length === 1 ? found[0] ?? null : found.find((p) => p.id === chosenId) ?? null;
   const reset = () => { setBrand(""); setModel(""); setYear(""); setCode(""); setSearch(null); setChosenId(null); setPhotos([]); move(0); };
   const searchLabel = search?.kind === "vehicle" ? search.label : search ? `OEM color code “${search.code}”` : "";
   const resultTitle = matches.isLoading ? "Searching…" : found.length === 0 ? "No Exact Match Found" : found.length > 1 ? "Multiple Possible Matches" : "Exact Match Found";
@@ -240,7 +240,7 @@ export function ColorChangeDbFinder() {
   const continueFromFinish = () => {
     const valid = uniqueSorted(all.filter((p) => p.finish === finish).map((p) => p.coating_type));
     setFamily("");
-    if (valid.length === 1) { setCoating(valid[0]!); setAuto(true); move(2); } else { setCoating(""); setAuto(false); move(1); }
+    if (valid.length === 1) { setCoating(valid[0] ?? ""); setAuto(true); move(2); } else { setCoating(""); setAuto(false); move(1); }
   };
   return <Shell title="Change My Wheel Color" intro="Choose the type of color or finish you are interested in. We'll help narrow down the products that match your project." steps={["Finish Type", "Coating", "Color", "Color Product", "System"]} titles={["What type of finish are you looking for?", "How will the wheels be coated?", colors.length === 0 ? "No Matching Products Found" : "Choose Your Color", "Selected Color Product", "Recommended System for Your Project"]} step={step} move={move} stageRef={ref} support="Tell us the look you want and share a few inspiration photos — our team can recommend the right products.">
     {(openHelp) => <>
@@ -290,7 +290,7 @@ export function CustomFinishDbFinder() {
   const [selected, setSelected] = useState<string[] | null>(null);
   const [cart, setCart] = useState<CartItem[] | null>(null);
   const systems = useQuery({ ...fresh, queryKey: ["demo", "systems"], queryFn: fetchSystems, retry: 1 });
-  const layers = useQuery({ ...fresh, queryKey: ["demo", "system-layers", system?.id], queryFn: () => fetchSystemLayers(system!.id), enabled: system !== null });
+  const layers = useQuery({ ...fresh, queryKey: ["demo", "system-layers", system?.id], queryFn: () => system ? fetchSystemLayers(system.id) : Promise.resolve([]), enabled: system !== null });
   const items = (layers.data ?? []).map(layerItem).filter((i): i is CartItem => i !== null);
   const chosen = selected ?? items.map((i) => i.key);
   const toggle = (key: string, on: boolean) => setSelected(on ? [...chosen, key] : chosen.filter((k) => k !== key));
