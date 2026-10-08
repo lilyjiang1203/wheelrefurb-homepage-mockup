@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import wheelPaintProduct from "../assets/product-wheel-paint.jpg";
 import clearCoatProduct from "../assets/product-clear-coat.jpg";
 import powderCoatingProduct from "../assets/product-powder-coating.jpg";
@@ -67,7 +68,7 @@ export function FeaturedProducts() {
         <ul className="featured-grid">
           {featuredProducts.map((product) => (
             <li key={product.name}>
-              <a className="featured-card" href={product.href}>
+              <FeaturedProductLink product={product}>
                 <span className="featured-media">
                   <img
                     src={product.image}
@@ -88,7 +89,7 @@ export function FeaturedProducts() {
                     View product <ArrowRight aria-hidden="true" />
                   </span>
                 </span>
-              </a>
+              </FeaturedProductLink>
             </li>
           ))}
         </ul>
@@ -100,4 +101,10 @@ export function FeaturedProducts() {
       </div>
     </section>
   );
+}
+
+function FeaturedProductLink({ product, children }: { product: FeaturedProduct; children: React.ReactNode }) {
+  return product.label === "Wheel Paint"
+    ? <Link className="featured-card" to="/products/audi-anthracite-lv7d">{children}</Link>
+    : <a className="featured-card" href={product.href}>{children}</a>;
 }
