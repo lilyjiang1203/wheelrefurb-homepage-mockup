@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "./ui/dialog";
 import { audiProduct, essentialInfo, normalizeProductQuantity, samplePriceLabel } from "./product-detail-data";
 import { ProductGallery } from "./product-gallery";
-import powderExample from "../assets/product-powder-coating.jpg";
+import finishExample from "../assets/wheel-finish-closeup.jpg";
 
 function PlaceholderProduct({ title, image, alt }: { title: string; image: string; alt: string }) {
   return <article className="pd-placeholder"><div className="pd-placeholder-media"><img src={image} alt={alt} /></div><div className="pd-placeholder-body"><h3>{title}</h3><p>Product name / SKU — TBD</p><p>Illustrative image only. Similar color selection pending.</p></div></article>;
