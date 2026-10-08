@@ -8,11 +8,12 @@ import { supabase } from "@/integrations/supabase/client";
 
 /**
  * Contact details — identical to the footer's Contact block (see
- * mem://features/contact-details). Phone displays exactly as supplied.
+ * mem://features/contact-details). Phone shows in the North American
+ * 1-780-434-9191 form the company chose.
  */
 const contact = {
   email: "info@freilackewheelrefurb.com",
-  phoneDisplay: "(0)780-434-9191",
+  phoneDisplay: "1-780-434-9191",
   phoneHref: "tel:+17804349191",
   address: "5845 Gateway Blvd NW, Edmonton, AB",
   addressHref:

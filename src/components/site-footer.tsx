@@ -3,12 +3,13 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import logoLight from "../assets/freilacke-logo-light.png";
 
 /**
- * Contact details supplied by the company on 2026-10-08. Keep the displayed
- * phone exactly as supplied; the tel: href is the same number in dial form.
+ * Contact details supplied by the company on 2026-10-08. The phone is shown in
+ * the North American 1-780-434-9191 form the company chose on 2026-10-08; the
+ * tel: href is the same number in dial form.
  */
 const contact = {
   email: "info@freilackewheelrefurb.com",
-  phoneDisplay: "(0)780-434-9191",
+  phoneDisplay: "1-780-434-9191",
   phoneHref: "tel:+17804349191",
   address: "5845 Gateway Blvd NW, Edmonton, AB",
   addressHref:
