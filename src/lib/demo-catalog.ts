@@ -82,3 +82,21 @@ export const filterProducts = (products: DemoProduct[], f: ProductFilters) =>
 export const EXISTING_PRODUCT_ROUTES = ["/products/audi-anthracite-lv7d"] as const;
 export const existingProductRoute = (url: string | null) =>
   EXISTING_PRODUCT_ROUTES.find((r) => r === url) ?? null;
+
+// OEM color code search across products.oem_color_code and products.formula_code.
+export const sanitizeCode = (code: string) => code.replace(/[^A-Za-z0-9 _-]/g, "").trim().slice(0, 60);
+export async function fetchProductsByCode(code: string): Promise<DemoProduct[]> {
+  const c = sanitizeCode(code);
+  if (!c) return [];
+  return unwrap(await demoDb().from("products").select(productCols).or(`oem_color_code.ilike.%${c}%,formula_code.ilike.%${c}%`).order("product_name"));
+}
+
+// Coating systems that include a given product (via coating_system_products).
+export async function fetchSystemsForProduct(productId: number): Promise<DemoSystem[]> {
+  const rows = unwrap<{ system: DemoSystem | null }[]>(
+    await demoDb().from("coating_system_products").select("system:coating_systems(id,system_name,finish_type,description)").eq("product_id", productId),
+  );
+  const seen = new Map<number, DemoSystem>();
+  rows.forEach((r) => { if (r.system) seen.set(r.system.id, r.system); });
+  return [...seen.values()];
+}
