@@ -11,6 +11,8 @@ export const Route = createFileRoute("/shop")({
     { property: "og:description", content: "Explore our example wheel refinishing product detail page." },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
+    { property: "og:image", content: audiProduct.product.images.front },
+    { name: "twitter:image", content: audiProduct.product.images.front },
   ] }),
   component: Shop,
 });

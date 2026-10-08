@@ -21,7 +21,7 @@ export function ProductDetail() {
     <section className="pd-overview" aria-labelledby="product-title">
       <div>
         <div className="pd-gallery-stage" aria-live="polite">
-          {media === "video" ? <video key="showcase" src={p.video} poster={p.images.front} controls playsInline preload="metadata" aria-label="Audi Anthracite product showcase" /> : media === "wheel" ? <div className="pd-empty-wheel"><CircleHelp /><span>Applied wheel photo — to be supplied</span><span>Not a verified finish example</span></div> : <img src={media === "back" ? p.images.back : p.images.front} alt={media === "back" ? "Back of Audi Anthracite sample panel with FreiLacke formula and layer references" : "Audi Anthracite dark grey coating sample panel"} width={768} height={768} />}
+          {media === "video" ? <video key="showcase" poster={p.images.front} controls playsInline preload="metadata" aria-label="Audi Anthracite product showcase"><source src={p.webVideo} type="video/webm" /><source src={p.video} type="video/mp4" /></video> : media === "wheel" ? <div className="pd-empty-wheel"><CircleHelp /><span>Applied wheel photo — to be supplied</span><span>Not a verified finish example</span></div> : <img src={media === "back" ? p.images.back : p.images.front} alt={media === "back" ? "Back of Audi Anthracite sample panel with FreiLacke formula and layer references" : "Audi Anthracite dark grey coating sample panel"} width={768} height={768} />}
         </div>
         <div className="pd-thumbs" aria-label="Product gallery">
           <Button variant="outline" className="pd-thumb" aria-label="Show color sample" aria-pressed={media === "front"} onClick={() => setMedia("front")}><img src={p.images.front} alt="" /></Button>
