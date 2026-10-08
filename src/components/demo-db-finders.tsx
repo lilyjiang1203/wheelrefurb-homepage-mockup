@@ -13,6 +13,8 @@ import {
   filterProducts, uniqueSorted, type DemoProduct,
 } from "../lib/demo-catalog";
 
+// Always re-query the database: on page load, on every new search, and when the tab regains focus.
+const fresh = { staleTime: 0, gcTime: 0, refetchOnMount: "always" as const, refetchOnWindowFocus: true };
 const DEMO_NOTE = "Demonstration data from the wheelrefurb-demo database. Matches and compatibility are not verified recommendations — confirm with our team before purchase or application.";
 
 const imageFor = (p: DemoProduct) => (p.coating_layer === "Clear Coat" ? clearImg : p.coating_type === "Powder" ? powderImg : wheelPaintImg);
@@ -72,10 +74,10 @@ const select = (label: string, value: string, options: string[], onChange: (v: s
 /* 1. Restore the Original OEM Finish */
 export function OemRestoreDbFinder() {
   const [brand, setBrand] = useState(""); const [model, setModel] = useState(""); const [year, setYear] = useState("");
-  const vehicles = useQuery({ queryKey: ["demo", "vehicles"], queryFn: fetchVehicles });
+  const vehicles = useQuery({ ...fresh, queryKey: ["demo", "vehicles"], queryFn: fetchVehicles });
   const list = vehicles.data ?? [];
   const vehicle = list.find((v) => v.brand === brand && v.model === model && String(v.year) === year) ?? null;
-  const matches = useQuery({ queryKey: ["demo", "vehicle-products", vehicle?.id], queryFn: () => fetchVehicleProducts(vehicle!.id), enabled: vehicle !== null });
+  const matches = useQuery({ ...fresh, queryKey: ["demo", "vehicle-products", vehicle?.id], queryFn: () => fetchVehicleProducts(vehicle!.id), enabled: vehicle !== null });
   const step = vehicle ? 1 : 0;
   return <Shell title="Restore the Original OEM Finish" intro="Select your vehicle brand, model and year to see the demo products linked to it." steps={["Select Your Vehicle", "Matching Products"]} step={step}>
     <Status loading={vehicles.isLoading} error={vehicles.error} retry={() => vehicles.refetch()} label="vehicles" />
@@ -100,7 +102,7 @@ export function OemRestoreDbFinder() {
 /* 2. Change My Wheel Color */
 export function ColorChangeDbFinder() {
   const [colorFamily, setColorFamily] = useState(""); const [finish, setFinish] = useState(""); const [coatingType, setCoatingType] = useState("");
-  const products = useQuery({ queryKey: ["demo", "products"], queryFn: fetchProducts });
+  const products = useQuery({ ...fresh, queryKey: ["demo", "products"], queryFn: fetchProducts });
   const all = products.data ?? [];
   const results = filterProducts(all, { colorFamily, finish, coatingType });
   const filtered = Boolean(colorFamily || finish || coatingType);
@@ -124,8 +126,8 @@ export function ColorChangeDbFinder() {
 /* 3. Create a Custom / Special Finish */
 export function CustomFinishDbFinder() {
   const [systemId, setSystemId] = useState<number | null>(null);
-  const systems = useQuery({ queryKey: ["demo", "systems"], queryFn: fetchSystems, retry: 1 });
-  const layers = useQuery({ queryKey: ["demo", "system-layers", systemId], queryFn: () => fetchSystemLayers(systemId!), enabled: systemId !== null });
+  const systems = useQuery({ ...fresh, queryKey: ["demo", "systems"], queryFn: fetchSystems, retry: 1 });
+  const layers = useQuery({ ...fresh, queryKey: ["demo", "system-layers", systemId], queryFn: () => fetchSystemLayers(systemId!), enabled: systemId !== null });
   const system = systems.data?.find((s) => s.id === systemId) ?? null;
   return <Shell title="Create a Custom / Special Finish" intro="Choose a demo special finish system to see its products in layer order." steps={["Choose a System", "System Layers"]} step={system ? 1 : 0}>
     <Status loading={systems.isLoading} error={systems.error} retry={() => systems.refetch()} label="finish systems" />
