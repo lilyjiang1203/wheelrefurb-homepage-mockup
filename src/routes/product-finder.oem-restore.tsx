@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { StoreNavigation } from "../components/store-navigation";
-import { OemRestoreFinder } from "../components/oem-restore-finder";
+import { OemRestoreDbFinder } from "../components/demo-db-finders";
 
 export const Route = createFileRoute("/product-finder/oem-restore")({
   head: () => ({ meta: [
@@ -14,4 +14,4 @@ export const Route = createFileRoute("/product-finder/oem-restore")({
   component: ProductFinderPage,
 });
 
-function ProductFinderPage() { return <div className="min-h-screen bg-background"><StoreNavigation /><OemRestoreFinder /></div>; }
+function ProductFinderPage() { return <div className="min-h-screen bg-background"><StoreNavigation /><OemRestoreDbFinder /></div>; }
