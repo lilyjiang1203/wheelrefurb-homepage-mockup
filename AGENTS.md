@@ -16,4 +16,5 @@
 - Keep finder state in memory and explicitly mark matches, product compatibility, cart and help submissions as simulated; this prevents a UI-only prototype from implying real purchases or email delivery.
 - Keep product detail data separated into product, variants, metafields, references and documents with null unverified values; this supports future Shopify integration without invented specifications.
 - Resolve product asset pointers against their verified Lovable hosting origin for third-party deployment and offer WebM/MP4 video sources; relative asset infrastructure paths and codec support otherwise fail outside the preview.
+- Use the shared ProductGallery for product media; filter missing sources and remove failed media with selection fallback so future product pages never show empty gallery placeholders.
 

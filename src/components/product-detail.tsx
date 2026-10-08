@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, ChevronRight, CircleHelp, Download, FileText, ImageIcon, Minus, Palette, Play, Plus, ShoppingBag } from "lucide-react";
+import { ArrowRight, ChevronRight, Download, FileText, ImageIcon, Minus, Palette, Plus, ShoppingBag } from "lucide-react";
 import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "./ui/dialog";
 import { audiProduct, essentialInfo, normalizeProductQuantity, samplePriceLabel } from "./product-detail-data";
+import { ProductGallery } from "./product-gallery";
 
 function PlaceholderProduct({ title, similar = false }: { title: string; similar?: boolean }) {
   return <article className="pd-placeholder"><div className="pd-placeholder-media"><ImageIcon aria-hidden="true" /></div><div className="pd-placeholder-body"><h3>{title}</h3><p>Product name / SKU — TBD</p><p>{similar ? "Similar color selection pending." : "Compatibility not yet verified."}</p></div></article>;
 }
 
 export function ProductDetail() {
-  const [media, setMedia] = useState("front");
   const [variantId, setVariantId] = useState("2");
   const [quantity, setQuantity] = useState(1);
   const [cart, setCart] = useState<{ packageSize: string; quantity: number } | null>(null);
@@ -20,16 +20,11 @@ export function ProductDetail() {
     <nav className="pd-breadcrumb" aria-label="Breadcrumb"><Link to="/">Home</Link><ChevronRight size={12} /><Link to="/shop">Products</Link><ChevronRight size={12} /><span>Audi Anthracite LV7D</span></nav>
     <section className="pd-overview" aria-labelledby="product-title">
       <div>
-        <div className="pd-gallery-stage" aria-live="polite">
-          {media === "video" ? <video key="showcase" poster={p.images.front} controls playsInline preload="metadata" aria-label="Audi Anthracite product showcase"><source src={p.webVideo} type="video/webm" /><source src={p.video} type="video/mp4" /></video> : media === "wheel" ? <div className="pd-empty-wheel"><CircleHelp /><span>Applied wheel photo — to be supplied</span><span>Not a verified finish example</span></div> : <img src={media === "back" ? p.images.back : p.images.front} alt={media === "back" ? "Back of Audi Anthracite sample panel with FreiLacke formula and layer references" : "Audi Anthracite dark grey coating sample panel"} width={768} height={768} />}
-        </div>
-        <div className="pd-thumbs" aria-label="Product gallery">
-          <Button variant="outline" className="pd-thumb" aria-label="Show color sample" aria-pressed={media === "front"} onClick={() => setMedia("front")}><img src={p.images.front} alt="" /></Button>
-          <Button variant="outline" className="pd-thumb" aria-label="Show panel reference" aria-pressed={media === "back"} onClick={() => setMedia("back")}><img src={p.images.back} alt="" /></Button>
-          <Button variant="outline" className="pd-thumb" aria-label="Show applied wheel placeholder" aria-pressed={media === "wheel"} onClick={() => setMedia("wheel")}><CircleHelp /><span className="pd-thumb-label">Wheel · TBD</span></Button>
-          <Button variant="outline" className="pd-thumb" aria-label="Watch product video" aria-pressed={media === "video"} onClick={() => setMedia("video")}><img src={p.images.front} alt="" /><span className="pd-play"><Play /></span><span className="pd-thumb-label">Video</span></Button>
-        </div>
-        <p className="pd-caption">Color appearance varies with lighting and screen settings. Supplied sample panel shown; applied wheel image pending.</p>
+        <ProductGallery images={[
+          { id: "front", src: p.images.front, alt: "Audi Anthracite dark grey coating sample panel", label: "Show color sample" },
+          { id: "back", src: p.images.back, alt: "Back of Audi Anthracite sample panel with FreiLacke formula and layer references", label: "Show panel reference" },
+        ]} videos={[{ id: "video", label: "Watch product video", poster: p.images.front, sources: [{ src: p.webVideo, type: "video/webm" }, { src: p.video, type: "video/mp4" }] }]} />
+        <p className="pd-caption">Color appearance varies with lighting and screen settings. Supplied sample panel shown.</p>
       </div>
       <div>
         <p className="pd-eyebrow">FreiLacke / Wheel Refinishing Color</p>

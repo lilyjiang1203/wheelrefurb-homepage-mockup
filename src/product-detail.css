@@ -4,10 +4,10 @@
 .pd-overview { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,1fr); gap: 64px; padding-bottom: 56px; }
 .pd-gallery-stage { aspect-ratio: 1; position: relative; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; background: var(--card); }
 .pd-gallery-stage img, .pd-gallery-stage video { width: 100%; height: 100%; object-fit: contain; }
-.pd-thumbs { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; margin-top: 14px; }
-.pd-thumb { height: auto; padding: 0; aspect-ratio: 1; overflow: hidden; position: relative; border: 1px solid var(--border); border-radius: 4px; background: var(--card); }
+.pd-thumbs { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
+.pd-thumb { flex: 0 0 calc((100% - 36px) / 4); min-width: 0; height: auto; padding: 0; aspect-ratio: 1; overflow: hidden; position: relative; border: 1px solid var(--border); border-radius: 4px; background: var(--card); }
 .pd-thumb[aria-pressed=true] { border: 2px solid var(--brand); }
-.pd-thumb img { width: 100%; height: 100%; object-fit: contain; }
+.pd-thumb img, .pd-thumb video { width: 100%; height: 100%; object-fit: contain; }
 .pd-thumb svg { width: 23px; height: 23px; }
 .pd-thumb-label { position: absolute; bottom: 3px; background: var(--card); color: var(--muted-foreground); font-size: 9px; padding: 2px 4px; }
 .pd-play { position: absolute; inset: 0; display: grid; place-items: center; background: color-mix(in oklab,var(--background) 55%, transparent); }
