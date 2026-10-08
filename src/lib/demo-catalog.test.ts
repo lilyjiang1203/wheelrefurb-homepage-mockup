@@ -16,3 +16,10 @@ describe("demo catalog", () => {
     expect(existingProductRoute("/products/demo-gloss-black-powder")).toBeNull();
   });
 });
+
+import { sanitizeCode } from "./demo-catalog";
+describe("color code search", () => {
+  it("strips characters that could alter the query filter", () => {
+    expect(sanitizeCode(" LV7D,(x)%* ")).toBe("LV7Dx");
+  });
+});
