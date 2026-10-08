@@ -8,10 +8,8 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "./ui/dial
 import { ProductFinderHelp } from "./product-finder-help";
 import { emptyVehicle } from "./product-finder-data";
 import { WheelGlyph } from "./wheel-glyph";
-import wheelPaintImg from "../assets/product-wheel-paint.jpg";
-import powderImg from "../assets/product-powder-coating.jpg";
-import clearImg from "../assets/product-clear-coat.jpg";
-import primerImg from "../assets/product-primer-kit.jpg";
+import { verifiedFinderImages, type FinderContactSearch } from "../lib/finder-presentation";
+import { FinderProductImage } from "./finder-product-image";
 import {
   existingProductRoute, fetchProducts, fetchProductsByCode, fetchSystemLayers, fetchSystems, fetchSystemsForProduct,
   fetchVehicleProducts, fetchVehicles, uniqueSorted, type DemoLayer, type DemoProduct, type DemoSystem,
@@ -21,7 +19,6 @@ import {
 const fresh = { staleTime: 0, gcTime: 0, refetchOnMount: "always" as const, refetchOnWindowFocus: true };
 const DEMO_NOTE = "Demonstration data from the wheelrefurb-demo database. Matches and compatibility are not verified recommendations — confirm with our team before purchase or application.";
 
-const imageFor = (p: DemoProduct) => (p.coating_layer === "Clear Coat" ? clearImg : p.coating_type === "Powder" ? powderImg : wheelPaintImg);
 // Presentational swatch tint only; unknown families fall back to a neutral grey.
 const swatchTint: Record<string, string> = { Grey: "linear-gradient(160deg,#6b6f75,#2f3236)", Silver: "linear-gradient(160deg,#eef1f4,#9aa3ad)", Black: "linear-gradient(160deg,#3a3a3a,#0b0b0b)", Gold: "linear-gradient(160deg,#f1d27a,#a7781f)", Clear: "linear-gradient(160deg,#ffffff,#dfe6ef)", Bronze: "linear-gradient(160deg,#b08350,#5d3e1f)", White: "linear-gradient(160deg,#ffffff,#e7e9ec)" };
 const swatch = (family: string | null) => (family && swatchTint[family]) || "linear-gradient(160deg,#d6dae0,#9aa0a8)";
@@ -82,15 +79,19 @@ const Details = ({ product }: { product: DemoProduct }) => <dl className="gpf-de
 </dl>;
 
 function ColorProduct({ product }: { product: DemoProduct }) {
-  return <div className="gpf-color-product" data-testid="demo-color-product"><div className="featured-media"><img src={imageFor(product)} alt={`Illustrative image for ${product.product_name}`} /></div><div><span className="featured-label">{product.coating_layer ?? "Color Coat"} · Demo data</span><h3>{product.product_name}</h3><Details product={product} /><ProductLink product={product} /><p className="gpf-disclaimer">Illustrative product image. Compatibility is not verified.</p></div></div>;
+  return <div className="gpf-color-product" data-testid="demo-color-product"><FinderProductImage sources={verifiedFinderImages(product)} name={product.product_name} /><div><span className="featured-label">{product.coating_layer ?? "Color Coat"} · Demo data</span><h3>{product.product_name}</h3><Details product={product} /><ProductLink product={product} /><p className="gpf-disclaimer">Demo product data. Compatibility is not verified.</p></div></div>;
+}
+
+function ContactAssistance({ title, label, search }: { title: string; label: string; search: FinderContactSearch }) {
+  return <section className="gpf-assistance" aria-label={title}><h3>{title}</h3><Button asChild variant="outline"><Link to="/contact" search={search}><Mail aria-hidden="true" />{label}</Link></Button></section>;
 }
 
 /* ---- shared system/cart pieces ---- */
-type CartItem = { key: string; name: string; role: string; image: string };
-const layerItem = (l: DemoLayer): CartItem | null => l.product ? { key: `l${l.id}`, name: l.product.product_name, role: `Layer ${l.layer_order} · ${l.coating_role ?? "Coat"}`, image: imageFor(l.product) } : null;
+type CartItem = { key: string; name: string; role: string; images: string[] };
+const layerItem = (l: DemoLayer): CartItem | null => l.product ? { key: `l${l.id}`, name: l.product.product_name, role: `Layer ${l.layer_order} · ${l.coating_role ?? "Coat"}`, images: verifiedFinderImages(l.product) } : null;
 
 function CartDialog({ items, onClose, back }: { items: CartItem[] | null; onClose: () => void; back: string }) {
-  return <Dialog open={Boolean(items)} onOpenChange={(o) => { if (!o) onClose(); }}><DialogContent className="gpf-dialog"><DialogTitle>Added to Your Demo Cart</DialogTitle><DialogDescription>{items?.length} demo products selected. No real cart or order has been created.</DialogDescription><ul className="gpf-cart-list">{items?.map((p) => <li key={p.key}><img src={p.image} alt="" /><div><strong>{p.name}</strong><p>{p.role} · Qty 1</p></div><Check size={18} className="text-brand" aria-hidden="true" /></li>)}</ul><Button className="gpf-primary" onClick={onClose}>{back}</Button></DialogContent></Dialog>;
+  return <Dialog open={Boolean(items)} onOpenChange={(o) => { if (!o) onClose(); }}><DialogContent className="gpf-dialog"><DialogTitle>Added to Your Demo Cart</DialogTitle><DialogDescription>{items?.length} demo products selected. No real cart or order has been created.</DialogDescription><ul className="gpf-cart-list">{items?.map((p) => <li key={p.key}><FinderProductImage sources={p.images} name={p.name} compact /><div><strong>{p.name}</strong><p>{p.role} · Qty 1</p></div><Check size={18} className="text-brand" aria-hidden="true" /></li>)}</ul><Button className="gpf-primary" onClick={onClose}>{back}</Button></DialogContent></Dialog>;
 }
 
 function LayerCards({ layers, selected, toggle }: { layers: DemoLayer[]; selected: string[]; toggle: (key: string, on: boolean) => void }) {
@@ -99,16 +100,15 @@ function LayerCards({ layers, selected, toggle }: { layers: DemoLayer[]; selecte
     if (!l.product) return <article key={key} className="featured-card"><div className="featured-body"><h4 className="featured-name">Layer {l.layer_order}</h4><p className="gpf-disclaimer">Product unavailable</p></div></article>;
     return <article key={key} className="featured-card" data-testid="demo-layer">
       <div className="gpf-product-role"><h3>Layer {l.layer_order} — {l.coating_role ?? "Coat"}</h3><span className="gpf-badge">Demo data</span></div>
-      <div className="featured-media"><img src={imageFor(l.product)} alt={`Illustrative image for ${l.product.product_name}`} loading="lazy" /></div>
+      <FinderProductImage sources={verifiedFinderImages(l.product)} name={l.product.product_name} />
       <div className="featured-body"><h4 className="featured-name">{l.product.product_name}</h4><Details product={l.product} /><label className="gpf-selection"><input type="checkbox" checked={selected.includes(key)} onChange={(e) => toggle(key, e.target.checked)} />Select {l.coating_role ?? "layer"}</label><ProductLink product={l.product} /></div>
     </article>;
   })}</div>;
 }
 
-function FutureCard({ role, image, text }: { role: string; image: string; text: string }) {
+function FutureCard({ role, text }: { role: string; text: string }) {
   return <article className="featured-card" aria-disabled="true" style={{ opacity: 0.6 }}>
     <div className="gpf-product-role"><h3>{role}</h3><span className="gpf-badge">Coming soon</span></div>
-    <div className="featured-media"><img src={image} alt="" loading="lazy" /></div>
     <div className="featured-body"><h4 className="featured-name">Future functionality</h4><p className="featured-finish">{text}</p><label className="gpf-selection"><input type="checkbox" disabled />Select {role}</label></div>
   </article>;
 }
@@ -118,10 +118,10 @@ function SystemForProduct({ product, summary, onBack, onReset }: { product: Demo
   const systems = useQuery({ ...fresh, queryKey: ["demo", "systems-for-product", product.id], queryFn: () => fetchSystemsForProduct(product.id) });
   const [systemId, setSystemId] = useState<number | null>(null);
   const system = systems.data?.find((s) => s.id === systemId) ?? systems.data?.[0] ?? null;
-  const layers = useQuery({ ...fresh, queryKey: ["demo", "system-layers", system?.id], queryFn: () => fetchSystemLayers(system!.id), enabled: system !== null });
+  const layers = useQuery({ ...fresh, queryKey: ["demo", "system-layers", system?.id], queryFn: () => system ? fetchSystemLayers(system.id) : Promise.resolve([]), enabled: system !== null });
   const [selected, setSelected] = useState<string[] | null>(null);
   const [cart, setCart] = useState<CartItem[] | null>(null);
-  const colorItem: CartItem = { key: `p${product.id}`, name: product.product_name, role: "Color Coat", image: imageFor(product) };
+  const colorItem: CartItem = { key: `p${product.id}`, name: product.product_name, role: "Color Coat", images: verifiedFinderImages(product) };
   const items: CartItem[] = system ? (layers.data ?? []).map(layerItem).filter((i): i is CartItem => i !== null) : [colorItem];
   const chosen = selected ?? items.map((i) => i.key);
   const toggle = (key: string, on: boolean) => setSelected(on ? [...chosen, key] : chosen.filter((k) => k !== key));
@@ -136,9 +136,9 @@ function SystemForProduct({ product, summary, onBack, onReset }: { product: Demo
     </> : <>
       <p className="gpf-intro">No demo coating system includes this product yet. The color coat is shown below; primer and clear coat recommendations will appear here once they are linked in the database.</p>
       <div className="gpf-system-grid">
-        <FutureCard role="Primer" image={primerImg} text="Primer recommendations are not yet linked to this product." />
-        <article className="featured-card" data-testid="demo-layer"><div className="gpf-product-role"><h3>Color Coat</h3><span className="gpf-badge is-required">Demo data</span></div><div className="featured-media"><img src={imageFor(product)} alt={`Illustrative image for ${product.product_name}`} loading="lazy" /></div><div className="featured-body"><h4 className="featured-name">{product.product_name}</h4><label className="gpf-selection"><input type="checkbox" checked={chosen.includes(colorItem.key)} onChange={(e) => toggle(colorItem.key, e.target.checked)} />Select Color Coat</label><ProductLink product={product} /></div></article>
-        <FutureCard role="Clear Coat" image={clearImg} text="Clear coat recommendations are not yet linked to this product." />
+        <FutureCard role="Primer" text="Primer recommendations are not yet linked to this product." />
+        <article className="featured-card" data-testid="demo-layer"><div className="gpf-product-role"><h3>Color Coat</h3><span className="gpf-badge is-required">Demo data</span></div><FinderProductImage sources={verifiedFinderImages(product)} name={product.product_name} /><div className="featured-body"><h4 className="featured-name">{product.product_name}</h4><label className="gpf-selection"><input type="checkbox" checked={chosen.includes(colorItem.key)} onChange={(e) => toggle(colorItem.key, e.target.checked)} />Select Color Coat</label><ProductLink product={product} /></div></article>
+        <FutureCard role="Clear Coat" text="Clear coat recommendations are not yet linked to this product." />
       </div>
     </>)}
     <div className="gpf-cart-actions"><Button className="gpf-primary" disabled={chosen.length === 0 || items.length === 0} onClick={() => setCart(items.filter((i) => chosen.includes(i.key)))}><ShoppingBag aria-hidden="true" />Add Selected Products to Cart ({chosen.filter((k) => items.some((i) => i.key === k)).length})</Button><Button variant="outline" disabled={items.length === 0} onClick={() => { setSelected(items.map((i) => i.key)); setCart(items); }}>Add Complete System to Cart</Button></div>
@@ -163,11 +163,11 @@ export function OemRestoreDbFinder() {
   const vehicle = list.find((v) => v.brand === brand && v.model === model && String(v.year) === year) ?? null;
   const matches = useQuery({
     ...fresh, queryKey: ["demo", "oem-matches", search],
-    queryFn: () => search!.kind === "vehicle" ? fetchVehicleProducts(search!.id) : fetchProductsByCode(search!.code),
+    queryFn: () => !search ? Promise.resolve([]) : search.kind === "vehicle" ? fetchVehicleProducts(search.id) : fetchProductsByCode(search.code),
     enabled: search !== null,
   });
   const found = matches.data ?? [];
-  const record = found.length === 1 ? found[0]! : found.find((p) => p.id === chosenId) ?? null;
+  const record = found.length === 1 ? found[0] ?? null : found.find((p) => p.id === chosenId) ?? null;
   const reset = () => { setBrand(""); setModel(""); setYear(""); setCode(""); setSearch(null); setChosenId(null); setPhotos([]); move(0); };
   const searchLabel = search?.kind === "vehicle" ? search.label : search ? `OEM color code “${search.code}”` : "";
   const resultTitle = matches.isLoading ? "Searching…" : found.length === 0 ? "No Exact Match Found" : found.length > 1 ? "Multiple Possible Matches" : "Exact Match Found";
@@ -240,7 +240,7 @@ export function ColorChangeDbFinder() {
   const continueFromFinish = () => {
     const valid = uniqueSorted(all.filter((p) => p.finish === finish).map((p) => p.coating_type));
     setFamily("");
-    if (valid.length === 1) { setCoating(valid[0]!); setAuto(true); move(2); } else { setCoating(""); setAuto(false); move(1); }
+    if (valid.length === 1) { setCoating(valid[0] ?? ""); setAuto(true); move(2); } else { setCoating(""); setAuto(false); move(1); }
   };
   return <Shell title="Change My Wheel Color" intro="Choose the type of color or finish you are interested in. We'll help narrow down the products that match your project." steps={["Finish Type", "Coating", "Color", "Color Product", "System"]} titles={["What type of finish are you looking for?", "How will the wheels be coated?", colors.length === 0 ? "No Matching Products Found" : "Choose Your Color", "Selected Color Product", "Recommended System for Your Project"]} step={step} move={move} stageRef={ref} support="Tell us the look you want and share a few inspiration photos — our team can recommend the right products.">
     {(openHelp) => <>
@@ -270,6 +270,7 @@ export function ColorChangeDbFinder() {
             {families.length > 1 && <div className="gpf-fields">{selectField("Color Family", family, families, setFamily, false, "All color families")}</div>}
             <div className="gpf-style-grid gpf-finish-grid">{colors.map((c) => <article key={c.id} className="gpf-style-card" data-testid="demo-color"><Swatch family={c.color_family} /><strong>{c.color_name ?? c.product_name}</strong><span>{c.product_name}</span><span>{[c.color_family, c.gloss_level].filter(Boolean).join(" · ")}</span><Button size="sm" className="gpf-primary" onClick={() => { setProduct(c); move(3); }}>Select</Button></article>)}</div>
           </>}
+          <ContactAssistance title="Can't Find the Color You're Looking For?" label="Request Color Assistance" search={{ inquiry: "color-assistance", finish, coating, family }} />
           <div className="gpf-actions"><Button variant="outline" onClick={() => move(auto ? 0 : 1)}><ArrowLeft aria-hidden="true" />Back</Button></div>
         </>}
         {step === 3 && product && <>
@@ -289,7 +290,7 @@ export function CustomFinishDbFinder() {
   const [selected, setSelected] = useState<string[] | null>(null);
   const [cart, setCart] = useState<CartItem[] | null>(null);
   const systems = useQuery({ ...fresh, queryKey: ["demo", "systems"], queryFn: fetchSystems, retry: 1 });
-  const layers = useQuery({ ...fresh, queryKey: ["demo", "system-layers", system?.id], queryFn: () => fetchSystemLayers(system!.id), enabled: system !== null });
+  const layers = useQuery({ ...fresh, queryKey: ["demo", "system-layers", system?.id], queryFn: () => system ? fetchSystemLayers(system.id) : Promise.resolve([]), enabled: system !== null });
   const items = (layers.data ?? []).map(layerItem).filter((i): i is CartItem => i !== null);
   const chosen = selected ?? items.map((i) => i.key);
   const toggle = (key: string, on: boolean) => setSelected(on ? [...chosen, key] : chosen.filter((k) => k !== key));
@@ -299,13 +300,14 @@ export function CustomFinishDbFinder() {
     {(openHelp) => <>
       {step === 0 && <>
         <Status loading={systems.isLoading} error={systems.error} retry={() => systems.refetch()} label="finish systems" />
-        {systems.isSuccess && (systems.data.length === 0 ? <NoMatch text="No special finish systems are available in the demo database yet." onHelp={openHelp} /> : <>
-          <p className="gpf-intro">Each special finish is built from several coating layers. Choose a system to see how it comes together.</p>
+        {systems.isSuccess && (systems.data.length === 0 ? <NoMatch text="No coating systems are available in the demo database yet." onHelp={openHelp} /> : <>
+          <p className="gpf-intro">Choose a demo coating system to explore its layers. These systems have not yet been classified as standard or special finishes.</p>
           <div className="gpf-style-grid gpf-finish-grid" role="radiogroup" aria-label="Special finish systems">
             {systems.data.map((s) => <button type="button" role="radio" key={s.id} aria-checked={system?.id === s.id} className={`gpf-style-card ${system?.id === s.id ? "is-selected" : ""}`} onClick={() => { setSystem(s); setSelected(null); }}><strong>{s.system_name}</strong><span>{s.finish_type ?? "Finish type TBD"}</span>{s.description && <span>{s.description}</span>}</button>)}
           </div>
           <div className="gpf-unsure-panel" aria-disabled="true" style={{ opacity: 0.6 }}><span className="gpf-demo">Coming soon</span><p className="mt-3">Upload an inspiration photo and get a matching system suggestion — future functionality.</p></div>
         </>)}
+        <ContactAssistance title="Don't See the Finish You Want?" label="Request Custom Finish Assistance" search={{ inquiry: "custom-finish-assistance", system: system?.system_name, finish: system?.finish_type ?? undefined }} />
         <div className="gpf-actions"><Button className="gpf-primary" disabled={!system} onClick={() => move(1)}>See How It's Built<ArrowRight aria-hidden="true" /></Button></div>
       </>}
       {step === 1 && system && <>

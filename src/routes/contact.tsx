@@ -1,8 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { StoreNavigation } from "../components/store-navigation";
 import { ContactPage } from "../components/contact-page";
+import { parseFinderContactSearch, finderInquiryMessage } from "../lib/finder-presentation";
 
 export const Route = createFileRoute("/contact")({
+  validateSearch: parseFinderContactSearch,
   head: () => ({
     meta: [
       { title: "Contact Us | FreiLack WheelRefurb" },
@@ -25,11 +27,13 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactRoute() {
+  const search = Route.useSearch();
+  const initialMessage = finderInquiryMessage(search);
   return (
     <div className="min-h-screen bg-background">
       <StoreNavigation />
       <main>
-        <ContactPage />
+        <ContactPage key={initialMessage} initialMessage={initialMessage} />
       </main>
     </div>
   );

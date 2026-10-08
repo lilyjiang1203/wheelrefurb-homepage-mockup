@@ -29,7 +29,7 @@ const messageSchema = z.object({
 
 type SubmitState = "idle" | "sending" | "sent" | "error";
 
-export function ContactPage() {
+export function ContactPage({ initialMessage = "" }: { initialMessage?: string }) {
   const [state, setState] = useState<SubmitState>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -158,7 +158,7 @@ export function ContactPage() {
                 </div>
                 <label className="contact-label">
                   Message
-                  <Textarea name="message" rows={6} required maxLength={5000} aria-invalid={Boolean(errors["message"])} />
+                  <Textarea name="message" defaultValue={initialMessage} rows={6} required maxLength={5000} aria-invalid={Boolean(errors["message"])} />
                   {errors["message"] && <span className="contact-field-error">{errors["message"]}</span>}
                 </label>
                 {state === "error" && errorMessage && (
