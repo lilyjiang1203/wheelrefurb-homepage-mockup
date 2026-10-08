@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { ArrowRight, Check, ChevronDown, Search } from "lucide-react";
 import finishedWheel from "../assets/wheel-finish-closeup.jpg";
 import { Button } from "./ui/button";
@@ -158,7 +159,7 @@ export function ColorFinder() {
             {selectedBrand ? `Ready to view ${selectedBrand} wheel colors.` : "Select a vehicle brand first."}
           </p>
           <p className="finder-help">
-            Can't find your brand? <a href="#contact-us">Contact us for assistance.</a>
+            Can't find your brand? <Link to="/contact">Contact us for assistance.</Link>
           </p>
         </div>
       </div>

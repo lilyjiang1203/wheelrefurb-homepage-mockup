@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { Button } from "./ui/button";
 
 export function AboutPageCta() {
@@ -15,9 +16,9 @@ export function AboutPageCta() {
         </p>
         <div className="cta-actions">
           <Button asChild size="lg" className="cta-primary">
-            <a href="/#contact-us">
+            <Link to="/contact">
               Contact us <ArrowRight aria-hidden="true" />
-            </a>
+            </Link>
           </Button>
           <Button asChild variant="outline" size="lg" className="cta-secondary">
             <a href="/collections/all">Shop products</a>

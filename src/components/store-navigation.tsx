@@ -248,7 +248,9 @@ export function StoreNavigation() {
           <Link className="nav-link" to="/about" activeProps={{ className: "active" }}>
             About Us
           </Link>
-          <a className="nav-link" href="#contact-us">Contact Us</a>
+          <Link className="nav-link" to="/contact" activeProps={{ className: "active" }}>
+            Contact Us
+          </Link>
         </div>
         <div className="nav-actions">
           <a href="#search" aria-label="Search"><Search /></a>
@@ -283,9 +285,9 @@ export function StoreNavigation() {
           <Link className="mobile-nav-row" to="/about" onClick={() => setMobileOpen(false)}>
             About Us
           </Link>
-          <a className="mobile-nav-row" href="#contact-us" onClick={() => setMobileOpen(false)}>
+          <Link className="mobile-nav-row" to="/contact" onClick={() => setMobileOpen(false)}>
             Contact Us
-          </a>
+          </Link>
         </div>
       ) : null}
     </header>
