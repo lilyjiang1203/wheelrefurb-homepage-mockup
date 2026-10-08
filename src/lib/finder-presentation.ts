@@ -2,7 +2,7 @@ import { audiProduct } from "../components/product-detail-data";
 import type { DemoProduct } from "./demo-catalog";
 
 export type FinderInquiry = "color-assistance" | "custom-finish-assistance";
-export type FinderContactSearch = { inquiry?: FinderInquiry; finish?: string; coating?: string; family?: string; system?: string };
+export type FinderContactSearch = { inquiry?: FinderInquiry; finish?: string | undefined; coating?: string | undefined; family?: string | undefined; system?: string | undefined };
 
 export function parseFinderContactSearch(search: Record<string, unknown>): FinderContactSearch {
   const inquiry = search["inquiry"];
@@ -15,7 +15,7 @@ export function finderInquiryMessage(search: FinderContactSearch): string {
   if (!search.inquiry) return "";
   const title = search.inquiry === "color-assistance" ? "Color Assistance" : "Custom Finish Assistance";
   const selections = [["Finish", search.finish], ["Coating Type", search.coating], ["Color Family", search.family], ["Demo System", search.system]];
-  return [`Inquiry: ${title}`, ...selections.filter(([, value]) => value).map(([label, value]) => `${label}: ${value}`), "", "I'd like help finding the right finish for my wheels."] .join("\n");
+  return [`Inquiry: ${title}`, ...selections.filter(([, value]) => value).map(([label, value]) => `${label}: ${value}`), "", "I'd like help finding the right finish for my wheels."].join("\n");
 }
 
 /** Identity match only: never assign photography by coating type or approximate name. */
