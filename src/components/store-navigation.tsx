@@ -10,6 +10,7 @@ import {
   X,
 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import logo from "../assets/freilacke-logo.png";
 
 type Collection = {
   name: string;
@@ -70,13 +71,14 @@ const fallbackCollection: Collection = { name: "Paint", groups: [] };
 
 function Brand() {
   return (
-    <Link className="brand" to="/" aria-label="FreiLack WheelRefurb home">
-      <span className="brand-name">FreiLack</span>
-      <span className="brand-mark" aria-hidden="true">
-        <span className="brand-wheel" />
-        <span className="brand-sub">wheelRefurb</span>
-        <span className="brand-lines" />
-      </span>
+    <Link className="brand" to="/" aria-label="FreiLacke wheelRefurb home">
+      <img
+        className="brand-logo"
+        src={logo}
+        alt="FreiLacke wheelRefurb"
+        width={763}
+        height={200}
+      />
     </Link>
   );
 }
