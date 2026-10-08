@@ -2,7 +2,7 @@ export type GalleryImage = { id: string; src?: string | null; alt: string; label
 export type GalleryVideo = { id: string; label: string; poster?: string | null; sources: { src?: string | null; type: string }[] };
 export type GalleryMedia =
   | { kind: "image"; id: string; src: string; alt: string; label: string }
-  | { kind: "video"; id: string; label: string; poster?: string; sources: { src: string; type: string }[] };
+  | { kind: "video"; id: string; label: string; poster?: string | undefined; sources: { src: string; type: string }[] };
 
 export function availableGalleryMedia(images: GalleryImage[], videos: GalleryVideo[] = []): GalleryMedia[] {
   const media: GalleryMedia[] = [];
