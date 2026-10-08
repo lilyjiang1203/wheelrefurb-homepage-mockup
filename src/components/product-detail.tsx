@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, ChevronRight, CircleHelp, Download, FileText, ImageIcon, Minus, Play, Plus, ShoppingBag } from "lucide-react";
+import { ArrowRight, ChevronRight, CircleHelp, Download, FileText, ImageIcon, Minus, Palette, Play, Plus, ShoppingBag } from "lucide-react";
 import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "./ui/dialog";
-import { audiProduct, normalizeProductQuantity, productAttributes } from "./product-detail-data";
+import { audiProduct, essentialInfo, normalizeProductQuantity, samplePriceLabel } from "./product-detail-data";
 
 function PlaceholderProduct({ title, similar = false }: { title: string; similar?: boolean }) {
   return <article className="pd-placeholder"><div className="pd-placeholder-media"><ImageIcon aria-hidden="true" /></div><div className="pd-placeholder-body"><h3>{title}</h3><p>Product name / SKU — TBD</p><p>{similar ? "Similar color selection pending." : "Compatibility not yet verified."}</p></div></article>;
@@ -33,14 +33,15 @@ export function ProductDetail() {
       </div>
       <div>
         <p className="pd-eyebrow">FreiLacke / Wheel Refinishing Color</p>
+        <span className="pd-type-label">Coating Technology: TBD</span>
         <h1 id="product-title" className="pd-title">AUDI ANTHRACITE<br />LV7D</h1>
+        <p className="pd-sku">SKU: {variant?.sku ?? `${audiProduct.exampleSku} (example — varies by package)`}</p>
         <div className="pd-code-row"><span>OEM code <strong>LV7D</strong></span><span>Formula <strong>W01838MAU07A</strong></span></div>
         <p className="pd-summary">Anthracite dark grey for alloy wheel refinishing.<br />Associated with Audi OEM color code LV7D.</p>
-        <p className="pd-price">Log in to view price</p>
+        <p className="pd-price">{samplePriceLabel} <span className="pd-price-note">sample price</span></p>
         <p className="pd-stock">In Stock <span>— sample status, not live inventory</span></p>
         <span className="pd-form-label">Package size</span>
         <div className="pd-variants" aria-label="Package size">{audiProduct.variants.map((v) => <Button key={v.id} variant="outline" className="pd-variant" aria-pressed={variantId === v.id} onClick={() => setVariantId(v.id)}>{v.packageSize}</Button>)}</div>
-        <p className="pd-caption">SKU: {variant?.sku ?? "TBD for selected package"}<br />Example: {audiProduct.exampleSku} — verify by package variant.</p>
         <label className="pd-form-label mt-5" htmlFor="product-quantity">Quantity</label>
         <div className="pd-purchase">
           <div className="pd-quantity"><Button variant="ghost" size="icon" aria-label="Decrease quantity" disabled={quantity === 1} onClick={() => setQuantity(normalizeProductQuantity(quantity - 1))}><Minus /></Button><input id="product-quantity" type="number" min={1} step={1} value={quantity} onChange={(e) => setQuantity(normalizeProductQuantity(Number(e.target.value)))} /><Button variant="ghost" size="icon" aria-label="Increase quantity" onClick={() => setQuantity(quantity + 1)}><Plus /></Button></div>
