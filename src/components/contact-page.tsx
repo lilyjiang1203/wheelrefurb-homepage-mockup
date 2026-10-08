@@ -141,24 +141,24 @@ export function ContactPage() {
                 <div className="contact-fields">
                   <label className="contact-label">
                     Name
-                    <Input name="name" autoComplete="name" required maxLength={120} aria-invalid={Boolean(errors.name)} />
-                    {errors.name && <span className="contact-field-error">{errors.name}</span>}
+                    <Input name="name" autoComplete="name" required maxLength={120} aria-invalid={Boolean(errors["name"])} />
+                    {errors["name"] && <span className="contact-field-error">{errors["name"]}</span>}
                   </label>
                   <label className="contact-label">
                     Email
-                    <Input name="email" type="email" autoComplete="email" required maxLength={255} aria-invalid={Boolean(errors.email)} />
-                    {errors.email && <span className="contact-field-error">{errors.email}</span>}
+                    <Input name="email" type="email" autoComplete="email" required maxLength={255} aria-invalid={Boolean(errors["email"])} />
+                    {errors["email"] && <span className="contact-field-error">{errors["email"]}</span>}
                   </label>
                   <label className="contact-label">
                     Phone <span className="contact-optional">(optional)</span>
-                    <Input name="phone" type="tel" autoComplete="tel" maxLength={40} aria-invalid={Boolean(errors.phone)} />
-                    {errors.phone && <span className="contact-field-error">{errors.phone}</span>}
+                    <Input name="phone" type="tel" autoComplete="tel" maxLength={40} aria-invalid={Boolean(errors["phone"])} />
+                    {errors["phone"] && <span className="contact-field-error">{errors["phone"]}</span>}
                   </label>
                 </div>
                 <label className="contact-label">
                   Message
-                  <Textarea name="message" rows={6} required maxLength={5000} aria-invalid={Boolean(errors.message)} />
-                  {errors.message && <span className="contact-field-error">{errors.message}</span>}
+                  <Textarea name="message" rows={6} required maxLength={5000} aria-invalid={Boolean(errors["message"])} />
+                  {errors["message"] && <span className="contact-field-error">{errors["message"]}</span>}
                 </label>
                 {state === "error" && errorMessage && (
                   <p role="alert" className="contact-field-error">
