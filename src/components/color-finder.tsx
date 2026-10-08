@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { ArrowRight, Check, ChevronDown, Search } from "lucide-react";
 import finishedWheel from "../assets/wheel-finish-closeup.jpg";
 import { Button } from "./ui/button";
