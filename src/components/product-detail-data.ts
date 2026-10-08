@@ -14,9 +14,12 @@ export const audiProduct = {
   exampleSku: "DVC-GB-1QT",
   metafields: { brand: "FreiLacke", technology: null, subtype: null, layer: null, colorFamily: "Grey", colorName: "Anthracite", finishType: null, glossLevel: null, vehicleBrand: "Audi", oemCode: "LV7D", formulaCode: "W01838MAU07A", panelReference: "12", application: "Alloy Wheel Refinishing" },
   references: { compatiblePrimers: [] as string[], compatibleBaseCoats: [] as string[], compatibleClearCoats: [] as string[], similarColors: [] as string[] },
-  documents: [{ name: "Technical Data Sheet (TDS)", url: null }, { name: "Safety Data Sheet (SDS)", url: null }],
+  documents: [{ name: "Technical Data Sheet (TDS)", url: null, optional: false }, { name: "Safety Data Sheet (SDS)", url: null, optional: false }, { name: "Application Guide", url: null, optional: true }],
 };
-export const productAttributes: [string, string | null][] = [
-  ["Brand", audiProduct.metafields.brand], ["Coating Technology", audiProduct.metafields.technology], ["Coating Subtype", audiProduct.metafields.subtype], ["Coating Layer", audiProduct.metafields.layer], ["Color Family", audiProduct.metafields.colorFamily], ["Color Name", audiProduct.metafields.colorName], ["Finish Type", audiProduct.metafields.finishType], ["Gloss Level", audiProduct.metafields.glossLevel], ["OEM Vehicle Brand", audiProduct.metafields.vehicleBrand], ["OEM Color Code", audiProduct.metafields.oemCode], ["FreiLacke Formula Code", audiProduct.metafields.formulaCode], ["Panel Reference", audiProduct.metafields.panelReference], ["Application", audiProduct.metafields.application],
+/** Display-only sample price for the mockup; real prices stay null in variants. */
+export const samplePriceLabel = "CAD $XX.XX";
+/** Customer-facing essentials only; classification metafields stay internal. */
+export const essentialInfo: [string, string][] = [
+  ["Product Name", "Audi Anthracite LV7D"], ["Brand", audiProduct.metafields.brand], ["Color", audiProduct.metafields.colorName], ["OEM Brand", audiProduct.metafields.vehicleBrand], ["OEM Color Code", audiProduct.metafields.oemCode], ["FreiLacke Formula Code", audiProduct.metafields.formulaCode], ["Application", audiProduct.metafields.application],
 ];
 export function normalizeProductQuantity(value: number) { return Number.isFinite(value) ? Math.max(1, Math.floor(value)) : 1; }
