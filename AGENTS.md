@@ -14,4 +14,5 @@
 - Keep each homepage section in its own component under src/components and render them in display order from the index route, so section order is readable in one place.
 - Keep the guided OEM finder data in a typed mock catalogue separate from its journey, help form and homepage entry; product metadata fields support a future integration without coupling the current UI to a live service.
 - Keep finder state in memory and explicitly mark matches, product compatibility, cart and help submissions as simulated; this prevents a UI-only prototype from implying real purchases or email delivery.
+- Keep product detail data separated into product, variants, metafields, references and documents with null unverified values; this supports future Shopify integration without invented specifications.
 
