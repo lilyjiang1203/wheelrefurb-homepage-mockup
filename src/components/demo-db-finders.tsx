@@ -124,7 +124,7 @@ export function ColorChangeDbFinder() {
 /* 3. Create a Custom / Special Finish */
 export function CustomFinishDbFinder() {
   const [systemId, setSystemId] = useState<number | null>(null);
-  const systems = useQuery({ queryKey: ["demo", "systems"], queryFn: fetchSystems });
+  const systems = useQuery({ queryKey: ["demo", "systems"], queryFn: fetchSystems, retry: 1 });
   const layers = useQuery({ queryKey: ["demo", "system-layers", systemId], queryFn: () => fetchSystemLayers(systemId!), enabled: systemId !== null });
   const system = systems.data?.find((s) => s.id === systemId) ?? null;
   return <Shell title="Create a Custom / Special Finish" intro="Choose a demo special finish system to see its products in layer order." steps={["Choose a System", "System Layers"]} step={system ? 1 : 0}>
