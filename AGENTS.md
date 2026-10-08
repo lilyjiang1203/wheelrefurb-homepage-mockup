@@ -21,3 +21,6 @@
 
 
 - The three guided finder routes read live demo data from the external wheelrefurb-demo database through the read-only client in src/lib/demo-catalog.ts (publishable key, SELECT-only grants); the older mock finder components are kept unused for reference. Why: one isolated read-only client keeps the external data separate from the Lovable Cloud contact form.
+- Keep finder assistance context in validated Contact route search parameters and prefill the existing message field; this preserves the existing submission path without schema changes.
+- Resolve finder photography through a verified product identity adapter and shared failure-aware image component; this keeps photo mappings separate from the dynamic catalogue and avoids invented imagery.
+- Future system-category filtering must consume an explicit, verified database classification field rather than infer categories from names or finish attributes; this prevents unverified special-finish claims while keeping current queries unchanged.

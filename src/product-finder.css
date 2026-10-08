@@ -36,6 +36,10 @@
 .gpf-match h3, .gpf-color-product h3 { font-size: 24px; font-weight: 700; line-height: 1.25; margin: 12px 0; }
 .gpf-disclaimer { color: var(--color-muted-foreground); font-size: 12px; line-height: 1.65; max-width: 820px; margin-top: 20px; }
 .gpf-color-product { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); align-items: center; gap: 36px; margin-top: 30px; max-width: 900px; }
+.gpf-color-product:not(:has(.featured-media)) { grid-template-columns: minmax(0, 1fr); max-width: 740px; }
+.gpf-assistance { display: flex; align-items: center; justify-content: space-between; gap: 20px; border-top: 1px solid var(--color-border); margin-top: 28px; padding-top: 22px; }
+.gpf-assistance h3 { font-size: 16px; font-weight: 600; line-height: 1.5; }
+.gpf-assistance a { flex: none; min-height: 44px; height: auto; white-space: normal; }
 .gpf-details { display: grid; gap: 12px; margin-top: 22px; }
 .gpf-details div { display: flex; justify-content: space-between; gap: 20px; border-bottom: 1px solid var(--color-border); padding-bottom: 10px; font-size: 13px; }
 .gpf-details dt, .gpf-summary dt { color: var(--color-muted-foreground); }
@@ -73,6 +77,7 @@
   .gpf-stage-heading > button { padding-left: 0; }
   .gpf-fields, .gpf-summary, .gpf-color-product { grid-template-columns: minmax(0, 1fr); }
   .gpf-support { flex-direction: column; align-items: flex-start; }
+  .gpf-assistance { flex-direction: column; align-items: flex-start; }
   .gpf-match { gap: 18px; }
   .gpf-oem-swatch { width: 90px; height: 110px; }
   .gpf-match h3 { font-size: 20px; }
