@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { StoreNavigation } from "../components/store-navigation";
-import { CustomFinishFinder } from "../components/custom-finish-finder";
+import { CustomFinishDbFinder } from "../components/demo-db-finders";
 
 export const Route = createFileRoute("/product-finder/custom-finish")({
   head: () => ({ meta: [
@@ -11,5 +11,5 @@ export const Route = createFileRoute("/product-finder/custom-finish")({
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
   ] }),
-  component: () => <div className="min-h-screen bg-background"><StoreNavigation /><CustomFinishFinder /></div>,
+  component: () => <div className="min-h-screen bg-background"><StoreNavigation /><CustomFinishDbFinder /></div>,
 });

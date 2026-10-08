@@ -19,3 +19,5 @@
 - Use the shared ProductGallery for product media; filter missing sources and remove failed media with selection fallback so future product pages never show empty gallery placeholders.
 - Render the footer once from the root route rather than per page, so every route shares the same contact block and no page can grow a second or missing footer.
 
+
+- The three guided finder routes read live demo data from the external wheelrefurb-demo database through the read-only client in src/lib/demo-catalog.ts (publishable key, SELECT-only grants); the older mock finder components are kept unused for reference. Why: one isolated read-only client keeps the external data separate from the Lovable Cloud contact form.

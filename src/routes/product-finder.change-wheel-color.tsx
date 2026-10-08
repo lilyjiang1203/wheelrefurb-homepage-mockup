@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { StoreNavigation } from "../components/store-navigation";
-import { ColorChangeFinder } from "../components/color-change-finder";
+import { ColorChangeDbFinder } from "../components/demo-db-finders";
 
 export const Route = createFileRoute("/product-finder/change-wheel-color")({
   head: () => ({ meta: [
@@ -11,5 +11,5 @@ export const Route = createFileRoute("/product-finder/change-wheel-color")({
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
   ] }),
-  component: () => <div className="min-h-screen bg-background"><StoreNavigation /><ColorChangeFinder /></div>,
+  component: () => <div className="min-h-screen bg-background"><StoreNavigation /><ColorChangeDbFinder /></div>,
 });
