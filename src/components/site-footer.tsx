@@ -86,18 +86,26 @@ export function SiteFooter() {
             <ul className="footer-contact">
               <li>
                 <Mail aria-hidden="true" />
-                <a href={`mailto:${contact.email}`}>{contact.email}</a>
+                <span>
+                  <span className="footer-contact-label">Email</span>
+                  <a href={`mailto:${contact.email}`}>{contact.email}</a>
+                </span>
               </li>
               <li>
                 <MapPin aria-hidden="true" />
-                <a href={contact.addressHref} target="_blank" rel="noreferrer">
+                <span>
                   <span className="footer-contact-label">Store Address</span>
-                  {contact.address}
-                </a>
+                  <a href={contact.addressHref} target="_blank" rel="noreferrer">
+                    {contact.address}
+                  </a>
+                </span>
               </li>
               <li>
                 <Phone aria-hidden="true" />
-                <a href={contact.phoneHref}>{contact.phoneDisplay}</a>
+                <span>
+                  <span className="footer-contact-label">Phone</span>
+                  <a href={contact.phoneHref}>{contact.phoneDisplay}</a>
+                </span>
               </li>
             </ul>
           </div>
