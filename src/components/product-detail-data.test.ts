@@ -21,6 +21,6 @@ describe("Audi product verification rules", () => {
     expect(audiProduct.references.compatibleClearCoats).toEqual([]);
   });
   it("keeps document downloads unavailable until files are supplied", () => {
-    expect(audiProduct.documents.map((d) => d.url)).toEqual([null, null]);
+    expect(audiProduct.documents.map((d) => d.url)).toEqual([null, null, null]);
   });
 });
