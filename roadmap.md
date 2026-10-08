@@ -43,3 +43,4 @@
 - [x] 2026-10-01 — FreiLacke band: the white logo plate at the top right removed at the user's request (verified 1280/624/390, 0 console errors, both photos intact).
 - [x] 2026-10-08 — Header brand replaced with the supplied FreiLacke wheelRefurb lockup (white background removed, bundled PNG), and the browser tab icon cut from the same mark.
 - [x] 2026-10-08 — Site footer in the existing dark band style on every page: white lockup, Shop / Explore columns, Contact block with the supplied email, Edmonton store address and phone, and the Authorized FreiLacke Partner line; it is also the #contact-us target.
+- 2026-10-08: Built /contact page (contact-page.tsx + contact.tsx route). Form stores real submissions in contact_submissions (Lovable Cloud, insert-only RLS). Header/About-CTA/color-finder links now point at /contact; footer keeps #contact-us. Owner email not wired — email domain not verified.
