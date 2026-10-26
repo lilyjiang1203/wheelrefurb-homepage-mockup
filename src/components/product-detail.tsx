@@ -122,6 +122,7 @@ export function ProductDetail() {
                 </div>
               ))}
           </dl>
+
           <p className="pd-price">{price ?? <span className="pd-price-pending">Price available soon</span>}</p>
           <span className="pd-form-label">Package size</span>
           <div className="pd-variants" aria-label="Package size">
@@ -189,34 +190,59 @@ export function ProductDetail() {
               <p>{p.description}</p>
             </AccordionContent>
           </AccordionItem>
+
           <AccordionItem value="benefits">
             <AccordionTrigger>Benefits</AccordionTrigger>
             <AccordionContent>
               {audiProduct.content.benefits.length ? (
-                <ul>
-                  {audiProduct.content.benefits.map((b) => (
-                    <li key={b}>{b}</li>
-                  ))}
+                <ul className="list-disc pl-6 space-y-2">
+                  {audiProduct.content.benefits.map((item) => {
+                    const [heading, ...rest] = item.split(":");
+                    return (
+                      <li key={item}>
+                        <strong>{heading}:</strong>
+                        {rest.length > 0 ? ` ${rest.join(":").trim()}` : ""}
+                      </li>
+                    );
+                  })}
                 </ul>
               ) : (
                 pending
               )}
             </AccordionContent>
           </AccordionItem>
+
           <AccordionItem value="how-to-use">
             <AccordionTrigger>How to Use</AccordionTrigger>
             <AccordionContent>
               {audiProduct.content.howToUse.length ? (
-                <ol>
-                  {audiProduct.content.howToUse.map((b) => (
-                    <li key={b}>{b}</li>
-                  ))}
+                <ol className="list-decimal pl-6 space-y-2">
+                  {audiProduct.content.howToUse
+                    .filter((item) => !item.startsWith("Important:"))
+                    .map((item) => {
+                      const [heading, ...rest] = item.split(":");
+                      return (
+                        <li key={item}>
+                          <strong>{heading}:</strong>
+                          {rest.length > 0 ? ` ${rest.join(":").trim()}` : ""}
+                        </li>
+                      );
+                    })}
                 </ol>
               ) : (
                 pending
               )}
+
+              {audiProduct.content.howToUse
+                .filter((item) => item.startsWith("Important:"))
+                .map((item) => (
+                  <p key={item} className="mt-4">
+                    <strong>Important:</strong> {item.slice("Important:".length).trim()}
+                  </p>
+                ))}
             </AccordionContent>
           </AccordionItem>
+
           <AccordionItem value="technical">
             <AccordionTrigger>Technical Details</AccordionTrigger>
             <AccordionContent>
