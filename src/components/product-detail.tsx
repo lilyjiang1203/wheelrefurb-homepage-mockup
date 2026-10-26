@@ -97,32 +97,6 @@ export function ProductDetail() {
             Associated with Audi OEM color code LV7D.
           </p>
 
-          <dl className="pd-attributes">
-            {(
-              [
-                ["Brand", m.brand],
-                ["Color Name", m.colorName],
-                ["Item No.", m.formulaCode],
-                ["Color Family", m.colorFamily],
-                ["Finish", m.finishType],
-                ["Product Line", m.productLine],
-                ["Coating Form", m.coatingForm],
-                ["Carrier Type", m.carrierType],
-                ["Coating Layer", m.layer],
-                ["Panel Number", m.panelReference],
-                ["Gloss Level", m.glossLevel ?? "Not specified"],
-                ["Application Parameters", m.applicationParameters ?? "Pending TDS verification"],
-              ] as [string, string | null][]
-            )
-              .filter(([, v]) => v !== null && v !== "")
-              .map(([k, v]) => (
-                <div key={k} className="pd-attribute">
-                  <dt>{k}</dt>
-                  <dd>{v}</dd>
-                </div>
-              ))}
-          </dl>
-
           <p className="pd-price">{price ?? <span className="pd-price-pending">Price available soon</span>}</p>
           <span className="pd-form-label">Package size</span>
           <div className="pd-variants" aria-label="Package size">
@@ -250,20 +224,28 @@ export function ProductDetail() {
                 {(
                   [
                     ["Brand", m.brand],
-                    ["OEM Color Code", m.oemCode],
-                    ["FreiLacke Formula Code", m.formulaCode],
-                    ["Panel Reference", m.panelReference],
-                    ["Application", m.application],
+                    ["Color Name", m.colorName],
+                    ["Item No.", m.formulaCode],
+                    ["Color Family", m.colorFamily],
+                    ["Finish", m.finishType],
+                    ["Product Line", m.productLine],
+                    ["Coating Form", m.coatingForm],
+                    ["Carrier Type", m.carrierType],
+                    ["Coating Layer", m.layer],
+                    ["Panel Number", m.panelReference],
+                    ["Gloss Level", m.glossLevel ?? "Not specified"],
+                    ["Application Parameters", m.applicationParameters ?? "Pending TDS verification"],
                   ] as [string, string | null][]
                 )
-                  .filter(([, v]) => v)
-                  .map(([k, v]) => (
-                    <div key={k} className="pd-attribute">
-                      <dt>{k}</dt>
-                      <dd>{v}</dd>
+                  .filter(([, value]) => value !== null && value !== "")
+                  .map(([label, value]) => (
+                    <div key={label} className="pd-attribute">
+                      <dt>{label}</dt>
+                      <dd>{value}</dd>
                     </div>
                   ))}
               </dl>
+
               <h3 className="pd-docs-title">Technical Documents</h3>
               {docs.length ? (
                 <div className="pd-documents">
