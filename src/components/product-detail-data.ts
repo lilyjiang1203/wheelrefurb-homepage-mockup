@@ -15,7 +15,7 @@ export const audiProduct = {
   content: { benefits: [] as string[], howToUse: [] as string[] },
   metafields: { brand: "FreiLacke", technology: null, subtype: null, layer: null, colorFamily: "Grey", colorName: "Anthracite", finishType: null, glossLevel: null, vehicleBrand: "Audi", oemCode: "LV7D", formulaCode: "W01838MAU07A", panelReference: "12", application: "Alloy Wheel Refinishing" },
   references: { compatiblePrimers: [] as string[], compatibleBaseCoats: [] as string[], compatibleClearCoats: [] as string[], similarColors: [] as string[] },
-  documents: [{ name: "Technical Data Sheet (TDS)", url: null, optional: false }, { name: "Safety Data Sheet (SDS)", url: null, optional: false }, { name: "Application Guide", url: null, optional: true }],
+  documents: ([{ name: "Technical Data Sheet (TDS)", url: null, optional: false }, { name: "Safety Data Sheet (SDS)", url: null, optional: false }, { name: "Application Guide", url: null, optional: true }] as { name: string; url: string | null; optional: boolean }[]),
 };
 /** Customer-relevant attributes near the purchase area; unverified values are hidden. */
 export function keyAttributes(m: typeof audiProduct.metafields & { coatingType?: string | null }): [string, string][] {
