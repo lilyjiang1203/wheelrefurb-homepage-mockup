@@ -279,6 +279,7 @@ export function ProductDetail() {
           </AccordionItem>
         </Accordion>
       </section>
+      <CoatingKitSection colorCode="WO1838MAU07A" />
       <section className="pd-help" aria-labelledby="pd-help-title">
         <div className="pd-help-icon" aria-hidden="true">
           <Palette />
