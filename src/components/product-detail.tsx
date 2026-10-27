@@ -11,6 +11,7 @@ import {
   normalizeProductQuantity,
 } from "./product-detail-data";
 import { ProductGallery } from "./product-gallery";
+import { useSdsDocuments } from "../lib/product-documents";
 import finishExample from "../assets/wheel-finish-closeup.jpg";
 import panelBand from "../assets/audi-anthracite-panel-band.jpg";
 
