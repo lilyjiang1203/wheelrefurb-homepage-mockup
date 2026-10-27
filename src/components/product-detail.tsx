@@ -6,7 +6,6 @@ import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "./ui/dialog";
 import {
   audiProduct,
-  availableDocuments,
   formatPrice,
   keyAttributes,
   normalizeProductQuantity,
@@ -38,7 +37,7 @@ export function ProductDetail() {
   const p = audiProduct.product;
   const m = audiProduct.metafields;
   const price = formatPrice(variant?.price ?? null);
-  const docs = availableDocuments(audiProduct.documents);
+  const sds = useSdsDocuments("WO1838MAU07A");
   const refs = audiProduct.references;
   const compatible = [...refs.compatiblePrimers, ...refs.compatibleBaseCoats, ...refs.compatibleClearCoats];
   const pending = <p className="pd-tbd">Pending manufacturer verification.</p>;
@@ -247,13 +246,14 @@ export function ProductDetail() {
               </dl>
 
               <h3 className="pd-docs-title">Technical Documents</h3>
-              {docs.length ? (
+              {sds.status === "ready" && sds.docs.length ? (
                 <div className="pd-documents">
-                  {docs.map((doc) => (
-                    <div key={doc.name} className="pd-document">
+                  {sds.docs.map((doc) => (
+                    <div key={doc.url} className="pd-document">
                       <FileText aria-hidden="true" />
                       <div>
-                        <h3>{doc.name}</h3>
+                        <h3>{doc.title}</h3>
+                        <p className="pd-caption">Language: {doc.language}</p>
                       </div>
                       <Button asChild variant="outline" size="sm">
                         <a href={doc.url} target="_blank" rel="noreferrer">
@@ -266,7 +266,11 @@ export function ProductDetail() {
                 </div>
               ) : (
                 <p className="pd-caption">
-                  TDS and SDS documents will be available here once supplied by the manufacturer.
+                  {sds.status === "loading"
+                    ? "Loading documents…"
+                    : sds.status === "error"
+                      ? "Technical documents are temporarily unavailable. Please try again later."
+                      : "TDS and SDS documents will be available here once supplied by the manufacturer."}
                 </p>
               )}
             </AccordionContent>
