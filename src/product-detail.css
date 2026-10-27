@@ -79,3 +79,26 @@
 .pd-accordion ul, .pd-accordion ol { padding-left: 18px; list-style: disc; font-size: 14px; color: var(--muted-foreground); line-height: 1.8; }
 .pd-docs-title { font-size: 14px; font-weight: 600; margin: 22px 0 6px; }
 .pd-section.pd-accordion-wrap { padding-top: 16px; }
+
+/* Build Your Coating Kit */
+.ck-section { }
+.ck-head { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 24px; }
+.ck-head-icon { width: 44px; height: 44px; border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--brand); flex-shrink: 0; }
+.ck-head-icon svg { width: 20px; height: 20px; }
+.ck-head h2 { margin-bottom: 6px; }
+.ck-system-name { font-size: 14px; font-weight: 600; color: var(--foreground); margin-bottom: 4px; }
+.ck-layers { display: flex; flex-direction: column; gap: 14px; max-width: 790px; }
+.ck-card { border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; background: var(--card); }
+.ck-card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+.ck-layer-label { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted-foreground); }
+.ck-current-badge { font-size: 10px; letter-spacing: .06em; text-transform: uppercase; font-weight: 600; color: var(--brand); border: 1px solid var(--brand); border-radius: 999px; padding: 3px 10px; white-space: nowrap; }
+.ck-product-name { font-size: 16px; font-weight: 600; margin-bottom: 2px; }
+.ck-product-code { font-size: 12px; color: var(--muted-foreground); margin-bottom: 12px; }
+.ck-sizes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; max-width: 320px; }
+.ck-sizes .pd-variant:disabled { opacity: .45; }
+.ck-summary { margin-top: 24px; border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; max-width: 790px; background: var(--nav-hover); }
+.ck-summary h3 { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.ck-summary ul { list-style: disc; padding-left: 20px; margin-bottom: 14px; }
+.ck-summary li { font-size: 13px; color: var(--foreground); line-height: 1.7; }
+.ck-summary .pd-cart-button { margin-top: 4px; }
+@media(max-width:640px) { .ck-sizes { max-width: none; } }

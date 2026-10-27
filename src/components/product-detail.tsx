@@ -11,6 +11,7 @@ import {
   normalizeProductQuantity,
 } from "./product-detail-data";
 import { ProductGallery } from "./product-gallery";
+import { CoatingKitSection } from "./coating-kit";
 import { useSdsDocuments } from "../lib/product-documents";
 import finishExample from "../assets/wheel-finish-closeup.jpg";
 import panelBand from "../assets/audi-anthracite-panel-band.jpg";
@@ -278,6 +279,7 @@ export function ProductDetail() {
           </AccordionItem>
         </Accordion>
       </section>
+      <CoatingKitSection colorCode="WO1838MAU07A" />
       <section className="pd-help" aria-labelledby="pd-help-title">
         <div className="pd-help-icon" aria-hidden="true">
           <Palette />
