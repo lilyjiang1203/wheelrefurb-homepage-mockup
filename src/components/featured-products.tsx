@@ -1,9 +1,9 @@
 import { catalogCategoryHref, catalogHome } from "../lib/catalog-links";
 import { ArrowRight } from "lucide-react";
-import wheelPaintProduct from "../assets/product-wheel-paint.jpg";
-import clearCoatProduct from "../assets/product-clear-coat.jpg";
-import powderCoatingProduct from "../assets/product-powder-coating.jpg";
-import primerKitProduct from "../assets/product-primer-kit.jpg";
+import wheelPaintProduct from "../assets/category-wheel-paint.jpg";
+import clearCoatProduct from "../assets/category-clear-coats.jpg";
+import powderCoatingProduct from "../assets/category-powder-coatings.jpg";
+import primerKitProduct from "../assets/category-other-supplies.jpg";
 
 type FeaturedProduct = {
   label: string;
@@ -21,7 +21,7 @@ const featuredProducts: FeaturedProduct[] = [
     finish: "Graphite Metallic · Metallic",
     href: catalogCategoryHref("Wheel Paint"),
     image: wheelPaintProduct,
-    alt: "Aerosol can of automotive wheel paint with a metallic paint swatch beside it",
+    alt: "Wheel paint being applied to an alloy wheel",
   },
   {
     label: "Clear Coat",
@@ -29,7 +29,7 @@ const featuredProducts: FeaturedProduct[] = [
     finish: "High Gloss · 2K",
     href: catalogCategoryHref("Clear Coats"),
     image: clearCoatProduct,
-    alt: "Bottle of automotive clear coat next to a glossy clear coated sample panel",
+    alt: "Glossy clear coat finish on an alloy wheel",
   },
   {
     label: "Powder Coating",
@@ -37,7 +37,7 @@ const featuredProducts: FeaturedProduct[] = [
     finish: "Textured Graphite",
     href: catalogCategoryHref("Powder Coatings"),
     image: powderCoatingProduct,
-    alt: "Tub of graphite powder coating next to a coated sample panel",
+    alt: "Powder coating being applied to an alloy wheel",
   },
   {
     label: "Refinishing Supply",
@@ -45,7 +45,7 @@ const featuredProducts: FeaturedProduct[] = [
     finish: "Grey Filler Primer",
     href: catalogCategoryHref("Other Supplies"),
     image: primerKitProduct,
-    alt: "Primer can, surfacer tub, sanding disc and masking tape arranged as a kit",
+    alt: "Wheel refinishing preparation supplies and workshop tools",
   },
 ];
 
