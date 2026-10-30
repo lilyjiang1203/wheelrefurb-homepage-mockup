@@ -1,5 +1,6 @@
 import { ArrowRight, BadgeCheck, Layers, Palette } from "lucide-react";
 import { Button } from "./ui/button";
+import { Link } from "@tanstack/react-router";
 import solutionsImage from "../assets/finish-solutions.jpg";
 
 const solutionsFeatures = [
@@ -40,9 +41,9 @@ export function ProfessionalSolutions() {
             </p>
             <div className="solutions-actions">
               <Button asChild size="lg" className="solutions-cta">
-                <a href="/collections/all">
-                  Shop products <ArrowRight aria-hidden="true" />
-                </a>
+                <Link to="/" hash="need-help">
+                  Explore Our Solutions <ArrowRight aria-hidden="true" />
+                </Link>
               </Button>
             </div>
           </div>
