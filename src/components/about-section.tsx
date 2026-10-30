@@ -1,5 +1,6 @@
 import { ArrowRight, Package, ShieldCheck, Users } from "lucide-react";
 import { Button } from "./ui/button";
+import { Link } from "@tanstack/react-router";
 import wheelImage from "../assets/about-wheel.jpg";
 
 const aboutStats = [
@@ -38,9 +39,9 @@ export function AboutSection() {
           </ul>
           <div className="about-actions">
             <Button asChild size="lg" className="about-cta">
-              <a href="/collections/all">
-                View all <ArrowRight aria-hidden="true" />
-              </a>
+              <Link to="/about">
+                Learn More About Us <ArrowRight aria-hidden="true" />
+              </Link>
             </Button>
           </div>
         </div>
