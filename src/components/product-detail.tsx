@@ -40,8 +40,6 @@ export function ProductDetail() {
   const m = audiProduct.metafields;
   const price = formatPrice(variant?.price ?? null);
   const sds = useSdsDocuments("WO1838MAU07A");
-  const refs = audiProduct.references;
-  const compatible = [...refs.compatiblePrimers, ...refs.compatibleBaseCoats, ...refs.compatibleClearCoats];
   const pending = <p className="pd-tbd">Pending manufacturer verification.</p>;
   return (
     <div className="pd-shell">
@@ -296,18 +294,6 @@ export function ProductDetail() {
             Find Your Wheel Color <ArrowRight />
           </Link>
         </Button>
-      </section>
-      <section className="pd-section pd-related">
-        <h2>Complete Your Coating System</h2>
-        {compatible.length ? (
-          <ul>
-            {compatible.map((c) => (
-              <li key={c}>{c}</li>
-            ))}
-          </ul>
-        ) : (
-          <p>Verified compatible products for this color will appear here once their relationships are confirmed.</p>
-        )}
       </section>
       <section className="pd-section pd-related">
         <h2>Related Products</h2>
