@@ -158,12 +158,10 @@
 
 @media(max-width:440px) { .pd-variants { grid-template-columns: repeat(2,minmax(0,1fr)); } }
 
-/* Free color swatch is a separate physical item, not a paint volume. */
-.pd-swatch { margin-top: 24px; padding: 20px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface-soft); }
-.pd-swatch-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
-.pd-swatch-top h2 { margin: 0 0 5px; font-size: 16px; font-weight: 600; }
-.pd-swatch-top p { font-size: 12px; color: var(--muted-foreground); line-height: 1.5; }
-.pd-swatch-free { white-space: nowrap; font-size: 14px; color: var(--foreground); }
-.pd-swatch-shipping { margin-top: 12px; font-size: 12px; line-height: 1.55; color: var(--muted-foreground); }
-.pd-swatch-button { margin-top: 16px; width: 100%; gap: 8px; }
-.pd-swatch-status { margin-top: 9px; font-size: 11px; color: var(--muted-foreground); }
+/* Secondary swatch option: deliberately smaller than the main Add to Cart area. */
+.pd-swatch { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); }
+.pd-swatch-inline { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+.pd-swatch-label { font-size: 12px; color: var(--muted-foreground); }
+.pd-swatch-label strong { margin-left: 6px; font-size: 12px; color: var(--foreground); font-weight: 600; }
+.pd-swatch-button { flex: 0 0 auto; height: 32px; font-size: 11px; gap: 5px; padding: 0 11px; }
+.pd-swatch-shipping { margin: 5px 0 0; font-size: 11px; line-height: 1.4; color: var(--muted-foreground); }
