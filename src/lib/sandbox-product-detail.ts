@@ -9,6 +9,7 @@ export type DetailRecord = {
   color_code: string | null; color_family: string[] | null; finish: string | null;
   description: string | null; product_line: string | null; panel_number: string | null;
   technical_description: string | null; application_instructions: string | null;
+  coating_layers: { name: string } | null;
 };
 export type DetailMedia = {
   id: string; media_type: string | null; media_role: string; alt_text: string | null;
@@ -50,7 +51,7 @@ export async function fetchSandboxProductDetail(productId: string): Promise<Deta
   );
   if (!visible.length) return null;
   const products = await read<DetailRecord[]>(
-    `products?select=id,product_name,brand,color_name,color_code,color_family,finish,description,product_line,panel_number,technical_description,application_instructions&id=eq.${productId}&limit=1`,
+    `products?select=id,product_name,brand,color_name,color_code,color_family,finish,description,product_line,panel_number,technical_description,application_instructions,coating_layers(name)&id=eq.${productId}&limit=1`,
   );
   if (!products[0]) return null;
   const [media, variants, documents] = await Promise.all([
