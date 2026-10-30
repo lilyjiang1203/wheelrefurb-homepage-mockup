@@ -1,5 +1,5 @@
+import { catalogCategoryHref, catalogHome } from "../lib/catalog-links";
 import { ArrowRight } from "lucide-react";
-import { Link } from "@tanstack/react-router";
 import wheelPaintProduct from "../assets/product-wheel-paint.jpg";
 import clearCoatProduct from "../assets/product-clear-coat.jpg";
 import powderCoatingProduct from "../assets/product-powder-coating.jpg";
@@ -14,16 +14,12 @@ type FeaturedProduct = {
   alt: string;
 };
 
-/*
- * Collection and product links are placeholders until the real Shopify URLs
- * are supplied, then swap each href below.
- */
 const featuredProducts: FeaturedProduct[] = [
   {
     label: "Wheel Paint",
     name: "OEM Wheel Paint",
     finish: "Graphite Metallic · Metallic",
-    href: "/collections/wheel-paint",
+    href: catalogCategoryHref("Wheel Paint"),
     image: wheelPaintProduct,
     alt: "Aerosol can of automotive wheel paint with a metallic paint swatch beside it",
   },
@@ -31,7 +27,7 @@ const featuredProducts: FeaturedProduct[] = [
     label: "Clear Coat",
     name: "2K High-Build Clear Coat",
     finish: "High Gloss · 2K",
-    href: "/collections/clear-coats",
+    href: catalogCategoryHref("Clear Coats"),
     image: clearCoatProduct,
     alt: "Bottle of automotive clear coat next to a glossy clear coated sample panel",
   },
@@ -39,7 +35,7 @@ const featuredProducts: FeaturedProduct[] = [
     label: "Powder Coating",
     name: "Powder Coating",
     finish: "Textured Graphite",
-    href: "/collections/powder-coatings",
+    href: catalogCategoryHref("Powder Coatings"),
     image: powderCoatingProduct,
     alt: "Tub of graphite powder coating next to a coated sample panel",
   },
@@ -47,7 +43,7 @@ const featuredProducts: FeaturedProduct[] = [
     label: "Refinishing Supply",
     name: "Primer & Surfacer Kit",
     finish: "Grey Filler Primer",
-    href: "/collections/other-supplies",
+    href: catalogCategoryHref("Other Supplies"),
     image: primerKitProduct,
     alt: "Primer can, surfacer tub, sanding disc and masking tape arranged as a kit",
   },
@@ -86,7 +82,7 @@ export function FeaturedProducts() {
                   ) : null}
                   <span className="featured-price">Log in to view price</span>
                   <span className="featured-cta">
-                    View product <ArrowRight aria-hidden="true" />
+                    Browse category <ArrowRight aria-hidden="true" />
                   </span>
                 </span>
               </FeaturedProductLink>
@@ -94,7 +90,7 @@ export function FeaturedProducts() {
           ))}
         </ul>
         <div className="featured-actions">
-          <a className="featured-all" href="/collections/all">
+          <a className="featured-all" href={catalogHome}>
             View all products <ArrowRight aria-hidden="true" />
           </a>
         </div>
@@ -104,7 +100,5 @@ export function FeaturedProducts() {
 }
 
 function FeaturedProductLink({ product, children }: { product: FeaturedProduct; children: React.ReactNode }) {
-  return product.label === "Wheel Paint"
-    ? <Link className="featured-card" to="/products/audi-anthracite-lv7d">{children}</Link>
-    : <a className="featured-card" href={product.href}>{children}</a>;
+  return <a className="featured-card" href={product.href}>{children}</a>;
 }
