@@ -243,7 +243,7 @@ export function StoreNavigation() {
             hash="need-help"
             activeOptions={{ exact: true, includeHash: true }}
           >
-            Need Help?
+            Product Guide
           </Link>
           <Link className="nav-link" to="/about" activeProps={{ className: "active" }}>
             About Us
@@ -280,7 +280,7 @@ export function StoreNavigation() {
             hash="need-help"
             onClick={() => setMobileOpen(false)}
           >
-            Need Help?
+            Product Guide
           </Link>
           <Link className="mobile-nav-row" to="/about" onClick={() => setMobileOpen(false)}>
             About Us
