@@ -15,6 +15,7 @@ import { CoatingKitSection } from "./coating-kit";
 import { useSdsDocuments } from "../lib/product-documents";
 import finishExample from "../assets/wheel-finish-closeup.jpg";
 import panelBand from "../assets/audi-anthracite-panel-band.jpg";
+import "../product-reviews.css";
 
 function PlaceholderProduct({ title, image, alt }: { title: string; image: string; alt: string }) {
   return (
