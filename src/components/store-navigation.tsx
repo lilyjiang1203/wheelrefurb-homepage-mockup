@@ -240,10 +240,10 @@ export function StoreNavigation() {
           <Link
             className="nav-link"
             to="/"
-            hash="find-your-color"
+            hash="need-help"
             activeOptions={{ exact: true, includeHash: true }}
           >
-            Find Your Color
+            Need Help?
           </Link>
           <Link className="nav-link" to="/about" activeProps={{ className: "active" }}>
             About Us
@@ -277,10 +277,10 @@ export function StoreNavigation() {
           <Link
             className="mobile-nav-row"
             to="/"
-            hash="find-your-color"
+            hash="need-help"
             onClick={() => setMobileOpen(false)}
           >
-            Find Your Color
+            Need Help?
           </Link>
           <Link className="mobile-nav-row" to="/about" onClick={() => setMobileOpen(false)}>
             About Us
