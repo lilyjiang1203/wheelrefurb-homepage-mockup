@@ -48,3 +48,35 @@
   .rv-search { min-width:0; width:100%; flex-basis:100%; }
   .rv-dialog { max-width:calc(100vw - 24px); }
 }
+
+/* OPI-inspired rating entry: placed below description and above price */
+.rv-summary.rv-summary-opi {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 16px 0 20px;
+  font-size: 14px;
+}
+.rv-opi-rating,
+.rv-opi-write {
+  appearance: none;
+  background: transparent;
+  color: inherit;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+.rv-opi-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.rv-opi-rating .rv-stars { gap: 2px; }
+.rv-opi-write { font-weight: 600; }
+.rv-opi-rating:hover span,
+.rv-opi-write:hover { text-decoration: underline; text-underline-offset: 3px; }
+.rv-opi-rating:focus-visible,
+.rv-opi-write:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
