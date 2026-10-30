@@ -81,10 +81,15 @@ function SandboxProducts() {
         {products.length === 0 && <p className="py-10 text-sm text-muted-foreground">
           No products in this category yet in the Sandbox preview. Try another collection or view all products.
         </p>}
+        <div className="mb-6 rounded-md border border-border bg-muted/20 p-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">New product template test</p>
+          <p className="mt-1 text-sm">Open Audi Chrome Anthracite L-UJ2 to see a different real product rendered through the dynamic Product Detail template.</p>
+          <Link to="/sandbox/product/$productId" params={{ productId: "7a5761e4-2fb6-452f-824d-6a40d3f29fff" }} className="mt-2 inline-flex text-sm font-semibold text-brand hover:underline">View Chrome Anthracite detail →</Link>
+        </div>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {products.map((product) => {
             const name = product.color_name || product.product_name;
-            const isAudiDemo = product.color_code === "WO1838MAU07A";
+
             return <article key={product.id} className="border border-border rounded-sm overflow-hidden">
               <div className="aspect-square bg-muted/30 flex items-center justify-center overflow-hidden">
                 {product.imageUrl
@@ -96,9 +101,7 @@ function SandboxProducts() {
                 <h2 className="text-sm font-semibold leading-snug">{name}</h2>
                 <p className="text-xs text-muted-foreground mt-1">{product.color_code}</p>
                 <p className="text-sm font-semibold mt-3">{product.price1L ? `1 L · ${product.price1L}` : "Pricing pending"}</p>
-                {isAudiDemo
-                  ? <Link to="/products/audi-anthracite-lv7d" className="inline-flex mt-4 text-sm font-semibold text-brand hover:underline">View demo detail →</Link>
-                  : <p className="text-xs text-muted-foreground mt-4">Product detail preview coming soon</p>}
+                <Link to="/sandbox/product/$productId" params={{ productId: product.id }} className="inline-flex mt-4 text-sm font-semibold text-brand hover:underline">View product detail →</Link>
               </div>
             </article>;
           })}
