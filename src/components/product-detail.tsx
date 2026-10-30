@@ -175,7 +175,6 @@ export function ProductDetail() {
               Add to Cart
             </Button>
           </div>
-          <p className="pd-caption">Demo cart only. No purchase or payment will be made.</p>
         </div>
       </section>
       <section className="pd-section">
@@ -318,23 +317,28 @@ export function ProductDetail() {
           </Link>
         </Button>
       </section>
-      <section className="pd-section pd-related">
-        <h2>Related Products</h2>
-        <h3>Similar Colors</h3>
-        <p>Visual alternatives are separate from technical compatibility.</p>
-        <div className="pd-placeholder-grid">
-          <PlaceholderProduct
-            title="Similar grey color — TBD"
-            image={finishExample}
-            alt="Dark anthracite metallic wheel finish close-up used as an illustrative placeholder"
-          />
-          <PlaceholderProduct
-            title="Similar anthracite color — TBD"
-            image={panelBand}
-            alt="Close-up of the anthracite coating sample panel used as an illustrative placeholder"
-          />
-        </div>
-      </section>
+     
+<section className="pd-section pd-related-minimal">
+  <div className="pd-explore-content">
+    <div className="pd-explore-copy">
+      <p className="pd-explore-eyebrow">
+        EXPLORE MORE FINISHES
+      </p>
+      <h2>Find Your Next Wheel Color</h2>
+      <p>
+        Browse our wheel refinishing colors and discover
+        other options for your project.
+      </p>
+    </div>
+
+    <Button asChild variant="outline" className="pd-explore-button">
+      <Link to="/shop">
+        Explore Colors <ArrowRight size={17} />
+      </Link>
+    </Button>
+  </div>
+</section>
+
       <ReviewsSection reviews={reviews} onWrite={() => setReviewDialogOpen(true)} />
       {showStickyCart && (
         <aside className="pd-sticky-cart" aria-label="Product quick purchase">
