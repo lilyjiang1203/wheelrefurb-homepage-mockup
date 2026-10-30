@@ -33,18 +33,12 @@ export function ReviewSummary({ reviews, onWrite }: { reviews: ProductReview[]; 
   const avg = averageRating(reviews);
   const scroll = () => document.getElementById("customer-reviews")?.scrollIntoView({ behavior: "smooth" });
   return (
-    <div className="rv-summary">
-      {avg === null ? (
-        <button type="button" className="rv-link-muted" onClick={scroll}>
-          No reviews yet
-        </button>
-      ) : (
-        <button type="button" className="rv-link-muted" onClick={scroll}>
-          {avg} <Stars value={avg} size={12} /> ({reviews.length} {reviews.length === 1 ? "Review" : "Reviews"})
-        </button>
-      )}
-      <span aria-hidden="true">·</span>
-      <button type="button" className="rv-link" onClick={onWrite}>
+    <div className="rv-summary rv-summary-opi">
+      <button type="button" className="rv-opi-rating" onClick={scroll}>
+        <Stars value={avg ?? 0} size={15} />
+        <span>{avg === null ? "No reviews yet" : `${avg.toFixed(1)} (${reviews.length})`}</span>
+      </button>
+      <button type="button" className="rv-opi-write" onClick={onWrite}>
         Write a Review
       </button>
     </div>
