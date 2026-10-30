@@ -1,5 +1,6 @@
 import { BadgeDollarSign, ArrowRight, Boxes, Headset } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "@tanstack/react-router";
 import wholesalePartners from "@/assets/wholesale-partners.jpg";
 
 /**
@@ -42,12 +43,11 @@ export function WholesaleProgram() {
           </ul>
 
           <div className="wholesale-actions">
-            {/* Temporary destination until the wholesale application page exists. */}
             <Button asChild size="lg" className="wholesale-cta">
-              <a href="/wholesale-application">
+              <Link to="/wholesale-application">
                 Become a partner
                 <ArrowRight aria-hidden />
-              </a>
+              </Link>
             </Button>
           </div>
         </div>
