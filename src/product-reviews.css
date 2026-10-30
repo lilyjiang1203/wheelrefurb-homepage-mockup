@@ -1,0 +1,50 @@
+/* WheelRefurb Product Reviews — sandbox UI */
+.rv-summary { display:flex; align-items:center; flex-wrap:wrap; gap:9px; margin:12px 0 18px; font-size:14px; }
+.rv-link, .rv-link-muted { display:inline-flex; align-items:center; gap:6px; padding:0; border:0; background:transparent; cursor:pointer; font:inherit; text-decoration:underline; text-underline-offset:3px; }
+.rv-link-muted { color:inherit; }
+.rv-link { font-weight:600; }
+.rv-stars { display:inline-flex; align-items:center; gap:2px; vertical-align:middle; }
+.rv-star-on { fill:currentColor; color:#202020; }
+.rv-star-off { fill:none; color:#a3a3a3; }
+.rv-section { scroll-margin-top:100px; }
+.rv-section > h2 { margin-bottom:18px; }
+.rv-head { display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; padding-bottom:22px; border-bottom:1px solid #dedede; }
+.rv-overall { display:flex; align-items:center; gap:16px; }
+.rv-overall p { margin:5px 0 0; font-size:13px; color:#666; }
+.rv-score { font-size:42px; font-weight:500; line-height:1.1; }
+.rv-media { padding:24px 0; border-bottom:1px solid #dedede; }
+.rv-media h3 { font-size:17px; font-weight:600; margin:0 0 12px; }
+.rv-media p { font-size:14px; color:#777; }
+.rv-media ul { display:flex; flex-wrap:wrap; gap:12px; list-style:none; padding:0; margin:0; }
+.rv-media li { display:flex; align-items:center; gap:5px; font-size:13px; padding:10px 12px; border:1px solid #ddd; border-radius:6px; }
+.rv-tools { display:flex; flex-wrap:wrap; align-items:center; gap:12px; padding:22px 0; }
+.rv-search { display:flex; align-items:center; gap:8px; border:1px solid #d5d5d5; border-radius:6px; padding:10px 12px; min-width:240px; flex:1; }
+.rv-search input { width:100%; background:transparent; border:0; outline:0; font:inherit; }
+.rv-tools select { padding:10px 12px; background:transparent; border:1px solid #d5d5d5; border-radius:6px; }
+.rv-tools :disabled { opacity:.55; cursor:not-allowed; }
+.rv-empty { padding:22px 0 42px; color:#777; }
+.rv-list { list-style:none; padding:0; margin:0; }
+.rv-card { padding:20px 0; border-bottom:1px solid #e1e1e1; }
+.rv-card h4 { margin:10px 0 6px; font-weight:600; }
+.rv-card > p { margin:8px 0; }
+.rv-meta { font-size:12px; color:#777; }
+.rv-dialog { max-width:570px; max-height:90vh; overflow-y:auto; }
+.rv-form { display:grid; gap:16px; padding-top:8px; }
+.rv-form label { display:grid; gap:6px; min-width:0; }
+.rv-label { font-size:13px; font-weight:600; }
+.rv-form input:not([type="file"]), .rv-form textarea { width:100%; padding:10px 12px; border:1px solid #c9c9c9; border-radius:6px; background:transparent; color:inherit; }
+.rv-form textarea { resize:vertical; }
+.rv-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.rv-rate { display:flex; gap:8px; margin-top:6px; }
+.rv-rate button { border:0; background:transparent; padding:4px; cursor:pointer; }
+.rv-rate button:focus-visible, .rv-link:focus-visible, .rv-link-muted:focus-visible { outline:2px solid currentColor; outline-offset:3px; }
+.rv-upload { border:1px dashed #aaa; border-radius:8px; padding:14px; display:flex !important; align-items:center; gap:10px; cursor:pointer; font-size:14px; }
+.rv-upload input[type="file"] { max-width:100%; font-size:12px; }
+.rv-upload span { overflow-wrap:anywhere; }
+.rv-error { color:#b42318; font-size:13px; margin:0; }
+@media(max-width:640px) {
+  .rv-row { grid-template-columns:1fr; }
+  .rv-head { align-items:flex-start; }
+  .rv-search { min-width:0; width:100%; flex-basis:100%; }
+  .rv-dialog { max-width:calc(100vw - 24px); }
+}
