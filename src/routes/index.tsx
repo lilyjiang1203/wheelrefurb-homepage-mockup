@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { StoreNavigation } from "../components/store-navigation";
-import { ColorFinder } from "../components/color-finder";
 import { HomeBanner } from "../components/home-banner";
 import { ShopByCategory } from "../components/shop-by-category";
 import { FeaturedProducts } from "../components/featured-products";
@@ -14,7 +13,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Professional Wheel Refinishing Products | FreiLack WheelRefurb" },
-      { name: "description", content: "OEM-quality wheel paints, primers, clear coats, powders and refinishing supplies for professionals, plus a wheel color finder by vehicle brand." },
+      { name: "description", content: "OEM-quality wheel paints, primers, clear coats, powders and refinishing supplies for professionals, plus guided product selection for wheel refinishing." },
       { property: "og:title", content: "Professional Wheel Refinishing Products — FreiLack WheelRefurb" },
       { property: "og:description", content: "OEM-quality wheel paints, primers, clear coats, powders and refinishing supplies for professionals." },
       { property: "og:type", content: "website" },
@@ -39,7 +38,6 @@ function Index() {
         <ShopByCategory />
         <FeaturedProducts />
         <ProfessionalSolutions />
-        <ColorFinder />
         <GuidedProductFinder />
         <AboutSection />
         <WholesaleProgram />
