@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ChevronRight, Download, FileText, ImageOff } from "lucide-react";
+import { CoatingKitSection } from "./coating-kit";
+import { SimilarColorRecommendations } from "./similar-color-recommendations";
+import { ReviewSummary, ReviewsSection, WriteReviewDialog, type ProductReview } from "./product-reviews";
+import "../product-reviews.css";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
 import { Button } from "./ui/button";
 import { ProductGallery } from "./product-gallery";
@@ -28,6 +32,8 @@ export function DynamicSandboxProductDetail({ productId }: { productId: string }
   const detail = useSandboxProductDetail(productId);
   const [selectedVariantId, setSelectedVariantId] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
+  const [reviews, setReviews] = useState<ProductReview[]>([]);
+  const [reviewOpen, setReviewOpen] = useState(false);
 
   if (detail.status === "loading") return <main className="pd-shell" role="status">Loading product information…</main>;
   if (detail.status === "error") return <main className="pd-shell" role="alert"><h1 className="pd-title">Product unavailable</h1><p>We couldn't load this product. Please try again later.</p><Link to="/sandbox/products">Back to products</Link></main>;
@@ -60,6 +66,7 @@ export function DynamicSandboxProductDetail({ productId }: { productId: string }
         <p className="pd-eyebrow">FreiLacke / Wheel Refinishing Color</p>
         <h1 className="pd-title pd-title--single-line" id="product-title">{productTitle}</h1>
         <p className="pd-summary">{formatProductShortDescription(product)}</p>
+        <ReviewSummary reviews={reviews} onWrite={() => setReviewOpen(true)} />
         <p className="pd-price">{formatPrice(variant)}</p>
         <span className="pd-form-label">Package size</span>
         {variants.length ? <div className="pd-variants">{variants.map(v => <Button key={v.id} variant="outline" className="pd-variant" aria-pressed={variant?.id === v.id} onClick={() => setSelectedVariantId(v.id)}>{formatSize(v)}</Button>)}</div> :
@@ -93,7 +100,12 @@ export function DynamicSandboxProductDetail({ productId }: { productId: string }
         </AccordionContent></AccordionItem>
       </Accordion>
     </section>
+    {product.color_code ? <CoatingKitSection colorCode={product.color_code} /> : null}
     <section className="pd-help"><div className="pd-help-copy"><h2>Need Help Finding Your Wheel Color?</h2><p>Our team can help confirm the correct product and coating system.</p></div>
       <Button asChild className="pd-help-cta"><Link to="/" hash="need-help">Get Product Guidance</Link></Button></section>
+    {product.color_code ? <SimilarColorRecommendations colorCode={product.color_code} /> : null}
+    <ReviewsSection reviews={reviews} onWrite={() => setReviewOpen(true)} />
+    <WriteReviewDialog open={reviewOpen} onOpenChange={setReviewOpen} productName={productTitle}
+      onSubmit={review => setReviews(current => [review, ...current])} />
   </main>;
 }
