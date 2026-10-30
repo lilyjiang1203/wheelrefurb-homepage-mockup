@@ -9,6 +9,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./
 import { Button } from "./ui/button";
 import { ProductGallery } from "./product-gallery";
 import { formatProductShortDescription } from "../lib/product-short-description";
+import { resolveHowToUseCategory, howToUseGuide } from "../lib/how-to-use-templates";
 import { productStorageUrl, useSandboxProductDetail, type DetailVariant } from "../lib/sandbox-product-detail";
 
 function formatSize(variant: DetailVariant): string {
@@ -54,6 +55,8 @@ export function DynamicSandboxProductDetail({ productId }: { productId: string }
     ["Brand", product.brand], ["Panel Number", product.panel_number],
   ].filter((pair): pair is [string, string] => Boolean(pair[1]));
   const description = product.description?.trim() || product.technical_description?.trim();
+  const useCategory = resolveHowToUseCategory(product.coating_layers?.name);
+  const useGuide = useCategory ? howToUseGuide(useCategory) : null;
   return <main className="pd-shell">
     <nav className="pd-breadcrumb" aria-label="Breadcrumb"><Link to="/">Home</Link><ChevronRight size={12} /><Link to="/sandbox/products">Sandbox Products</Link><ChevronRight size={12}/><span>{productTitle}</span></nav>
     <section className="pd-overview" aria-labelledby="product-title">
@@ -90,7 +93,12 @@ export function DynamicSandboxProductDetail({ productId }: { productId: string }
         </AccordionContent></AccordionItem>
         <AccordionItem value="benefits"><AccordionTrigger>Benefits</AccordionTrigger><AccordionContent><p className="pd-tbd">Benefits are pending product documentation and verification.</p></AccordionContent></AccordionItem>
         <AccordionItem value="how-to-use"><AccordionTrigger>How to Use</AccordionTrigger><AccordionContent>
-          {product.application_instructions?.trim() ? <p className="whitespace-pre-line">{product.application_instructions}</p> : <p className="pd-tbd">Consult the product Technical Data Sheet for application instructions.</p>}
+          {useGuide ? <>
+            <ol className="list-decimal pl-6 space-y-2">
+              {useGuide.steps.map(step => <li key={step.title}><strong>{step.title}:</strong> {step.explanation}</li>)}
+            </ol>
+            <p className="mt-4"><strong>Important:</strong> {useGuide.note}</p>
+          </> : <p className="pd-tbd">Consult the product Technical Data Sheet for application instructions. Product category is not confirmed.</p>}
         </AccordionContent></AccordionItem>
         <AccordionItem value="technical"><AccordionTrigger>Technical Details</AccordionTrigger><AccordionContent>
           <dl className="pd-attributes">{attrs.map(([label, value]) => <div className="pd-attribute" key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
