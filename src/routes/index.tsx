@@ -1,5 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
 import { StoreNavigation } from "../components/store-navigation";
 import { ColorFinder } from "../components/color-finder";
 import { HomeBanner } from "../components/home-banner";
@@ -29,12 +28,6 @@ function Index() {
     <div className="min-h-screen bg-background" id="home">
       <StoreNavigation />
       <main>
-        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 border-b border-border bg-muted/50 px-4 py-2 text-center text-xs sm:text-sm" aria-label="Sandbox catalog preview">
-          <span className="text-muted-foreground">Explore our product catalog preview</span>
-          <Link to="/sandbox/products" className="inline-flex items-center gap-1 font-semibold text-brand hover:underline">
-            Browse Sandbox Products <ArrowRight size={14} aria-hidden="true" />
-          </Link>
-        </div>
         <HomeBanner />
         <ShopByCategory />
         <FeaturedProducts />
