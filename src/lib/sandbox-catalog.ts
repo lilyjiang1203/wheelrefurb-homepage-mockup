@@ -17,6 +17,7 @@ type ProductRecord = {
   color_name: string | null;
   color_code: string | null;
   finish: string | null;
+  color_family: string[] | null;
 };
 type CollectionRecord = {
   collection_id: string;
@@ -70,7 +71,7 @@ export async function fetchSandboxCatalog(): Promise<CatalogData> {
   if (!selected.length) return { products: [], collections };
   const ids = selected.map((p) => p.product_id).join(",");
   const [products, media, variants] = await Promise.all([
-    read<ProductRecord[]>(`products?select=id,product_name,color_name,color_code,finish&id=in.(${ids})`),
+    read<ProductRecord[]>(`products?select=id,product_name,color_name,color_code,finish,color_family&id=in.(${ids})`),
     read<MediaRecord[]>(`product_media?select=product_id,bucket_name,storage_path,media_role&product_id=in.(${ids})&media_role=eq.front`),
     read<VariantRecord[]>(`product_variants?select=product_id,size,unit,price,currency_code&product_id=in.(${ids})&size=eq.1&unit=eq.L`),
   ]);
