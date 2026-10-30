@@ -11,7 +11,6 @@ import {
 } from "./product-detail-data";
 import { ProductGallery } from "./product-gallery";
 import { CoatingKitSection } from "./coating-kit";
-import { SimilarFinishRecommendations } from "./similar-finish-recommendations";
 import { ReviewSummary, ReviewsSection, WriteReviewDialog, type ProductReview } from "./product-reviews";
 import { useSdsDocuments } from "../lib/product-documents";
 import { formatVariantUsd, useProductPrices } from "../lib/product-pricing";
@@ -339,7 +338,26 @@ export function ProductDetail() {
         </Button>
       </section>
      
-<SimilarFinishRecommendations colorCode="WO1838MAU07A" />
+<section className="pd-section pd-related-minimal">
+  <div className="pd-explore-content">
+    <div className="pd-explore-copy">
+      <p className="pd-explore-eyebrow">
+        EXPLORE MORE FINISHES
+      </p>
+      <h2>Find Your Next Wheel Color</h2>
+      <p>
+        Browse our wheel refinishing colors and discover
+        other options for your project.
+      </p>
+    </div>
+
+    <Button asChild variant="outline" className="pd-explore-button">
+      <Link to="/shop">
+        Explore Colors <ArrowRight size={17} />
+      </Link>
+    </Button>
+  </div>
+</section>
 
       <ReviewsSection reviews={reviews} onWrite={() => setReviewDialogOpen(true)} />
       {showStickyCart && (
