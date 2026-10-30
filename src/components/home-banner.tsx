@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { Button } from "./ui/button";
 import bannerImage from "../assets/workshop-banner.jpg";
 
@@ -30,9 +31,9 @@ export function HomeBanner() {
         </p>
         <div className="home-banner-actions">
           <Button asChild size="lg" className="home-banner-cta">
-            <a href="/collections/all">
+            <Link to="/sandbox/products">
               Shop products <ArrowRight aria-hidden="true" />
-            </a>
+            </Link>
           </Button>
         </div>
         <ul className="home-banner-facts">
