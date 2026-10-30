@@ -183,31 +183,17 @@ export function ProductDetail() {
               Add to Cart
             </Button>
           </div>
-          <div className="pd-swatch" aria-labelledby="pd-swatch-title">
-            <div className="pd-swatch-top">
-              <div>
-                <h2 id="pd-swatch-title">Add a Color Swatch</h2>
-                <p>See the color before choosing your paint size.</p>
-              </div>
-              <strong className="pd-swatch-free">FREE · $0.00</strong>
+          <div className="pd-swatch" aria-label="Color swatch option">
+            <div className="pd-swatch-inline">
+              <span className="pd-swatch-label">Color swatch <strong>FREE · $0.00</strong></span>
+              <Button type="button" variant="outline" size="sm" className="pd-swatch-button" disabled
+                title={swatchState.status === "loading" ? "Checking swatch availability" :
+                  swatchState.status === "error" ? "Swatch availability temporarily unavailable" :
+                  swatchState.swatch?.isAvailable ? "Online swatch ordering coming soon" : "Swatch availability to be confirmed"}>
+                <Plus size={14} aria-hidden="true" /> Add Swatch
+              </Button>
             </div>
-            <p className="pd-swatch-shipping">
-              Swatches are free. Shipping charges apply to swatch-only orders.
-              Orders with paint follow the standard shipping policy.
-            </p>
-            <Button type="button" variant="outline" className="pd-swatch-button"
-              disabled
-              title={swatchState.status === "loading" ? "Checking swatch availability" :
-                swatchState.status === "error" ? "Swatch availability temporarily unavailable" :
-                swatchState.swatch?.isAvailable ? "Online swatch ordering coming soon" : "Swatch availability to be confirmed"}>
-              <Plus size={16} aria-hidden="true" /> Add Swatch
-            </Button>
-            <p className="pd-swatch-status" role="status">
-              {swatchState.status === "loading" ? "Checking swatch availability…" :
-                swatchState.status === "error" ? "Swatch availability temporarily unavailable." :
-                swatchState.swatch?.isAvailable ? "Online swatch ordering coming soon." :
-                "Swatch availability to be confirmed."}
-            </p>
+            <p className="pd-swatch-shipping">Free swatch · Shipping applies to swatch-only orders.</p>
           </div>
         </div>
       </section>
