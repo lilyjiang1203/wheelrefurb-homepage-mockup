@@ -1,3 +1,4 @@
+import { catalogCategoryHref, catalogHome } from "../lib/catalog-links";
 import { ArrowRight } from "lucide-react";
 import wheelPaintImage from "../assets/category-wheel-paint.jpg";
 import clearCoatsImage from "../assets/category-clear-coats.jpg";
@@ -13,44 +14,40 @@ type ShopCategory = {
   alt: string;
 };
 
-/*
- * Collection links are placeholders until the real Shopify collection URLs
- * are supplied, then swap each href below.
- */
 const shopCategories: ShopCategory[] = [
   {
     name: "Wheel Paint",
-    href: "/collections/wheel-paint",
+    href: catalogCategoryHref("Wheel Paint"),
     image: wheelPaintImage,
     alt: "Spray gun laying a wet coat of metallic paint onto an alloy wheel spoke",
   },
   {
     name: "Clear Coats",
-    href: "/collections/clear-coats",
+    href: catalogCategoryHref("Clear Coats"),
     image: clearCoatsImage,
     alt: "Freshly clear-coated alloy wheel with a deep, mirror-like gloss finish",
   },
   {
     name: "Powder Coatings",
-    href: "/collections/powder-coatings",
+    href: catalogCategoryHref("Powder Coatings"),
     image: powderCoatingsImage,
     alt: "Alloy wheel hung in a powder booth while colored powder is applied",
   },
   {
     name: "Candy Colors",
-    href: "/collections/candy-colors",
+    href: catalogCategoryHref("Candy Colors"),
     image: candyColorsImage,
     alt: "Alloy wheel spokes coated in deep translucent candy paint finishes",
   },
   {
     name: "FreiFlip",
-    href: "/collections/freiflip",
+    href: catalogCategoryHref("FreiFlip"),
     image: freiflipImage,
     alt: "Close-up of a color-shifting chameleon wheel finish changing from violet to green",
   },
   {
     name: "Other Supplies",
-    href: "/collections/other-supplies",
+    href: catalogCategoryHref("Other Supplies"),
     image: otherSuppliesImage,
     alt: "Primers, mixing cups, masking tape and sanding discs laid out on a workbench",
   },

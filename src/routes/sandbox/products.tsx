@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ChevronRight, ImageOff, Search } from "lucide-react";
 import { StoreNavigation } from "../../components/store-navigation";
 import { useSandboxCatalog } from "../../lib/sandbox-catalog";
+import { matchesCatalogCategory, catalogCategoryNames } from "../../lib/catalog-links";
 
 export const Route = createFileRoute("/sandbox/products")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    collection: typeof search.collection === "string" ? search.collection : undefined,
+    category: typeof search.category === "string" ? search.category : undefined,
+  }),
   head: () => ({ meta: [
     { title: "Sandbox Product Catalog | Wheel Refurb" },
     { name: "robots", content: "noindex, nofollow" },
@@ -14,15 +19,23 @@ export const Route = createFileRoute("/sandbox/products")({
 
 function SandboxProducts() {
   const catalog = useSandboxCatalog();
-  const [collection, setCollection] = useState("all");
+  const filters = Route.useSearch();
+  const [collection, setCollection] = useState(filters.collection ?? "all");
+  const [category, setCategory] = useState(filters.category ?? "all");
+  useEffect(() => {
+    setCollection(filters.collection ?? "all");
+    setCategory(filters.category ?? "all");
+  }, [filters.collection, filters.category]);
   const [search, setSearch] = useState("");
   const data = catalog.status === "ready" ? catalog.data : null;
   const q = search.trim().toLowerCase();
   const products = (data?.products ?? []).filter((p) => {
-    const matchesCollection = collection === "all" || p.collectionId === collection;
+    const collectionName = data?.collections.find((c) => c.collection_id === p.collectionId)?.collection_name ?? "";
+    const matchesCollection = collection === "all" || collectionName.toLowerCase() === collection.toLowerCase();
+    const matchesCategory = category === "all" || matchesCatalogCategory(category, p, collectionName);
     const matchesSearch = !q || [p.product_name, p.color_name, p.color_code, p.finish]
       .some((value) => value?.toLowerCase().includes(q));
-    return matchesCollection && matchesSearch;
+    return matchesCollection && matchesCategory && matchesSearch;
   });
 
   return <div className="min-h-screen bg-background">
@@ -52,14 +65,22 @@ function SandboxProducts() {
           <label className="flex items-center gap-2 text-sm">
             <span className="text-muted-foreground">Collection</span>
             <select className="border border-border bg-background p-2 max-w-48"
-              value={collection} onChange={(event) => setCollection(event.target.value)}>
+              value={collection} onChange={(event) => { setCollection(event.target.value); setCategory("all"); }}>
               <option value="all">All collections</option>
-              {data.collections.map((c) => <option key={c.collection_id} value={c.collection_id}>{c.collection_name}</option>)}
+              {data.collections.map((c) => <option key={c.collection_id} value={c.collection_name}>{c.collection_name}</option>)}
             </select>
           </label>
           <span className="text-xs text-muted-foreground" role="status">{products.length} of {data.products.length} products</span>
         </div>
-        {products.length === 0 && <p className="py-10 text-sm text-muted-foreground">No matching Sandbox products.</p>}
+        {(category !== "all" || collection !== "all") && (
+          <div className="mb-5 flex items-center gap-3 flex-wrap text-sm">
+            <span className="font-medium">Showing: {collection !== "all" ? collection : catalogCategoryNames[category] ?? category}</span>
+            <Link to="/sandbox/products" className="text-brand hover:underline">View all Sandbox products</Link>
+          </div>
+        )}
+        {products.length === 0 && <p className="py-10 text-sm text-muted-foreground">
+          No products in this category yet in the Sandbox preview. Try another collection or view all products.
+        </p>}
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {products.map((product) => {
             const name = product.color_name || product.product_name;

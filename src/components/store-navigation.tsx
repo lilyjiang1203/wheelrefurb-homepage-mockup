@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import logo from "../assets/freilacke-logo.png";
+import { catalogCategoryHref, catalogCollectionHref } from "../lib/catalog-links";
 
 type Collection = {
   name: string;
@@ -101,7 +102,7 @@ function DesktopCollections() {
           <p className="menu-label">Shop collections</p>
           {collections.map((collection, index) => (
             <a
-              href={`#${collection.name.toLowerCase()}`}
+              href={catalogCategoryHref(collection.name)}
               className={index === active ? "collection-category active" : "collection-category"}
               key={collection.name}
               onMouseEnter={() => setActive(index)}
@@ -115,7 +116,7 @@ function DesktopCollections() {
         <div className="collection-level-two">
           <div className="submenu-heading">
             <span>{selected.name}</span>
-            <a href={`#${selected.name.toLowerCase()}`}>View all</a>
+            <a href={catalogCategoryHref(selected.name)}>View all</a>
           </div>
           {selected.groups.length ? (
             <div className="submenu-groups">
@@ -137,7 +138,7 @@ function DesktopCollections() {
                       }
                     >
                       {group.items.map((item) => (
-                        <a href={`#${item.toLowerCase().replaceAll(" ", "-")}`} key={item}>
+                        <a href={catalogCollectionHref(item)} key={item}>
                           {item}
                         </a>
                       ))}
@@ -191,7 +192,7 @@ function MobileCollections() {
                             {group.name ? <p>{group.name}</p> : null}
                             {group.items.map((item) => (
                               <a
-                                href={`#${item.toLowerCase().replaceAll(" ", "-")}`}
+                                href={catalogCollectionHref(item)}
                                 key={item}
                                 className={hasNamedGroup && !group.name ? "standalone-item" : undefined}
                               >
@@ -202,7 +203,7 @@ function MobileCollections() {
                         );
                       })
                     ) : (
-                      <a href={`#${collection.name.toLowerCase()}`}>View all {collection.name}</a>
+                      <a href={catalogCategoryHref(collection.name)}>View all {collection.name}</a>
                     )}
                   </div>
                 ) : null}
