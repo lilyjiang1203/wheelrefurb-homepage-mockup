@@ -116,3 +116,42 @@
 .re-select { height: 40px; border: 1px solid var(--border); border-radius: 999px; padding: 0 14px; background: var(--background); color: var(--foreground); font-size: 13px; }
 .re-add { border-radius: 999px; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; padding: 0 20px; height: 40px; }
 @media(max-width:640px) { .re-row { grid-template-columns: 56px minmax(0,1fr); } .re-thumb { width: 56px; height: 56px; } .re-actions { grid-column: 1 / -1; } .re-add { flex: 1; } }
+
+/* Customer reviews (sandbox) */
+.rv-summary{display:flex;align-items:center;gap:.5rem;margin:.5rem 0 1rem;font-size:.8rem;color:var(--muted-foreground)}
+.rv-summary button{background:none;border:0;padding:0;cursor:pointer;font:inherit;display:inline-flex;align-items:center;gap:.3rem}
+.rv-link{color:var(--foreground);text-decoration:underline;text-underline-offset:3px;font-weight:600}
+.rv-link-muted{color:var(--muted-foreground)}
+.rv-stars{display:inline-flex;gap:1px}
+.rv-star-on{fill:var(--foreground);color:var(--foreground)}
+.rv-star-off{color:var(--border)}
+.rv-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;padding:1rem 0;border-bottom:1px solid var(--border)}
+.rv-overall{display:flex;align-items:center;gap:.75rem}
+.rv-overall p{font-size:.8rem;color:var(--muted-foreground);margin:.2rem 0 0}
+.rv-score{font-size:2.25rem;font-weight:700;line-height:1}
+.rv-media{padding:1rem 0;border-bottom:1px solid var(--border)}
+.rv-media h3{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;margin:0 0 .4rem}
+.rv-media p,.rv-media li{font-size:.85rem;color:var(--muted-foreground)}
+.rv-media ul{display:flex;flex-wrap:wrap;gap:.75rem;list-style:none;padding:0;margin:0}
+.rv-tools{display:flex;gap:.75rem;padding:1rem 0;flex-wrap:wrap}
+.rv-search{flex:1;min-width:200px;display:flex;align-items:center;gap:.5rem;border:1px solid var(--border);padding:.5rem .75rem}
+.rv-search input{border:0;outline:0;flex:1;background:transparent;font-size:.85rem}
+.rv-tools select{border:1px solid var(--border);padding:.5rem .75rem;font-size:.85rem;background:var(--background)}
+.rv-empty{padding:1.5rem;text-align:center;background:var(--muted);font-size:.9rem;color:var(--muted-foreground)}
+.rv-list{list-style:none;padding:0;margin:0}
+.rv-card{padding:1rem 0;border-bottom:1px solid var(--border)}
+.rv-card h4{margin:.4rem 0 .25rem;font-weight:600}
+.rv-card p{margin:0;font-size:.9rem}
+.rv-card .rv-meta{margin-top:.5rem;font-size:.75rem;color:var(--muted-foreground)}
+.rv-dialog{max-width:540px}
+.rv-form{display:grid;gap:.9rem}
+.rv-form label{display:grid;gap:.3rem}
+.rv-form input:not([type=file]),.rv-form textarea{border:1px solid var(--border);padding:.55rem .7rem;font-size:.9rem;background:var(--background)}
+.rv-label{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.rv-rate{display:flex;gap:.2rem}
+.rv-rate button{background:none;border:0;padding:0;cursor:pointer}
+.rv-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+@media (max-width:560px){.rv-row{grid-template-columns:1fr}}
+.rv-upload{display:flex!important;align-items:center;gap:.6rem;border:1px dashed var(--border);padding:.8rem;cursor:pointer;font-size:.85rem;color:var(--muted-foreground)}
+.rv-upload input{display:none}
+.rv-error{color:var(--destructive);font-size:.85rem;margin:0}
