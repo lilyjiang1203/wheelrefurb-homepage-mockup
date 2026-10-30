@@ -9,7 +9,6 @@ export const Route = createFileRoute("/sandbox/products")({
   validateSearch: (search: Record<string, unknown>) => ({
     collection: typeof search.collection === "string" ? search.collection : undefined,
     category: typeof search.category === "string" ? search.category : undefined,
-    search: typeof search.search === "string" ? search.search : undefined,
   }),
   head: () => ({ meta: [
     { title: "Sandbox Product Catalog | Wheel Refurb" },
@@ -27,8 +26,7 @@ function SandboxProducts() {
     setCollection(filters.collection ?? "all");
     setCategory(filters.category ?? "all");
   }, [filters.collection, filters.category]);
-  const [search, setSearch] = useState(filters.search ?? "");
-  useEffect(() => { setSearch(filters.search ?? ""); }, [filters.search]);
+  const [search, setSearch] = useState("");
   const data = catalog.status === "ready" ? catalog.data : null;
   const q = search.trim().toLowerCase();
   const products = (data?.products ?? []).filter((p) => {
