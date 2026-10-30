@@ -145,4 +145,64 @@
   .pd-sticky-quantity { height: 30px; justify-content: center; }
   .pd-sticky-quantity button { padding: 0 10px; font-size: 18px; }
   .pd-sticky-add { min-width: 115px; min-height: 34px; font-size: 11px; }
+   .pd-explore-content {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+  }
+
+  .pd-explore-copy h2 {
+    font-size: 22px;
+  }
 }
+
+
+
+
+
+.pd-related-minimal {
+  padding: 28px 0;
+}
+
+.pd-explore-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 32px;
+  background: #f8f9fb;
+  border: 1px solid #e1e5e9;
+  border-radius: 6px;
+}
+
+.pd-explore-copy {
+  flex: 1;
+}
+
+.pd-explore-eyebrow {
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #60758a;
+}
+
+.pd-explore-copy h2 {
+  font-size: 25px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.pd-explore-copy > p:last-child {
+  font-size: 14px;
+  color: #637287;
+  line-height: 1.6;
+}
+
+.pd-explore-button {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+
+
