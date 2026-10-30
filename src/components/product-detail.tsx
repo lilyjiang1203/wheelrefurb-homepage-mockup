@@ -6,7 +6,6 @@ import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "./ui/dialog";
 import {
   audiProduct,
-  formatPrice,
   keyAttributes,
   normalizeProductQuantity,
 } from "./product-detail-data";
@@ -14,6 +13,7 @@ import { ProductGallery } from "./product-gallery";
 import { CoatingKitSection } from "./coating-kit";
 import { ReviewSummary, ReviewsSection, WriteReviewDialog, type ProductReview } from "./product-reviews";
 import { useSdsDocuments } from "../lib/product-documents";
+import { formatVariantUsd, useProductPrices } from "../lib/product-pricing";
 import finishExample from "../assets/wheel-finish-closeup.jpg";
 import panelBand from "../assets/audi-anthracite-panel-band.jpg";
 import "../product-reviews.css";
@@ -34,7 +34,8 @@ function PlaceholderProduct({ title, image, alt }: { title: string; image: strin
 }
 
 export function ProductDetail() {
-  const [variantId, setVariantId] = useState("1");
+  const [variantId, setVariantId] = useState<string | null>(null);
+  const pricing = useProductPrices("WO1838MAU07A");
   const [quantity, setQuantity] = useState(1);
   const [cart, setCart] = useState<{ packageSize: string; quantity: number } | null>(null);
   const [reviews, setReviews] = useState<ProductReview[]>([]);
@@ -57,10 +58,13 @@ export function ProductDetail() {
       window.removeEventListener("resize", update);
     };
   }, []);
-  const variant = audiProduct.variants.find((v) => v.id === variantId) ?? audiProduct.variants[0];
+  const selectedId = variantId ?? pricing.variants.find((v) => v.size === 1)?.id ?? pricing.variants[0]?.id;
+  const variant = pricing.variants.find((v) => v.id === selectedId);
+  const isPriced = !!variant && variant.price !== null && variant.currency === "USD";
   const p = audiProduct.product;
   const m = audiProduct.metafields;
-  const price = formatPrice(variant?.price ?? null);
+  const price = formatVariantUsd(variant);
+  const pricingMessage = pricing.status === "loading" ? "Loading price…" : pricing.status === "error" ? "Pricing temporarily unavailable" : !variant ? "Price unavailable" : variant.price === null ? "Price coming soon" : variant.currency !== "USD" ? "Currency unavailable" : "Price unavailable";
   const sds = useSdsDocuments("WO1838MAU07A");
   const pending = <p className="pd-tbd">Pending manufacturer verification.</p>;
   return (
@@ -119,15 +123,16 @@ export function ProductDetail() {
           </p>
 
           <ReviewSummary reviews={reviews} onWrite={() => setReviewDialogOpen(true)} />
-          <p className="pd-price">{price ?? <span className="pd-price-pending">Price available soon</span>}</p>
+          <p className="pd-price">{price ?? <span className="pd-price-pending">{pricingMessage}</span>}</p>
           <span className="pd-form-label">Package size</span>
           <div className="pd-variants" aria-label="Package size">
-            {audiProduct.variants.map((v) => (
+            {pricing.variants.map((v) => (
               <Button
                 key={v.id}
                 variant="outline"
                 className="pd-variant"
-                aria-pressed={variantId === v.id}
+                aria-pressed={selectedId === v.id}
+                title={v.price === null ? "Price coming soon" : undefined}
                 onClick={() => setVariantId(v.id)}
               >
                 {v.packageSize}
@@ -167,8 +172,9 @@ export function ProductDetail() {
             </div>
             <Button
               className="pd-cart-button"
+              disabled={!isPriced || variant?.status !== "active" || (variant.inventory ?? 0) <= 0}
               onClick={() => {
-                if (variant) setCart({ packageSize: variant.packageSize, quantity });
+                if (isPriced && variant) setCart({ packageSize: variant.packageSize, quantity });
               }}
             >
               <ShoppingBag />
@@ -348,7 +354,7 @@ export function ProductDetail() {
               <div className="pd-sticky-copy">
                 <span className="pd-sticky-kicker">WHEEL REFINISHING COLOR</span>
                 <strong>{p.title}</strong>
-                <span>{price ?? "Price available soon"} · {variant?.packageSize ?? "Size unavailable"}</span>
+                <span>{price ?? pricingMessage} · {variant?.packageSize ?? "Size unavailable"}</span>
               </div>
             </div>
             <div className="pd-sticky-actions">
@@ -359,9 +365,9 @@ export function ProductDetail() {
                 <button type="button" aria-label="Increase quantity"
                   onClick={() => setQuantity((q) => q + 1)}>+</button>
               </div>
-              <Button type="button" className="pd-sticky-add" disabled={!variant}
+              <Button type="button" className="pd-sticky-add" disabled={!isPriced || variant?.status !== "active" || (variant.inventory ?? 0) <= 0}
                 onClick={() => {
-                  if (variant) setCart({ packageSize: variant.packageSize, quantity });
+                  if (isPriced && variant) setCart({ packageSize: variant.packageSize, quantity });
                 }}>
                 <ShoppingBag size={17} /> Add to Cart
               </Button>
@@ -391,7 +397,7 @@ export function ProductDetail() {
               <p className="mt-2 text-sm text-muted-foreground">
                 {cart?.packageSize} · Quantity: {cart?.quantity}
               </p>
-              <p className="mt-2 text-xs text-muted-foreground">Price pending.</p>
+              <p className="mt-2 text-xs text-muted-foreground">{price ?? pricingMessage} (USD pricing)</p>
             </div>
           </div>
           <Button variant="outline" onClick={() => setCart(null)}>
