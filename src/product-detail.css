@@ -20,7 +20,7 @@
 .pd-price { border-top: 1px solid var(--border); padding-top: 23px; margin-bottom: 22px; font-size: 21px; font-weight: 600; }
 .pd-stock { font-size: 12px; color: var(--muted-foreground); margin: 8px 0 25px; }
 .pd-form-label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 10px; }
-.pd-variants { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; }
+.pd-variants { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 8px; }
 .pd-variant { border-radius: 4px; height: 43px; font-weight: 400; font-size: 12px; }
 .pd-variant[aria-pressed=true] { border-color: var(--brand); color: var(--brand); background: var(--nav-hover); }
 .pd-purchase { display: flex; gap: 14px; margin-top: 23px; }
@@ -155,3 +155,5 @@
 .rv-upload{display:flex!important;align-items:center;gap:.6rem;border:1px dashed var(--border);padding:.8rem;cursor:pointer;font-size:.85rem;color:var(--muted-foreground)}
 .rv-upload input{display:none}
 .rv-error{color:var(--destructive);font-size:.85rem;margin:0}
+
+@media(max-width:440px) { .pd-variants { grid-template-columns: repeat(2,minmax(0,1fr)); } }
