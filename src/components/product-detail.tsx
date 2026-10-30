@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ChevronRight, Download, FileText, Minus, Palette, Plus, ShoppingBag } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
@@ -39,6 +39,24 @@ export function ProductDetail() {
   const [cart, setCart] = useState<{ packageSize: string; quantity: number } | null>(null);
   const [reviews, setReviews] = useState<ProductReview[]>([]);
   const [reviewDialogOpen, setReviewDialogOpen] = useState(false);
+  const [showStickyCart, setShowStickyCart] = useState(false);
+  const purchaseRef = useRef<HTMLDivElement>(null);
+
+  // Show the compact purchase bar only after the main purchase area is scrolled past.
+  useEffect(() => {
+    const update = () => {
+      const purchase = purchaseRef.current;
+      if (!purchase) return;
+      setShowStickyCart(purchase.getBoundingClientRect().bottom < 0);
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
   const variant = audiProduct.variants.find((v) => v.id === variantId) ?? audiProduct.variants[0];
   const p = audiProduct.product;
   const m = audiProduct.metafields;
@@ -46,7 +64,7 @@ export function ProductDetail() {
   const sds = useSdsDocuments("WO1838MAU07A");
   const pending = <p className="pd-tbd">Pending manufacturer verification.</p>;
   return (
-    <div className="pd-shell">
+    <div className={`pd-shell ${showStickyCart ? "pd-has-sticky-cart" : ""}`}>
       <nav className="pd-breadcrumb" aria-label="Breadcrumb">
         <Link to="/">Home</Link>
         <ChevronRight size={12} />
@@ -119,7 +137,7 @@ export function ProductDetail() {
           <label className="pd-form-label mt-5" htmlFor="product-quantity">
             Quantity
           </label>
-          <div className="pd-purchase">
+          <div className="pd-purchase" ref={purchaseRef}>
             <div className="pd-quantity">
               <Button
                 variant="ghost"
@@ -318,6 +336,35 @@ export function ProductDetail() {
         </div>
       </section>
       <ReviewsSection reviews={reviews} onWrite={() => setReviewDialogOpen(true)} />
+      {showStickyCart && (
+        <aside className="pd-sticky-cart" aria-label="Product quick purchase">
+          <div className="pd-sticky-inner">
+            <div className="pd-sticky-product">
+              <img src={p.images.front} alt="" />
+              <div className="pd-sticky-copy">
+                <span className="pd-sticky-kicker">WHEEL REFINISHING COLOR</span>
+                <strong>{p.title}</strong>
+                <span>{price ?? "Price available soon"} · {variant?.packageSize ?? "Size unavailable"}</span>
+              </div>
+            </div>
+            <div className="pd-sticky-actions">
+              <div className="pd-sticky-quantity" aria-label="Quantity">
+                <button type="button" aria-label="Decrease quantity" disabled={quantity <= 1}
+                  onClick={() => setQuantity((q) => Math.max(1, q - 1))}>−</button>
+                <output aria-label="Selected quantity">{quantity}</output>
+                <button type="button" aria-label="Increase quantity"
+                  onClick={() => setQuantity((q) => q + 1)}>+</button>
+              </div>
+              <Button type="button" className="pd-sticky-add" disabled={!variant}
+                onClick={() => {
+                  if (variant) setCart({ packageSize: variant.packageSize, quantity });
+                }}>
+                <ShoppingBag size={17} /> Add to Cart
+              </Button>
+            </div>
+          </div>
+        </aside>
+      )}
       <WriteReviewDialog
         open={reviewDialogOpen}
         onOpenChange={setReviewDialogOpen}
