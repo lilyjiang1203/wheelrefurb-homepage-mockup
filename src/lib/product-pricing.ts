@@ -80,6 +80,6 @@ export function formatVariantUsd(variant: PricedVariant | undefined): string | n
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-    currencyDisplay: "code",
-  }).format(variant.price);
+    currencyDisplay: "symbol",
+  }).format(variant.price) + " USD";
 }
