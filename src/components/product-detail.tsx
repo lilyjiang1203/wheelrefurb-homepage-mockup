@@ -40,7 +40,6 @@ export function ProductDetail() {
   const m = audiProduct.metafields;
   const price = formatPrice(variant?.price ?? null);
   const sds = useSdsDocuments("WO1838MAU07A");
-  const refs = audiProduct.references;
   const pending = <p className="pd-tbd">Pending manufacturer verification.</p>;
   return (
     <div className="pd-shell">
