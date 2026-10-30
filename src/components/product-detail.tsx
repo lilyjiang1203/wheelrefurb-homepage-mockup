@@ -14,6 +14,7 @@ import { CoatingKitSection } from "./coating-kit";
 import { ReviewSummary, ReviewsSection, WriteReviewDialog, type ProductReview } from "./product-reviews";
 import { useSdsDocuments } from "../lib/product-documents";
 import { formatVariantUsd, useProductPrices } from "../lib/product-pricing";
+import { useProductSwatch } from "../lib/product-swatches";
 import finishExample from "../assets/wheel-finish-closeup.jpg";
 import panelBand from "../assets/audi-anthracite-panel-band.jpg";
 import "../product-reviews.css";
@@ -36,6 +37,7 @@ function PlaceholderProduct({ title, image, alt }: { title: string; image: strin
 export function ProductDetail() {
   const [variantId, setVariantId] = useState<string | null>(null);
   const pricing = useProductPrices("WO1838MAU07A");
+  const swatchState = useProductSwatch("WO1838MAU07A");
   const [quantity, setQuantity] = useState(1);
   const [cart, setCart] = useState<{ packageSize: string; quantity: number } | null>(null);
   const [reviews, setReviews] = useState<ProductReview[]>([]);
@@ -180,6 +182,32 @@ export function ProductDetail() {
               <ShoppingBag />
               Add to Cart
             </Button>
+          </div>
+          <div className="pd-swatch" aria-labelledby="pd-swatch-title">
+            <div className="pd-swatch-top">
+              <div>
+                <h2 id="pd-swatch-title">Add a Color Swatch</h2>
+                <p>See the color before choosing your paint size.</p>
+              </div>
+              <strong className="pd-swatch-free">FREE · $0.00</strong>
+            </div>
+            <p className="pd-swatch-shipping">
+              Swatches are free. Shipping charges apply to swatch-only orders.
+              Orders with paint follow the standard shipping policy.
+            </p>
+            <Button type="button" variant="outline" className="pd-swatch-button"
+              disabled
+              title={swatchState.status === "loading" ? "Checking swatch availability" :
+                swatchState.status === "error" ? "Swatch availability temporarily unavailable" :
+                swatchState.swatch?.isAvailable ? "Online swatch ordering coming soon" : "Swatch availability to be confirmed"}>
+              <Plus size={16} aria-hidden="true" /> Add Swatch
+            </Button>
+            <p className="pd-swatch-status" role="status">
+              {swatchState.status === "loading" ? "Checking swatch availability…" :
+                swatchState.status === "error" ? "Swatch availability temporarily unavailable." :
+                swatchState.swatch?.isAvailable ? "Online swatch ordering coming soon." :
+                "Swatch availability to be confirmed."}
+            </p>
           </div>
         </div>
       </section>
