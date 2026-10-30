@@ -102,3 +102,17 @@
 .ck-summary li { font-size: 13px; color: var(--foreground); line-height: 1.7; }
 .ck-summary .pd-cart-button { margin-top: 4px; }
 @media(max-width:640px) { .ck-sizes { max-width: none; } }
+.re-section { max-width: 790px; }
+.re-title { font-size: 20px; font-weight: 600; padding-bottom: 14px; border-bottom: 1px solid var(--border); margin-bottom: 0; }
+.re-list { list-style: none; padding: 0; margin: 0 0 12px; }
+.re-row { display: grid; grid-template-columns: 64px minmax(0,1fr) auto; gap: 16px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--border); }
+.re-thumb { width: 64px; height: 64px; border-radius: 6px; background: var(--muted); color: var(--muted-foreground); display: flex; align-items: center; justify-content: center; }
+.re-thumb svg { width: 24px; height: 24px; }
+.re-name { font-size: 15px; font-weight: 600; margin: 0 0 2px; }
+.re-role { font-size: 13px; color: var(--muted-foreground); margin: 0 0 4px; }
+.re-price { font-size: 14px; font-weight: 600; margin: 0; display: flex; gap: 8px; align-items: baseline; }
+.re-status { font-size: 12px; font-weight: 400; color: var(--muted-foreground); }
+.re-actions { display: flex; gap: 10px; align-items: center; }
+.re-select { height: 40px; border: 1px solid var(--border); border-radius: 999px; padding: 0 14px; background: var(--background); color: var(--foreground); font-size: 13px; }
+.re-add { border-radius: 999px; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; padding: 0 20px; height: 40px; }
+@media(max-width:640px) { .re-row { grid-template-columns: 56px minmax(0,1fr); } .re-thumb { width: 56px; height: 56px; } .re-actions { grid-column: 1 / -1; } .re-add { flex: 1; } }
