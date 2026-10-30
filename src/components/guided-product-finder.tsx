@@ -11,7 +11,7 @@ export function GuidedProductFinder() {
     { title: "Change My Wheel Color", description: "I want to choose a different color or finish for my wheels.", image: colorImage, to: "/product-finder/change-wheel-color" as const, cta: "Start Color Finder" },
     { title: "Create a Custom / Special Finish", description: "I want a unique, custom, or special-effect finish for my wheels.", image: customImage, to: "/product-finder/custom-finish" as const, cta: "Explore Special Finishes" },
   ];
-  return <section className="featured-section gpf-entry" aria-labelledby="guided-finder-title">
+  return <section id="need-help" className="featured-section gpf-entry" aria-labelledby="guided-finder-title">
     <div className="featured-inner">
       <div className="featured-head"><p className="finder-kicker">Guided Product Finder</p><h2 className="featured-title" id="guided-finder-title">Not Sure What You Need?</h2><p className="featured-intro">Tell us what you're working on and we'll guide you to the right products.</p></div>
       <div className="gpf-project-grid">{projects.map((project) => <article className="featured-card" key={project.title}>
