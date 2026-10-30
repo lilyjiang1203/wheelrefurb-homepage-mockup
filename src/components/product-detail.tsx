@@ -332,8 +332,8 @@ export function ProductDetail() {
           </p>
         </div>
         <Button asChild className="pd-help-cta">
-          <Link to="/" hash="find-your-color">
-            Find Your Wheel Color <ArrowRight />
+          <Link to="/" hash="need-help">
+            Get Product Guidance <ArrowRight />
           </Link>
         </Button>
       </section>
