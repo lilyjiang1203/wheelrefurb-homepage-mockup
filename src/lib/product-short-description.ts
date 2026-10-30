@@ -17,7 +17,6 @@ function normalWord(value: string): string {
 /** Consistent, single-sentence text shared by future dynamic detail pages. */
 export function formatProductShortDescription(product: ShortDescriptionProduct): string {
   const name = product.product_name ?? "";
-  const normalized = name.toLowerCase();
   const category = /\bprimer\b/i.test(name)
     ? "primer"
     : /\b(clearcoat|clear coat|topcoat|top coat)\b/i.test(name)
