@@ -15,6 +15,7 @@ import { SimilarColorRecommendations } from "./similar-color-recommendations";
 import { ReviewSummary, ReviewsSection, WriteReviewDialog, type ProductReview } from "./product-reviews";
 import { useSdsDocuments } from "../lib/product-documents";
 import { formatVariantUsd, useProductPrices } from "../lib/product-pricing";
+import { useProductShortDescription } from "../lib/product-short-description";
 import { useProductSwatch } from "../lib/product-swatches";
 import finishExample from "../assets/wheel-finish-closeup.jpg";
 import panelBand from "../assets/audi-anthracite-panel-band.jpg";
@@ -39,6 +40,7 @@ export function ProductDetail() {
   const [variantId, setVariantId] = useState<string | null>(null);
   const pricing = useProductPrices("WO1838MAU07A");
   const swatchState = useProductSwatch("WO1838MAU07A");
+  const shortDescription = useProductShortDescription("WO1838MAU07A", "A grey metallic water-based basecoat for professional wheel refinishing.");
   const [quantity, setQuantity] = useState(1);
   const [cart, setCart] = useState<{ packageSize: string; quantity: number } | null>(null);
   const [reviews, setReviews] = useState<ProductReview[]>([]);
@@ -114,16 +116,10 @@ export function ProductDetail() {
         </div>
         <div>
           <p className="pd-eyebrow">FreiLacke / Wheel Refinishing Color</p>
-          <h1 id="product-title" className="pd-title">
-            AUDI ANTHRACITE
-            <br />
-            LV7D
+          <h1 id="product-title" className="pd-title pd-title--single-line">
+            {p.title}
           </h1>
-          <p className="pd-summary">
-            Anthracite dark grey for alloy wheel refinishing.
-            <br />
-            Associated with Audi OEM color code LV7D.
-          </p>
+          <p className="pd-summary">{shortDescription}</p>
 
           <ReviewSummary reviews={reviews} onWrite={() => setReviewDialogOpen(true)} />
           <p className="pd-price">{price ?? <span className="pd-price-pending">{pricingMessage}</span>}</p>
