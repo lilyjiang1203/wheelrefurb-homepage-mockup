@@ -1,9 +1,10 @@
 import { catalogCategoryHref, catalogHome } from "../lib/catalog-links";
 import { ArrowRight } from "lucide-react";
-import wheelPaintProduct from "../assets/category-wheel-paint.jpg";
-import clearCoatProduct from "../assets/category-clear-coats.jpg";
-import powderCoatingProduct from "../assets/category-powder-coatings.jpg";
-import primerKitProduct from "../assets/category-other-supplies.jpg";
+// Independent licensed stock photographs from Pexels; not WheelRefurb product photos.
+const wheelPaintProduct = "https://images.pexels.com/photos/15549918/pexels-photo-15549918.jpeg?auto=compress&cs=tinysrgb&w=960";
+const clearCoatProduct = "https://images.pexels.com/photos/31768888/pexels-photo-31768888.jpeg?auto=compress&cs=tinysrgb&w=960";
+const powderCoatingProduct = "https://images.pexels.com/photos/36215204/pexels-photo-36215204.jpeg?auto=compress&cs=tinysrgb&w=960";
+const primerKitProduct = "https://images.pexels.com/photos/7154616/pexels-photo-7154616.jpeg?auto=compress&cs=tinysrgb&w=960";
 
 type FeaturedProduct = {
   label: string;
@@ -21,7 +22,7 @@ const featuredProducts: FeaturedProduct[] = [
     finish: "Graphite Metallic · Metallic",
     href: catalogCategoryHref("Wheel Paint"),
     image: wheelPaintProduct,
-    alt: "Wheel paint being applied to an alloy wheel",
+    alt: "Mechanic working on an alloy wheel in a workshop",
   },
   {
     label: "Clear Coat",
@@ -29,7 +30,7 @@ const featuredProducts: FeaturedProduct[] = [
     finish: "High Gloss · 2K",
     href: catalogCategoryHref("Clear Coats"),
     image: clearCoatProduct,
-    alt: "Glossy clear coat finish on an alloy wheel",
+    alt: "Close-up of a polished, glossy metallic alloy wheel",
   },
   {
     label: "Powder Coating",
@@ -37,7 +38,7 @@ const featuredProducts: FeaturedProduct[] = [
     finish: "Textured Graphite",
     href: catalogCategoryHref("Powder Coatings"),
     image: powderCoatingProduct,
-    alt: "Powder coating being applied to an alloy wheel",
+    alt: "Industrial powder coating application on metal parts",
   },
   {
     label: "Refinishing Supply",
@@ -45,7 +46,7 @@ const featuredProducts: FeaturedProduct[] = [
     finish: "Grey Filler Primer",
     href: catalogCategoryHref("Other Supplies"),
     image: primerKitProduct,
-    alt: "Wheel refinishing preparation supplies and workshop tools",
+    alt: "Wheel cleaning and surface preparation in progress",
   },
 ];
 
