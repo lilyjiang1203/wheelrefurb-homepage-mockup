@@ -10,6 +10,7 @@ export type KitVariant = {
   unit: string;
   inventory: number;
   status: string | null;
+  price: number | null;
 };
 
 export type KitLayer = {
@@ -71,8 +72,8 @@ export async function fetchCoatingKit(colorCode: string): Promise<KitState> {
 
   const ids = layers.map((l) => l.product.id).join(",");
   const variants = await get<
-    { id: string; product_id: string; size: number; unit: string | null; inventory_quantity: number | null; status: string | null }[]
-  >(`product_variants?select=id,product_id,size,unit,inventory_quantity,status&product_id=in.(${ids})&order=size.asc`);
+    { id: string; product_id: string; size: number; unit: string | null; inventory_quantity: number | null; status: string | null; price: number | null }[]
+  >(`product_variants?select=id,product_id,size,unit,inventory_quantity,status,price&product_id=in.(${ids})&order=size.asc`);
 
   for (const layer of layers) {
     layer.variants = variants
@@ -83,6 +84,7 @@ export async function fetchCoatingKit(colorCode: string): Promise<KitState> {
         unit: v.unit ?? "L",
         inventory: v.inventory_quantity ?? 0,
         status: v.status,
+        price: v.price,
       }));
   }
 
@@ -115,4 +117,14 @@ export function variantLabel(v: KitVariant): string {
 
 export function isVariantAvailable(v: KitVariant): boolean {
   return v.status === "active" && v.inventory > 0;
+}
+
+/** Purchasable only with a real price and stock; cart is not implemented yet, so the UI also stays disabled. */
+export function isVariantPurchasable(v: KitVariant): boolean {
+  return isVariantAvailable(v) && v.price !== null;
+}
+
+/** Recommendations = other products in the system, in layer order. */
+export function recommendedLayers(layers: KitLayer[], currentCode: string): KitLayer[] {
+  return layers.filter((l) => l.product.colorCode !== currentCode).sort((a, b) => a.layerOrder - b.layerOrder);
 }
