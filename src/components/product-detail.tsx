@@ -12,6 +12,7 @@ import {
 } from "./product-detail-data";
 import { ProductGallery } from "./product-gallery";
 import { CoatingKitSection } from "./coating-kit";
+import { ReviewSummary, ReviewsSection, WriteReviewDialog, type ProductReview } from "./product-reviews";
 import { useSdsDocuments } from "../lib/product-documents";
 import finishExample from "../assets/wheel-finish-closeup.jpg";
 import panelBand from "../assets/audi-anthracite-panel-band.jpg";
@@ -36,6 +37,8 @@ export function ProductDetail() {
   const [variantId, setVariantId] = useState("1");
   const [quantity, setQuantity] = useState(1);
   const [cart, setCart] = useState<{ packageSize: string; quantity: number } | null>(null);
+  const [reviews, setReviews] = useState<ProductReview[]>([]);
+  const [reviewDialogOpen, setReviewDialogOpen] = useState(false);
   const variant = audiProduct.variants.find((v) => v.id === variantId) ?? audiProduct.variants[0];
   const p = audiProduct.product;
   const m = audiProduct.metafields;
@@ -97,6 +100,7 @@ export function ProductDetail() {
             Associated with Audi OEM color code LV7D.
           </p>
 
+          <ReviewSummary reviews={reviews} onWrite={() => setReviewDialogOpen(true)} />
           <p className="pd-price">{price ?? <span className="pd-price-pending">Price available soon</span>}</p>
           <span className="pd-form-label">Package size</span>
           <div className="pd-variants" aria-label="Package size">
@@ -313,6 +317,13 @@ export function ProductDetail() {
           />
         </div>
       </section>
+      <ReviewsSection reviews={reviews} onWrite={() => setReviewDialogOpen(true)} />
+      <WriteReviewDialog
+        open={reviewDialogOpen}
+        onOpenChange={setReviewDialogOpen}
+        productName={p.title}
+        onSubmit={(review) => setReviews((current) => [review, ...current])}
+      />
       <Dialog
         open={cart !== null}
         onOpenChange={(open) => {
