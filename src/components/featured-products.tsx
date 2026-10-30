@@ -80,7 +80,7 @@ export function FeaturedProducts() {
                   {product.finish ? (
                     <span className="featured-finish">{product.finish}</span>
                   ) : null}
-                  <span className="featured-price">Log in to view price</span>
+                  <span className="featured-price">Explore category options</span>
                   <span className="featured-cta">
                     Browse category <ArrowRight aria-hidden="true" />
                   </span>
