@@ -1,3 +1,4 @@
+import { SandboxProductPreview } from "../../components/sandbox-product-preview";
 import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ChevronRight, ImageOff, Search } from "lucide-react";
@@ -19,6 +20,7 @@ export const Route = createFileRoute("/sandbox/products")({
 
 function SandboxProducts() {
   const catalog = useSandboxCatalog();
+  const [previewId, setPreviewId] = useState<string | null>(null);
   const filters = Route.useSearch();
   const [collection, setCollection] = useState(filters.collection ?? "all");
   const [category, setCategory] = useState(filters.category ?? "all");
@@ -84,7 +86,7 @@ function SandboxProducts() {
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {products.map((product) => {
             const name = product.color_name || product.product_name;
-            const isAudiDemo = product.color_code === "WO1838MAU07A";
+
             return <article key={product.id} className="border border-border rounded-sm overflow-hidden">
               <div className="aspect-square bg-muted/30 flex items-center justify-center overflow-hidden">
                 {product.imageUrl
@@ -96,14 +98,13 @@ function SandboxProducts() {
                 <h2 className="text-sm font-semibold leading-snug">{name}</h2>
                 <p className="text-xs text-muted-foreground mt-1">{product.color_code}</p>
                 <p className="text-sm font-semibold mt-3">{product.price1L ? `1 L · ${product.price1L}` : "Pricing pending"}</p>
-                {isAudiDemo
-                  ? <Link to="/products/audi-anthracite-lv7d" className="inline-flex mt-4 text-sm font-semibold text-brand hover:underline">View demo detail →</Link>
-                  : <p className="text-xs text-muted-foreground mt-4">Product detail preview coming soon</p>}
+                <button type="button" onClick={() => setPreviewId(product.id)} className="inline-flex mt-4 text-sm font-semibold text-brand hover:underline">View product detail →</button>
               </div>
             </article>;
           })}
         </div>
       </>}
+      <SandboxProductPreview productId={previewId} onClose={() => setPreviewId(null)} />
     </main>
   </div>;
 }
