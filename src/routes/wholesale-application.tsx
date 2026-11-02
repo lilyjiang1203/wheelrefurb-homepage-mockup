@@ -22,6 +22,7 @@ function WholesaleApplication() {
   const [sending, setSending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const [licensePath, setLicensePath] = useState<string | null>(null);
   const [interests, setInterests] = useState<string[]>([]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -32,6 +33,16 @@ function WholesaleApplication() {
     // Honeypot: ordinary visitors never see this field.
     if (String(values.get("company_fax") ?? "").trim()) return;
     const read = (name: string) => String(values.get(name) ?? "").trim();
+    const license = values.get("business_license");
+    if (!(license instanceof File) || license.size === 0) {
+      setError("Please upload your business license certificate.");
+      return;
+    }
+    const extensions: Record<string, string> = { "application/pdf": "pdf", "image/jpeg": "jpg", "image/png": "png" };
+    if (!extensions[license.type] || license.size > 5 * 1024 * 1024) {
+      setError("Please upload a PDF, JPG or PNG file no larger than 5 MB.");
+      return;
+    }
     const payload = {
       company_name: read("company_name"),
       business_type: read("business_type"),
@@ -49,6 +60,17 @@ function WholesaleApplication() {
     setSending(true);
     setError("");
     try {
+      let path = licensePath;
+      if (!path) {
+        path = `${crypto.randomUUID()}.${extensions[license.type]}`;
+        const upload = await fetch(`${base}/storage/v1/object/wholesale-licenses/${path}`, {
+          method: "POST",
+          headers: { apikey: key, "Content-Type": license.type, "x-upsert": "false" },
+          body: license,
+        });
+        if (!upload.ok) throw new Error("License upload failed");
+        setLicensePath(path);
+      }
       const response = await fetch(`${base}/rest/v1/wholesale_applications`, {
         method: "POST",
         headers: {
@@ -56,7 +78,7 @@ function WholesaleApplication() {
           "Content-Type": "application/json",
           Prefer: "return=minimal",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ ...payload, business_license_path: path }),
       });
       if (!response.ok) throw new Error(`Application submission failed (${response.status})`);
       setSubmitted(true);
@@ -114,6 +136,13 @@ function WholesaleApplication() {
                 <label className={labelClass}>Business website <span className="font-normal text-muted-foreground">(optional)</span>
                   <input className={inputClass} type="url" name="website" maxLength={255} placeholder="https://" autoComplete="url" />
                 </label>
+              </div>
+              <div>
+                <label className={labelClass} htmlFor="business-license">Business License Certificate <span aria-hidden="true">*</span></label>
+                <input id="business-license" className={inputClass} type="file" name="business_license" required
+                  accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" disabled={sending}
+                  aria-describedby="business-license-help" onChange={() => setLicensePath(null)} />
+                <p id="business-license-help" className="mt-2 text-sm text-muted-foreground">Upload your shop’s business license certificate. Required. PDF, JPG or PNG, up to 5 MB.</p>
               </div>
             </section>
             <section className="space-y-5" aria-labelledby="contact-heading">
