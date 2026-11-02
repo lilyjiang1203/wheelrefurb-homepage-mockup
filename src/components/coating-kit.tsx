@@ -31,7 +31,7 @@ function EssentialRow({ layer }: { layer: KitLayer }) {
         <h3 className="re-name">{layer.product.name}</h3>
         <p className="re-role">{layer.role} · {layer.product.colorCode}</p>
         <p className="re-price">
-          {variant?.price != null ? cad.format(variant.price) : null}
+          {variant?.price != null && variant.currency ? new Intl.NumberFormat("en-CA", { style: "currency", currency: variant.currency }).format(variant.price) + " " + variant.currency : null}
           <span className="re-status">{status}</span>
         </p>
       </div>
@@ -61,7 +61,7 @@ function EssentialRow({ layer }: { layer: KitLayer }) {
 
 export function CoatingKitSection({ colorCode }: { colorCode: string }) {
   const kit = useCoatingKit(colorCode);
-  if (kit.status === "none") return null;
+  if (kit.status === "none") return <section className="pd-section re-section"><h2 className="re-title">Recommended Essentials</h2><p className="pd-caption">Compatible finishing products are awaiting confirmation. Contact us for help selecting your coating system.</p></section>;
   const rows = kit.status === "ready" ? recommendedLayers(kit.layers, colorCode) : [];
   if (kit.status === "ready" && !rows.length) return null;
 

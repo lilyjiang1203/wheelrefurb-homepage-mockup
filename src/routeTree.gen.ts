@@ -13,10 +13,13 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as WholesaleApplicationRouteImport } from './routes/wholesale-application'
 import { Route as ProductFinderChangeWheelColorRouteImport } from './routes/product-finder.change-wheel-color'
 import { Route as ProductFinderCustomFinishRouteImport } from './routes/product-finder.custom-finish'
 import { Route as ProductFinderOemRestoreRouteImport } from './routes/product-finder.oem-restore'
 import { Route as ProductsAudiAnthraciteLv7dRouteImport } from './routes/products.audi-anthracite-lv7d'
+import { Route as SandboxProductsRouteImport } from './routes/sandbox/products'
+import { Route as SandboxProductsItemNoRouteImport } from './routes/sandbox/products_.$itemNo'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -36,6 +39,11 @@ const ContactRoute = ContactRouteImport.update({
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WholesaleApplicationRoute = WholesaleApplicationRouteImport.update({
+  id: '/wholesale-application',
+  path: '/wholesale-application',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductFinderChangeWheelColorRoute =
@@ -61,26 +69,42 @@ const ProductsAudiAnthraciteLv7dRoute =
     path: '/products/audi-anthracite-lv7d',
     getParentRoute: () => rootRouteImport,
   } as any)
+const SandboxProductsRoute = SandboxProductsRouteImport.update({
+  id: '/sandbox/products',
+  path: '/sandbox/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SandboxProductsItemNoRoute = SandboxProductsItemNoRouteImport.update({
+  id: '/sandbox/products_/$itemNo',
+  path: '/sandbox/products/$itemNo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/shop': typeof ShopRoute
+  '/wholesale-application': typeof WholesaleApplicationRoute
   '/product-finder/change-wheel-color': typeof ProductFinderChangeWheelColorRoute
   '/product-finder/custom-finish': typeof ProductFinderCustomFinishRoute
   '/product-finder/oem-restore': typeof ProductFinderOemRestoreRoute
   '/products/audi-anthracite-lv7d': typeof ProductsAudiAnthraciteLv7dRoute
+  '/sandbox/products': typeof SandboxProductsRoute
+  '/sandbox/products/$itemNo': typeof SandboxProductsItemNoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/shop': typeof ShopRoute
+  '/wholesale-application': typeof WholesaleApplicationRoute
   '/product-finder/change-wheel-color': typeof ProductFinderChangeWheelColorRoute
   '/product-finder/custom-finish': typeof ProductFinderCustomFinishRoute
   '/product-finder/oem-restore': typeof ProductFinderOemRestoreRoute
   '/products/audi-anthracite-lv7d': typeof ProductsAudiAnthraciteLv7dRoute
+  '/sandbox/products': typeof SandboxProductsRoute
+  '/sandbox/products/$itemNo': typeof SandboxProductsItemNoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -88,10 +112,13 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/shop': typeof ShopRoute
+  '/wholesale-application': typeof WholesaleApplicationRoute
   '/product-finder/change-wheel-color': typeof ProductFinderChangeWheelColorRoute
   '/product-finder/custom-finish': typeof ProductFinderCustomFinishRoute
   '/product-finder/oem-restore': typeof ProductFinderOemRestoreRoute
   '/products/audi-anthracite-lv7d': typeof ProductsAudiAnthraciteLv7dRoute
+  '/sandbox/products': typeof SandboxProductsRoute
+  '/sandbox/products_/$itemNo': typeof SandboxProductsItemNoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -100,30 +127,39 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/shop'
+    | '/wholesale-application'
     | '/product-finder/change-wheel-color'
     | '/product-finder/custom-finish'
     | '/product-finder/oem-restore'
     | '/products/audi-anthracite-lv7d'
+    | '/sandbox/products'
+    | '/sandbox/products/$itemNo'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/contact'
     | '/shop'
+    | '/wholesale-application'
     | '/product-finder/change-wheel-color'
     | '/product-finder/custom-finish'
     | '/product-finder/oem-restore'
     | '/products/audi-anthracite-lv7d'
+    | '/sandbox/products'
+    | '/sandbox/products/$itemNo'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/contact'
     | '/shop'
+    | '/wholesale-application'
     | '/product-finder/change-wheel-color'
     | '/product-finder/custom-finish'
     | '/product-finder/oem-restore'
     | '/products/audi-anthracite-lv7d'
+    | '/sandbox/products'
+    | '/sandbox/products_/$itemNo'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -131,10 +167,13 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   ShopRoute: typeof ShopRoute
+  WholesaleApplicationRoute: typeof WholesaleApplicationRoute
   ProductFinderChangeWheelColorRoute: typeof ProductFinderChangeWheelColorRoute
   ProductFinderCustomFinishRoute: typeof ProductFinderCustomFinishRoute
   ProductFinderOemRestoreRoute: typeof ProductFinderOemRestoreRoute
   ProductsAudiAnthraciteLv7dRoute: typeof ProductsAudiAnthraciteLv7dRoute
+  SandboxProductsRoute: typeof SandboxProductsRoute
+  SandboxProductsItemNoRoute: typeof SandboxProductsItemNoRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -167,6 +206,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/wholesale-application': {
+      id: '/wholesale-application'
+      path: '/wholesale-application'
+      fullPath: '/wholesale-application'
+      preLoaderRoute: typeof WholesaleApplicationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/product-finder/change-wheel-color': {
       id: '/product-finder/change-wheel-color'
       path: '/product-finder/change-wheel-color'
@@ -195,6 +241,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsAudiAnthraciteLv7dRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sandbox/products': {
+      id: '/sandbox/products'
+      path: '/sandbox/products'
+      fullPath: '/sandbox/products'
+      preLoaderRoute: typeof SandboxProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sandbox/products_/$itemNo': {
+      id: '/sandbox/products_/$itemNo'
+      path: '/sandbox/products/$itemNo'
+      fullPath: '/sandbox/products/$itemNo'
+      preLoaderRoute: typeof SandboxProductsItemNoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -203,10 +263,13 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   ShopRoute: ShopRoute,
+  WholesaleApplicationRoute: WholesaleApplicationRoute,
   ProductFinderChangeWheelColorRoute: ProductFinderChangeWheelColorRoute,
   ProductFinderCustomFinishRoute: ProductFinderCustomFinishRoute,
   ProductFinderOemRestoreRoute: ProductFinderOemRestoreRoute,
   ProductsAudiAnthraciteLv7dRoute: ProductsAudiAnthraciteLv7dRoute,
+  SandboxProductsRoute: SandboxProductsRoute,
+  SandboxProductsItemNoRoute: SandboxProductsItemNoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

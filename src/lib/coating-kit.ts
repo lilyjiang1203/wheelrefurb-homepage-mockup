@@ -11,6 +11,7 @@ export type KitVariant = {
   inventory: number;
   status: string | null;
   price: number | null;
+  currency?: string | null;
 };
 
 export type KitLayer = {
@@ -72,8 +73,8 @@ export async function fetchCoatingKit(colorCode: string): Promise<KitState> {
 
   const ids = layers.map((l) => l.product.id).join(",");
   const variants = await get<
-    { id: string; product_id: string; size: number; unit: string | null; inventory_quantity: number | null; status: string | null; price: number | null }[]
-  >(`product_variants?select=id,product_id,size,unit,inventory_quantity,status,price&product_id=in.(${ids})&order=size.asc`);
+    { id: string; product_id: string; size: number; unit: string | null; inventory_quantity: number | null; status: string | null; price: number | null; currency_code: string | null }[]
+  >(`product_variants?select=id,product_id,size,unit,inventory_quantity,status,price,currency_code&product_id=in.(${ids})&order=size.asc`);
 
   for (const layer of layers) {
     layer.variants = variants
@@ -85,6 +86,7 @@ export async function fetchCoatingKit(colorCode: string): Promise<KitState> {
         inventory: v.inventory_quantity ?? 0,
         status: v.status,
         price: v.price,
+        currency: v.currency_code,
       }));
   }
 

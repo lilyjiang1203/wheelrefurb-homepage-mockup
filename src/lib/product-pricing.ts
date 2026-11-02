@@ -44,13 +44,13 @@ export async function fetchProductPrices(colorCode: string): Promise<PricedVaria
   if (!products.length) return [];
 
   const rows = await fetchJson<VariantRow[]>(
-    `product_variants?select=id,size,unit,price,currency_code,status,inventory_quantity&product_id=eq.${products[0].id}&unit=eq.L&size=in.(0.03,0.5,1,5)&order=size.asc`,
+    `product_variants?select=id,size,unit,price,currency_code,status,inventory_quantity&product_id=eq.${products[0].id}&is_dummy=eq.false&order=size.asc`,
   );
 
   return rows.map((row) => ({
     id: row.id,
     size: Number(row.size),
-    packageSize: Number(row.size) === 0.03 ? "30 mL" : `${Number(row.size)} L`,
+    packageSize: Number(row.size) === 0.03 ? "30 mL" : `${Number(row.size)} ${row.unit}`,
     price: row.price == null ? null : Number(row.price),
     currency: row.currency_code,
     status: row.status,
@@ -76,10 +76,10 @@ export function useProductPrices(colorCode: string): PriceState {
 }
 
 export function formatVariantUsd(variant: PricedVariant | undefined): string | null {
-  if (!variant || variant.price === null || variant.currency !== "USD") return null;
+  if (!variant || variant.price === null || !variant.currency) return null;
   return new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "USD",
+    currency: variant.currency,
     currencyDisplay: "symbol",
-  }).format(variant.price) + " USD";
+  }).format(variant.price) + ` ${variant.currency}`;
 }

@@ -36,11 +36,18 @@ function PlaceholderProduct({ title, image, alt }: { title: string; image: strin
   );
 }
 
-export function ProductDetail() {
+export type ProductDetailData = {
+  product: typeof audiProduct.product;
+  content: { benefits: string[]; howToUse: string[] };
+  metafields: { [K in keyof typeof audiProduct.metafields]: string | null };
+};
+export function ProductDetail({ data, colorCode = "WO1838MAU07A", subtitle }: { data?: ProductDetailData; colorCode?: string; subtitle?: string }) {
+  const detail = data ?? audiProduct;
   const [variantId, setVariantId] = useState<string | null>(null);
-  const pricing = useProductPrices("WO1838MAU07A");
-  const swatchState = useProductSwatch("WO1838MAU07A");
-  const shortDescription = useProductShortDescription("WO1838MAU07A", "A grey metallic water-based basecoat for professional wheel refinishing.");
+  const pricing = useProductPrices(colorCode);
+  const swatchState = useProductSwatch(colorCode);
+  const generatedSubtitle = useProductShortDescription(colorCode, "A grey metallic water-based basecoat for professional wheel refinishing.");
+  const shortDescription = subtitle ?? generatedSubtitle;
   const [quantity, setQuantity] = useState(1);
   const [cart, setCart] = useState<{ packageSize: string; quantity: number } | null>(null);
   const [reviews, setReviews] = useState<ProductReview[]>([]);
@@ -65,12 +72,12 @@ export function ProductDetail() {
   }, []);
   const selectedId = variantId ?? pricing.variants.find((v) => v.size === 1)?.id ?? pricing.variants[0]?.id;
   const variant = pricing.variants.find((v) => v.id === selectedId);
-  const isPriced = !!variant && variant.price !== null && variant.currency === "USD";
-  const p = audiProduct.product;
-  const m = audiProduct.metafields;
+  const isPriced = !!variant && variant.price !== null && !!variant.currency;
+  const p = detail.product;
+  const m = detail.metafields;
   const price = formatVariantUsd(variant);
-  const pricingMessage = pricing.status === "loading" ? "Loading price…" : pricing.status === "error" ? "Pricing temporarily unavailable" : !variant ? "Price unavailable" : variant.price === null ? "Price coming soon" : variant.currency !== "USD" ? "Currency unavailable" : "Price unavailable";
-  const sds = useSdsDocuments("WO1838MAU07A");
+  const pricingMessage = pricing.status === "loading" ? "Loading price…" : pricing.status === "error" ? "Pricing temporarily unavailable" : !variant ? "Price unavailable" : variant.price === null ? "Price coming soon" : !variant.currency ? "Currency unavailable" : "Price unavailable";
+  const sds = useSdsDocuments(colorCode);
   const pending = <p className="pd-tbd">Pending manufacturer verification.</p>;
   return (
     <div className={`pd-shell ${showStickyCart ? "pd-has-sticky-cart" : ""}`}>
@@ -79,7 +86,7 @@ export function ProductDetail() {
         <ChevronRight size={12} />
         <Link to="/shop">Products</Link>
         <ChevronRight size={12} />
-        <span>Audi Anthracite LV7D</span>
+        <span>{p.title}</span>
       </nav>
       <section className="pd-overview" aria-labelledby="product-title">
         <div>
@@ -88,13 +95,13 @@ export function ProductDetail() {
               {
                 id: "front",
                 src: p.images.front,
-                alt: "Audi Anthracite dark grey coating sample panel",
+                alt: `${p.title} color sample panel`,
                 label: "Show color sample",
               },
               {
                 id: "back",
                 src: p.images.back,
-                alt: "Back of Audi Anthracite sample panel with FreiLacke formula and layer references",
+                alt: `${p.title} back label`,
                 label: "Show panel reference",
               },
             ]}
@@ -116,13 +123,15 @@ export function ProductDetail() {
         </div>
         <div>
           <p className="pd-eyebrow">FreiLacke / Wheel Refinishing Color</p>
-          <h1 id="product-title" className="pd-title pd-title--single-line">
+          <h1 id="product-title" className="pd-title">
             {p.title}
           </h1>
           <p className="pd-summary">{shortDescription}</p>
 
           <ReviewSummary reviews={reviews} onWrite={() => setReviewDialogOpen(true)} />
           <p className="pd-price">{price ?? <span className="pd-price-pending">{pricingMessage}</span>}</p>
+          <p className="pd-caption" role="status">{pricing.status === "ready" ? variant ? variant.inventory == null ? "Stock awaiting confirmation" : variant.inventory > 0 ? `In stock · ${variant.inventory} available` : "Out of stock" : "Package sizes and stock awaiting confirmation" : ""}</p>
+          <p className="pd-caption">Sandbox preview · Cart and reviews are simulated.</p>
           <span className="pd-form-label">Package size</span>
           <div className="pd-variants" aria-label="Package size">
             {pricing.variants.map((v) => (
@@ -199,16 +208,16 @@ export function ProductDetail() {
           <AccordionItem value="description">
             <AccordionTrigger>Description</AccordionTrigger>
             <AccordionContent>
-              <p>{p.description}</p>
+              <p className="whitespace-pre-line">{p.description}</p>
             </AccordionContent>
           </AccordionItem>
 
           <AccordionItem value="benefits">
             <AccordionTrigger>Benefits</AccordionTrigger>
             <AccordionContent>
-              {audiProduct.content.benefits.length ? (
+              {detail.content.benefits.length ? (
                 <ul className="list-disc pl-6 space-y-2">
-                  {audiProduct.content.benefits.map((item) => {
+                  {detail.content.benefits.map((item) => {
                     const [heading, ...rest] = item.split(":");
                     return (
                       <li key={item}>
@@ -227,9 +236,9 @@ export function ProductDetail() {
           <AccordionItem value="how-to-use">
             <AccordionTrigger>How to Use</AccordionTrigger>
             <AccordionContent>
-              {audiProduct.content.howToUse.length ? (
+              {detail.content.howToUse.length ? (
                 <ol className="list-decimal pl-6 space-y-2">
-                  {audiProduct.content.howToUse
+                  {detail.content.howToUse
                     .filter((item) => !item.startsWith("Important:"))
                     .map((item) => {
                       const [heading, ...rest] = item.split(":");
@@ -245,7 +254,7 @@ export function ProductDetail() {
                 pending
               )}
 
-              {audiProduct.content.howToUse
+              {detail.content.howToUse
                 .filter((item) => item.startsWith("Important:"))
                 .map((item) => (
                   <p key={item} className="mt-4">
@@ -316,7 +325,7 @@ export function ProductDetail() {
           </AccordionItem>
         </Accordion>
       </section>
-      <CoatingKitSection colorCode="WO1838MAU07A" />
+      <CoatingKitSection colorCode={colorCode} />
       <section className="pd-help" aria-labelledby="pd-help-title">
         <div className="pd-help-icon" aria-hidden="true">
           <Palette />
@@ -335,7 +344,7 @@ export function ProductDetail() {
         </Button>
       </section>
      
-      <SimilarColorRecommendations colorCode="WO1838MAU07A" />
+      <SimilarColorRecommendations colorCode={colorCode} />
 
       <ReviewsSection reviews={reviews} onWrite={() => setReviewDialogOpen(true)} />
       {showStickyCart && (
@@ -383,13 +392,13 @@ export function ProductDetail() {
           <DialogTitle>Added to Demo Cart</DialogTitle>
           <DialogDescription>Simulated cart only — no order has been placed.</DialogDescription>
           <div className="flex items-center gap-4">
-            <img className="h-24 w-24 object-contain" src={p.images.front} alt="Audi Anthracite panel" />
+            <img className="h-24 w-24 object-contain" src={p.images.front} alt={`${p.title} sample panel`} />
             <div>
               <p className="text-sm font-semibold">{p.title}</p>
               <p className="mt-2 text-sm text-muted-foreground">
                 {cart?.packageSize} · Quantity: {cart?.quantity}
               </p>
-              <p className="mt-2 text-xs text-muted-foreground">{price ?? pricingMessage} (USD pricing)</p>
+              <p className="mt-2 text-xs text-muted-foreground">{price ?? pricingMessage} ({variant?.currency || "currency pending"} pricing)</p>
             </div>
           </div>
           <Button variant="outline" onClick={() => setCart(null)}>

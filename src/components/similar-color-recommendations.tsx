@@ -121,9 +121,7 @@ function Recommendations({ colorCode }: { colorCode: string }) {
         {suggestions.map(({ product }) => {
           const name = product.color_name || product.product_name;
           const collectionName = catalog.data.collections.find(c => c.collection_id === product.collectionId)?.collection_name;
-          const href = collectionName
-            ? `/sandbox/products?collection=${encodeURIComponent(collectionName)}`
-            : "/sandbox/products";
+          const href = `/sandbox/products/${encodeURIComponent(product.color_code || "")}`;
           return (
             <article key={product.id} className="overflow-hidden rounded-md border border-border bg-card">
               <div className="flex aspect-square items-center justify-center bg-muted/20">
@@ -136,7 +134,7 @@ function Recommendations({ colorCode }: { colorCode: string }) {
                 <p className="text-xs text-muted-foreground">{product.finish || "Finish not specified"}</p>
                 {product.price1L && <p className="text-sm font-semibold">1 L · {product.price1L}</p>}
                 <a className="inline-flex items-center gap-1 text-xs font-semibold text-brand hover:underline" href={href}>
-                  Browse collection <ArrowRight size={14} aria-hidden="true" />
+                  View product <ArrowRight size={14} aria-hidden="true" />
                 </a>
               </div>
             </article>
