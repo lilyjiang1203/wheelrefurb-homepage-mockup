@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ChevronRight, ImageOff, Search } from "lucide-react";
+import { ChevronLeft, ChevronRight, ImageOff, Search } from "lucide-react";
 import { StoreNavigation } from "../../components/store-navigation";
 import { useSandboxCatalog } from "../../lib/sandbox-catalog";
 import { matchesCatalogCategory, catalogCategoryNames } from "../../lib/catalog-links";
+
+const PAGE_SIZE = 24;
 
 export const Route = createFileRoute("/sandbox/products")({
   validateSearch: (search: Record<string, unknown>) => ({
@@ -25,8 +27,10 @@ function SandboxProducts() {
   useEffect(() => {
     setCollection(filters.collection ?? "all");
     setCategory(filters.category ?? "all");
+    setPage(1);
   }, [filters.collection, filters.category]);
   const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
   const data = catalog.status === "ready" ? catalog.data : null;
   const q = search.trim().toLowerCase();
   const products = (data?.products ?? []).filter((p) => {
@@ -37,6 +41,13 @@ function SandboxProducts() {
       .some((value) => value?.toLowerCase().includes(q));
     return matchesCollection && matchesCategory && matchesSearch;
   });
+
+  const totalPages = Math.max(1, Math.ceil(products.length / PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const firstItem = (currentPage - 1) * PAGE_SIZE;
+  const visibleProducts = products.slice(firstItem, firstItem + PAGE_SIZE);
+  const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1)
+    .filter((number) => number === 1 || number === totalPages || Math.abs(number - currentPage) <= 2);
 
   return <div className="min-h-screen bg-background">
     <StoreNavigation />
@@ -60,12 +71,12 @@ function SandboxProducts() {
             <Search size={16} aria-hidden="true" />
             <input className="min-w-0 flex-1 bg-transparent text-sm outline-none"
               aria-label="Search products" placeholder="Search name or color code"
-              value={search} onChange={(event) => setSearch(event.target.value)} />
+              value={search} onChange={(event) => { setSearch(event.target.value); setPage(1); }} />
           </label>
           <label className="flex items-center gap-2 text-sm">
             <span className="text-muted-foreground">Collection</span>
             <select className="border border-border bg-background p-2 max-w-48"
-              value={collection} onChange={(event) => { setCollection(event.target.value); setCategory("all"); }}>
+              value={collection} onChange={(event) => { setCollection(event.target.value); setCategory("all"); setPage(1); }}>
               <option value="all">All collections</option>
               {data.collections.map((c) => <option key={c.collection_id} value={c.collection_name}>{c.collection_name}</option>)}
             </select>
@@ -82,7 +93,7 @@ function SandboxProducts() {
           No products in this category yet in the Sandbox preview. Try another collection or view all products.
         </p>}
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {products.map((product) => {
+          {visibleProducts.map((product) => {
             const name = product.color_name || product.product_name;
 
             return <article key={product.id} className="border border-border rounded-sm overflow-hidden">
@@ -101,6 +112,37 @@ function SandboxProducts() {
             </article>;
           })}
         </div>
+        {products.length > 0 && (
+          <nav className="mt-8 mb-10 flex flex-col items-center gap-4" aria-label="Product pagination">
+            <p className="text-sm text-muted-foreground">
+              Showing {firstItem + 1}–{Math.min(firstItem + PAGE_SIZE, products.length)} of {products.length} products
+            </p>
+            {totalPages > 1 && (
+              <div className="flex flex-wrap items-center justify-center gap-2">
+                <button type="button" disabled={currentPage === 1}
+                  onClick={() => setPage(currentPage - 1)}
+                  className="inline-flex items-center gap-1 border border-border px-3 py-2 text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:border-brand"
+                  aria-label="Previous page"><ChevronLeft size={16} /> Previous</button>
+                {pageNumbers.map((number, index) => (
+                  <span key={number} className="inline-flex items-center gap-2">
+                    {index > 0 && number - pageNumbers[index - 1] > 1 && (
+                      <span className="px-1 text-muted-foreground" aria-hidden="true">…</span>
+                    )}
+                    <button type="button" onClick={() => setPage(number)}
+                      aria-label={`Page ${number}`} aria-current={number === currentPage ? "page" : undefined}
+                      className={`min-w-10 border px-3 py-2 text-sm hover:border-brand ${number === currentPage ? "border-brand bg-muted font-semibold" : "border-border"}`}>
+                      {number}
+                    </button>
+                  </span>
+                ))}
+                <button type="button" disabled={currentPage === totalPages}
+                  onClick={() => setPage(currentPage + 1)}
+                  className="inline-flex items-center gap-1 border border-border px-3 py-2 text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:border-brand"
+                  aria-label="Next page">Next <ChevronRight size={16} /></button>
+              </div>
+            )}
+          </nav>
+        )}
       </>}
     </main>
   </div>;
