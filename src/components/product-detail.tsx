@@ -84,7 +84,7 @@ export function ProductDetail({ data, colorCode = "WO1838MAU07A", subtitle }: { 
       <nav className="pd-breadcrumb" aria-label="Breadcrumb">
         <Link to="/">Home</Link>
         <ChevronRight size={12} />
-        <Link to="/shop">Products</Link>
+        <Link to="/sandbox/products">Products</Link>
         <ChevronRight size={12} />
         <span>{p.title}</span>
       </nav>
