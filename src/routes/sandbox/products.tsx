@@ -86,7 +86,7 @@ function SandboxProducts() {
         {(category !== "all" || collection !== "all") && (
           <div className="mb-5 flex items-center gap-3 flex-wrap text-sm">
             <span className="font-medium">Showing: {collection !== "all" ? collection : catalogCategoryNames[category] ?? category}</span>
-            <Link to="/sandbox/products" search={{}} className="text-brand hover:underline">View all Sandbox products</Link>
+            <Link to="/sandbox/products" search={{ collection: undefined, category: undefined }} className="text-brand hover:underline">View all Sandbox products</Link>
           </div>
         )}
         {products.length === 0 && <p className="py-10 text-sm text-muted-foreground">

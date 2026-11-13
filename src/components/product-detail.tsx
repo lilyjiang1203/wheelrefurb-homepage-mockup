@@ -14,7 +14,6 @@ import { CoatingKitSection } from "./coating-kit";
 import { SimilarColorRecommendations } from "./similar-color-recommendations";
 import { ReviewSummary, ReviewsSection, WriteReviewDialog, type ProductReview } from "./product-reviews";
 import { useSdsDocuments } from "../lib/product-documents";
-import { ReviewSummary, ReviewsSection, WriteReviewDialog, type ProductReview } from "./product-reviews";
 import { formatVariantUsd, useProductPrices } from "../lib/product-pricing";
 import { useProductShortDescription } from "../lib/product-short-description";
 import { useProductSwatch } from "../lib/product-swatches";
@@ -127,7 +126,6 @@ export function ProductDetail({ data, colorCode = "WO1838MAU07A", subtitle }: { 
           <h1 id="product-title" className="pd-title">
             {p.title}
           </h1>
-          <ReviewSummary reviews={reviews} onWrite={() => setReviewOpen(true)} />
           <p className="pd-summary">{shortDescription}</p>
 
           <ReviewSummary reviews={reviews} onWrite={() => setReviewDialogOpen(true)} />
@@ -383,13 +381,6 @@ export function ProductDetail({ data, colorCode = "WO1838MAU07A", subtitle }: { 
         onOpenChange={setReviewDialogOpen}
         productName={p.title}
         onSubmit={(review) => setReviews((current) => [review, ...current])}
-      />
-      <ReviewsSection reviews={reviews} onWrite={() => setReviewOpen(true)} />
-      <WriteReviewDialog
-        open={reviewOpen}
-        onOpenChange={setReviewOpen}
-        productName="Audi Anthracite LV7D"
-        onSubmit={(r) => setReviews((prev) => [r, ...prev])}
       />
       <Dialog
         open={cart !== null}
