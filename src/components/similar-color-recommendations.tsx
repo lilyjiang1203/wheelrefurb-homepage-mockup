@@ -4,7 +4,7 @@ import { useSandboxCatalog, type SandboxProduct } from "../lib/sandbox-catalog";
 
 // Intentionally isolated from the shared catalog loader and global styles.
 // Recommendations are advisory: equal color families do not imply an exact visual match.
-const SUPABASE_URL = "https://unlygyqhgeujetjphrro.supabase.co";
+const SUPABASE_URL = "https://ftwujzvsdymfcbqyjxci.supabase.co";
 const PUBLIC_KEY = "sb_publishable_SwnulQeid12F7Qud_jODJQ_1s0DcUCN";
 
 type FamilyRow = { id: string; color_family: string[] | null };
@@ -70,7 +70,7 @@ function Recommendations({ colorCode }: { colorCode: string }) {
     const fetchFamilies = async () => {
       try {
         const response = await fetch(
-          `${SUPABASE_URL}/rest/v1/products?select=id,color_family&id=in.(${ids.join(",")})`,
+          `${SUPABASE_URL}/rest/v1/mockup_products?select=id,color_family&id=in.(${ids.join(",")})`,
           { headers: { apikey: PUBLIC_KEY } },
         );
         if (!response.ok) throw new Error("Related color metadata unavailable");

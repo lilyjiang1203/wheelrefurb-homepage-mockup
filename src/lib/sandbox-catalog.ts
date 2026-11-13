@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 // Sandbox-only read access. Product records remain in their existing canonical tables.
-const BASE = "https://unlygyqhgeujetjphrro.supabase.co";
-const KEY = "sb_publishable_SwnulQeid12F7Qud_jODJQ_1s0DcUCN";
+const BASE = "https://ftwujzvsdymfcbqyjxci.supabase.co";
+const KEY = "sb_publishable_QbF4mNg-JnNpAqEYYNpcdw_wO613Xnb";
 
 type SandboxRecord = {
   product_id: string;
@@ -60,19 +60,19 @@ async function read<T>(path: string): Promise<T> {
 
 function publicStorageUrl(row: MediaRecord): string {
   const path = row.storage_path.split("/").map(encodeURIComponent).join("/");
-  return `${BASE}/storage/v1/object/public/${encodeURIComponent(row.bucket_name)}/${path}`;
+  return `https://unlygyqhgeujetjphrro.supabase.co/storage/v1/object/public/${encodeURIComponent(row.bucket_name)}/${path}`;
 }
 export async function fetchSandboxCatalog(): Promise<CatalogData> {
   const [selected, collections] = await Promise.all([
-    read<SandboxRecord[]>("sandbox_products?select=product_id,primary_collection_id,display_order,is_featured,demo_note&is_visible=eq.true&order=display_order.asc"),
-    read<CollectionRecord[]>("sandbox_collection_navigation?select=collection_id,collection_name,collection_type,display_order&is_visible=eq.true&order=display_order.asc"),
+    read<SandboxRecord[]>("mockup_sandbox_products?select=product_id,primary_collection_id,display_order,is_featured,demo_note&is_visible=eq.true&order=display_order.asc"),
+    read<CollectionRecord[]>("mockup_sandbox_collection_navigation?select=collection_id,collection_name,collection_type,display_order&is_visible=eq.true&order=display_order.asc"),
   ]);
   if (!selected.length) return { products: [], collections };
   const ids = selected.map((p) => p.product_id).join(",");
   const [products, media, variants] = await Promise.all([
-    read<ProductRecord[]>(`products?select=id,product_name,color_name,color_code,finish&id=in.(${ids})`),
-    read<MediaRecord[]>(`product_media?select=product_id,bucket_name,storage_path,media_role&product_id=in.(${ids})&media_role=eq.front`),
-    read<VariantRecord[]>(`product_variants?select=product_id,size,unit,price,currency_code&product_id=in.(${ids})&size=eq.1&unit=eq.L`),
+    read<ProductRecord[]>(`mockup_products?select=id,product_name,color_name,color_code,finish&id=in.(${ids})`),
+    read<MediaRecord[]>(`mockup_product_media?select=product_id,bucket_name,storage_path,media_role&product_id=in.(${ids})&media_role=eq.front`),
+    read<VariantRecord[]>(`mockup_product_variants?select=product_id,size,unit,price,currency_code&product_id=in.(${ids})&size=eq.1&unit=eq.L`),
   ]);
   const details = new Map(products.map((p) => [p.id, p]));
   const fronts = new Map(media.map((m) => [m.product_id, publicStorageUrl(m)]));

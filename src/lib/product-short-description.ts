@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const SUPABASE_URL = "https://unlygyqhgeujetjphrro.supabase.co";
+const SUPABASE_URL = "https://ftwujzvsdymfcbqyjxci.supabase.co";
 const PUBLIC_KEY = "sb_publishable_SwnulQeid12F7Qud_jODJQ_1s0DcUCN";
 
 /** Public product attributes. Absent or unverified attributes are never invented. */
@@ -59,7 +59,7 @@ export function useProductShortDescription(colorCode: string, fallback: string):
     const load = async () => {
       try {
         const response = await fetch(
-          `${SUPABASE_URL}/rest/v1/products?select=product_name,color_family,finish&color_code=eq.${encodeURIComponent(colorCode)}&limit=1`,
+          `${SUPABASE_URL}/rest/v1/mockup_products?select=product_name,color_family,finish&color_code=eq.${encodeURIComponent(colorCode)}&limit=1`,
           { headers: { apikey: PUBLIC_KEY } },
         );
         if (!response.ok) return;

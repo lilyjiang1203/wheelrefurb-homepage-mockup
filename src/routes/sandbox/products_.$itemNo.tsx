@@ -7,8 +7,8 @@ export const Route = createFileRoute("/sandbox/products_/$itemNo")({
   head: () => ({ meta: [{ title: "Product Preview | WheelRefurb" }, { name: "robots", content: "noindex, nofollow" }] }),
   component: ProductPage,
 });
-const BASE = "https://unlygyqhgeujetjphrro.supabase.co";
-const KEY = "sb_publishable_SwnulQeid12F7Qud_jODJQ_1s0DcUCN";
+const BASE = "https://ftwujzvsdymfcbqyjxci.supabase.co";
+const KEY = "sb_publishable_QbF4mNg-JnNpAqEYYNpcdw_wO613Xnb";
 type Row = { id: string; product_name: string; color_name: string | null; color_code: string; description: string | null; benefits: string[] | null; application_instructions: string | null; technical_details: Record<string, unknown> | null };
 type Media = { bucket_name: string; storage_path: string; media_role: string; media_type: string };
 async function read<T>(path: string, signal: AbortSignal): Promise<T> {
@@ -23,10 +23,10 @@ function ProductPage() {
     const c = new AbortController();
     setState({ code: itemNo, data: null, subtitle: "", error: false });
     (async () => {
-      const rows = await read<Row[]>(`products?select=id,product_name,color_name,color_code,description,benefits,application_instructions,technical_details&color_code=eq.${encodeURIComponent(itemNo)}&limit=1`, c.signal);
+      const rows = await read<Row[]>(`mockup_products?select=id,product_name,color_name,color_code,description,benefits,application_instructions,technical_details&color_code=eq.${encodeURIComponent(itemNo)}&limit=1`, c.signal);
       const p = rows[0]; if (!p) throw new Error("Product not found");
-      const media = await read<Media[]>(`product_media?select=bucket_name,storage_path,media_role,media_type&product_id=eq.${p.id}&order=display_order.asc`, c.signal);
-      const asset = (role: string) => { const m = media.find(x => x.media_role === role); return m ? `${BASE}/storage/v1/object/public/${encodeURIComponent(m.bucket_name)}/${m.storage_path.split('/').map(encodeURIComponent).join('/')}` : ""; };
+      const media = await read<Media[]>(`mockup_product_media?select=bucket_name,storage_path,media_role,media_type&product_id=eq.${p.id}&order=display_order.asc`, c.signal);
+      const asset = (role: string) => { const m = media.find(x => x.media_role === role); return m ? `https://unlygyqhgeujetjphrro.supabase.co/storage/v1/object/public/${encodeURIComponent(m.bucket_name)}/${m.storage_path.split('/').map(encodeURIComponent).join('/')}` : ""; };
       const t = p.technical_details || {};
       const val = (key: string): string | null => { const v = t[key]; return typeof v === "string" && v.trim() ? v : Array.isArray(v) ? v.join(', ') : null; };
       const data: ProductDetailData = {

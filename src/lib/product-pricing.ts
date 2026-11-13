@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 // Public read-only access, matching the existing product documents integration.
-const URL_BASE = "https://unlygyqhgeujetjphrro.supabase.co";
-const KEY = "sb_publishable_SwnulQeid12F7Qud_jODJQ_1s0DcUCN";
+const URL_BASE = "https://ftwujzvsdymfcbqyjxci.supabase.co";
+const KEY = "sb_publishable_QbF4mNg-JnNpAqEYYNpcdw_wO613Xnb";
 
 export type PricedVariant = {
   id: string;
@@ -39,12 +39,12 @@ async function fetchJson<T>(path: string): Promise<T> {
 
 export async function fetchProductPrices(colorCode: string): Promise<PricedVariant[]> {
   const products = await fetchJson<{ id: string }[]>(
-    `products?select=id&color_code=eq.${encodeURIComponent(colorCode)}&limit=1`,
+    `mockup_products?select=id&color_code=eq.${encodeURIComponent(colorCode)}&limit=1`,
   );
   if (!products.length) return [];
 
   const rows = await fetchJson<VariantRow[]>(
-    `product_variants?select=id,size,unit,price,currency_code,status,inventory_quantity&product_id=eq.${products[0]!.id}&is_dummy=eq.false&order=size.asc`,
+    `mockup_product_variants?select=id,size,unit,price,currency_code,status,inventory_quantity&product_id=eq.${products[0]!.id}&is_dummy=eq.false&order=size.asc`,
   );
 
   return rows.map((row) => ({

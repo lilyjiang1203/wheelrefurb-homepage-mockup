@@ -3,8 +3,8 @@ import { Dialog, DialogContent, DialogTitle, DialogDescription } from "./ui/dial
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "./ui/accordion";
 import { ProductGallery } from "./product-gallery";
 
-const BASE = "https://unlygyqhgeujetjphrro.supabase.co";
-const KEY = "sb_publishable_SwnulQeid12F7Qud_jODJQ_1s0DcUCN";
+const BASE = "https://ftwujzvsdymfcbqyjxci.supabase.co";
+const KEY = "sb_publishable_QbF4mNg-JnNpAqEYYNpcdw_wO613Xnb";
 type Media = { id: string; bucket_name: string; storage_path: string; media_type: string; media_role: string; alt_text: string | null };
 type Product = { color_name: string | null; product_name: string; description: string | null; benefits: string[] | null; application_instructions: string | null; technical_details: Record<string, unknown> | null };
 type Variant = { id: string; size: number; unit: string; price: number | null; currency_code: string | null; inventory_quantity: number | null; status: string };
@@ -15,7 +15,7 @@ async function read<T>(path: string, signal: AbortSignal): Promise<T> {
   if (!r.ok) throw new Error("Unable to load product");
   return r.json();
 }
-const url = (m: { bucket_name: string; storage_path: string }) => `${BASE}/storage/v1/object/public/${encodeURIComponent(m.bucket_name)}/${m.storage_path.split('/').map(encodeURIComponent).join('/')}`;
+const url = (m: { bucket_name: string; storage_path: string }) => `https://unlygyqhgeujetjphrro.supabase.co/storage/v1/object/public/${encodeURIComponent(m.bucket_name)}/${m.storage_path.split('/').map(encodeURIComponent).join('/')}`;
 const labels: Record<string,string> = {brand:"Brand",color_name:"Color Name",item_number:"Item No.",color_family:"Color Family",finish:"Finish",product_line:"Product Line",coating_form:"Coating Form",carrier_type:"Carrier Type",coating_layer:"Coating Layer",panel_number:"Panel Number",gloss_level:"Gloss Level",application_parameters:"Application Parameters",coating_system_reference:"Coating System Reference"};
 export function SandboxProductPreview({ productId, onClose }: { productId: string | null; onClose: () => void }) {
   const [state,setState]=useState<{status:"loading"|"error"|"ready";data:Data|null}>({status:"loading",data:null});
@@ -23,9 +23,9 @@ export function SandboxProductPreview({ productId, onClose }: { productId: strin
     if(!productId)return;
     const controller=new AbortController();setState({status:"loading",data:null});
     Promise.all([
-      read<Product[]>(`products?select=color_name,product_name,description,benefits,application_instructions,technical_details&id=eq.${productId}`,controller.signal),
-      read<Media[]>(`product_media?select=*&product_id=eq.${productId}&order=display_order.asc`,controller.signal),
-      read<Variant[]>(`product_variants?select=id,size,unit,price,currency_code,inventory_quantity,status&product_id=eq.${productId}&is_dummy=eq.false&order=size.asc`,controller.signal),
+      read<Product[]>(`mockup_products?select=color_name,product_name,description,benefits,application_instructions,technical_details&id=eq.${productId}`,controller.signal),
+      read<Media[]>(`mockup_product_media?select=*&product_id=eq.${productId}&order=display_order.asc`,controller.signal),
+      read<Variant[]>(`mockup_product_variants?select=id,size,unit,price,currency_code,inventory_quantity,status&product_id=eq.${productId}&is_dummy=eq.false&order=size.asc`,controller.signal),
       read<Document[]>(`product_documents?select=id,document_type,document_title,bucket_name,storage_path&product_id=eq.${productId}`,controller.signal),
     ]).then(([products,media,variants,documents])=>{
       if(!products[0])throw new Error("Product unavailable");
