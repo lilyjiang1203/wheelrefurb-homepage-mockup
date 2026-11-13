@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Share } from "lucide-react";
+import { Share, Share2 } from "lucide-react";
 import { Button } from "../../components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../components/ui/tooltip";
 
@@ -8,9 +8,9 @@ export const Route = createFileRoute("/sandbox/share-preview")({
   head: () => ({
     meta: [
       { title: "Share Control Preview (Private) | Wheel Refurb" },
-      { name: "description", content: "Internal comparison of two share control treatments in the purchase section." },
+      { name: "description", content: "Internal comparison of four share control treatments in the purchase section." },
       { property: "og:title", content: "Share Control Preview (Private)" },
-      { property: "og:description", content: "Internal comparison of two share control treatments." },
+      { property: "og:description", content: "Internal comparison of four share control treatments." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex, nofollow" },
@@ -20,36 +20,64 @@ export const Route = createFileRoute("/sandbox/share-preview")({
 });
 
 const sizes = ["0.5L", "1L", "5L"];
+type Variant = "A" | "B" | "C" | "D";
 
-function Purchase({ variant }: { variant: "A" | "B" }) {
-  const [size, setSize] = useState("1L");
+const variantLabels: Record<Variant, string> = {
+  A: "plain text link below Add to cart",
+  B: "icon + text pill below Add to cart",
+  C: "small icon on the Add to cart row",
+  D: "icon at the top corner of the panel",
+};
+
+function useShare() {
   const [note, setNote] = useState<string | null>(null);
   const share = async () => {
     const url = `${window.location.origin}/products/audi-anthracite-lv7d`;
     try {
       if (navigator.share) await navigator.share({ title: "Audi Anthracite LV7D", url });
-      else { await navigator.clipboard.writeText(url); setNote("Link copied"); setTimeout(() => setNote(null), 1800); }
-    } catch { /* user cancelled */ }
+      else {
+        await navigator.clipboard.writeText(url);
+        setNote("Link copied");
+        setTimeout(() => setNote(null), 1800);
+      }
+    } catch {
+      /* user cancelled */
+    }
   };
+  return { share, note };
+}
+
+function Purchase({ variant }: { variant: Variant }) {
+  const [size, setSize] = useState("1L");
+  const { share, note } = useShare();
+
+  const cornerShare = variant === "D" && (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <button type="button" className="sp-corner" aria-label="Share this product" onClick={share}>
+          <Share size={15} strokeWidth={1.5} aria-hidden="true" />
+        </button>
+      </TooltipTrigger>
+      <TooltipContent>Share</TooltipContent>
+    </Tooltip>
+  );
+
   return (
-    <div className="sp-purchase">
+    <div className={variant === "D" ? "sp-purchase sp-purchase-rel" : "sp-purchase"}>
+      {cornerShare}
       <p className="sp-eyebrow">FreiLacke / Wheel Refinishing Color</p>
       <h3 className="sp-title">Audi Anthracite LV7D</h3>
       <p className="sp-price">CAD $XX.XX</p>
       <span className="sp-label">Package size</span>
       <div className="sp-sizes">
         {sizes.map((s) => (
-          <Button key={s} variant="outline" size="sm" aria-pressed={size === s} className={size === s ? "sp-size-on" : ""} onClick={() => setSize(s)}>{s}</Button>
+          <Button key={s} variant="outline" size="sm" aria-pressed={size === s} className={size === s ? "sp-size-on" : ""} onClick={() => setSize(s)}>
+            {s}
+          </Button>
         ))}
       </div>
-      {variant === "A" ? (
-        <>
-          <Button className="sp-cart">Add to cart</Button>
-          <button type="button" className="sp-share-link" onClick={share}>
-            <Share size={14} strokeWidth={1.5} aria-hidden="true" /> Share
-          </button>
-        </>
-      ) : (
+
+      {variant === "C" ? (
         <div className="sp-row">
           <Button className="sp-cart sp-cart-flex">Add to cart</Button>
           <Tooltip>
@@ -61,7 +89,21 @@ function Purchase({ variant }: { variant: "A" | "B" }) {
             <TooltipContent>Share</TooltipContent>
           </Tooltip>
         </div>
+      ) : (
+        <Button className="sp-cart">Add to cart</Button>
       )}
+
+      {variant === "A" && (
+        <button type="button" className="sp-share-text" onClick={share}>
+          Share
+        </button>
+      )}
+      {variant === "B" && (
+        <button type="button" className="sp-share-pill" onClick={share}>
+          <Share2 size={13} strokeWidth={1.5} aria-hidden="true" /> Share
+        </button>
+      )}
+
       <p className="sp-note" aria-live="polite">{note ?? ""}</p>
     </div>
   );
@@ -80,10 +122,14 @@ function SharePreview() {
           <section key={d} className="sp-device">
             <h2>{d === "desktop" ? "Desktop" : "Mobile (375px)"}</h2>
             <div className="sp-grid">
-              {(["A", "B"] as const).map((v) => (
+              {(["A", "B", "C", "D"] as const).map((v) => (
                 <figure key={v} className="sp-fig">
-                  <figcaption>Version {v} — {v === "A" ? "text link below Add to cart" : "outlined icon button with tooltip"}</figcaption>
-                  <div className={d === "mobile" ? "sp-frame sp-frame-mobile" : "sp-frame"}><Purchase variant={v} /></div>
+                  <figcaption>
+                    Version {v} — {variantLabels[v]}
+                  </figcaption>
+                  <div className={d === "mobile" ? "sp-frame sp-frame-mobile" : "sp-frame"}>
+                    <Purchase variant={v} />
+                  </div>
                 </figure>
               ))}
             </div>

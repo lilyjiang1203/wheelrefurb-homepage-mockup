@@ -2600,6 +2600,11 @@ html { scroll-behavior: smooth; }
 .sp-cart-flex{flex:1;width:auto}
 .sp-share-icon{width:3rem;height:3rem;flex:none;color:var(--muted-foreground)}
 .sp-share-icon:hover{color:var(--foreground)}
-.sp-share-link{display:inline-flex;align-items:center;gap:.35rem;margin-top:.75rem;background:none;border:0;padding:0;font-size:.8rem;color:var(--muted-foreground);cursor:pointer}
-.sp-share-link:hover{color:var(--foreground);text-decoration:underline;text-underline-offset:3px}
+.sp-share-text{display:inline-block;margin-top:.6rem;background:none;border:0;padding:0;font-size:.8rem;color:var(--muted-foreground);cursor:pointer}
+.sp-share-text:hover{color:var(--foreground);text-decoration:underline;text-underline-offset:3px}
+.sp-share-pill{display:inline-flex;align-items:center;gap:.35rem;margin-top:.75rem;padding:.35rem .85rem;border:1px solid var(--border);border-radius:999px;background:none;font-size:.78rem;color:var(--muted-foreground);cursor:pointer}
+.sp-share-pill:hover{border-color:var(--foreground);color:var(--foreground)}
+.sp-purchase-rel{position:relative}
+.sp-corner{position:absolute;top:0;right:0;display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;border:1px solid var(--border);border-radius:999px;background:none;color:var(--muted-foreground);cursor:pointer}
+.sp-corner:hover{border-color:var(--foreground);color:var(--foreground)}
 .sp-note{min-height:1rem;font-size:.75rem;color:var(--muted-foreground);margin-top:.4rem}

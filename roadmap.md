@@ -48,3 +48,4 @@
 - [x] Build Your Coating Kit section on Audi product page — dynamic from wheelrefurb-shopify (coating_systems/coating_system_products/products/product_variants), layer order, Current Product badge, variant sizes with inventory gating, kit summary, disabled cart button; verified in browser
 - [x] Customer reviews on product page (sandbox, local state only)
 - [x] Private preview: purchase section Share control, version A (text link) vs B (icon button + tooltip), desktop + mobile
+- [ ] Share control comparison page rebuilt with four styles (A plain text link, B icon+text pill, C icon on cart row, D top-corner icon) at /sandbox/share-preview; awaiting user's pick before installing on the product page
