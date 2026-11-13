@@ -9,8 +9,8 @@ const PAGE_SIZE = 24;
 
 export const Route = createFileRoute("/sandbox/products")({
   validateSearch: (search: Record<string, unknown>) => ({
-    collection: typeof search.collection === "string" ? search.collection : undefined,
-    category: typeof search.category === "string" ? search.category : undefined,
+    collection: typeof search["collection"] === "string" ? (search["collection"] as string) : undefined,
+    category: typeof search["category"] === "string" ? (search["category"] as string) : undefined,
   }),
   head: () => ({ meta: [
     { title: "Sandbox Product Catalog | Wheel Refurb" },
@@ -86,7 +86,7 @@ function SandboxProducts() {
         {(category !== "all" || collection !== "all") && (
           <div className="mb-5 flex items-center gap-3 flex-wrap text-sm">
             <span className="font-medium">Showing: {collection !== "all" ? collection : catalogCategoryNames[category] ?? category}</span>
-            <Link to="/sandbox/products" className="text-brand hover:underline">View all Sandbox products</Link>
+            <Link to="/sandbox/products" search={{}} className="text-brand hover:underline">View all Sandbox products</Link>
           </div>
         )}
         {products.length === 0 && <p className="py-10 text-sm text-muted-foreground">
@@ -125,7 +125,7 @@ function SandboxProducts() {
                   aria-label="Previous page"><ChevronLeft size={16} /> Previous</button>
                 {pageNumbers.map((number, index) => (
                   <span key={number} className="inline-flex items-center gap-2">
-                    {index > 0 && number - pageNumbers[index - 1] > 1 && (
+                    {index > 0 && number - (pageNumbers[index - 1] ?? number) > 1 && (
                       <span className="px-1 text-muted-foreground" aria-hidden="true">…</span>
                     )}
                     <button type="button" onClick={() => setPage(number)}
