@@ -8,7 +8,7 @@ import { matchesCatalogCategory, catalogCategoryNames } from "../../lib/catalog-
 const PAGE_SIZE = 24;
 
 export const Route = createFileRoute("/sandbox/products")({
-  validateSearch: (search: Record<string, unknown>): { collection?: string; category?: string } => ({
+  validateSearch: (search: Record<string, unknown>): { collection?: string | undefined; category?: string | undefined } => ({
     collection: typeof search["collection"] === "string" ? (search["collection"] as string) : undefined,
     category: typeof search["category"] === "string" ? (search["category"] as string) : undefined,
   }),
