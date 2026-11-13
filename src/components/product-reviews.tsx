@@ -54,7 +54,7 @@ export function ReviewsSection({ reviews, onWrite }: { reviews: ProductReview[];
   const shown = reviews
     .filter((review) => {
       const text = `${review.title} ${review.body}`.toLowerCase();
-      return (!normalized || text.includes(normalized)) && (!topic || text.includes(topic.toLowerCase().split(" ")[0]));
+      return (!normalized || text.includes(normalized)) && (!topic || text.includes(topic.toLowerCase().split(" ")[0] ?? ""));
     })
     .sort((a, b) => sort === "highest"
       ? b.rating - a.rating

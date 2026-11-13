@@ -14,9 +14,9 @@ class RecommendationBoundary extends Component<
   { children: ReactNode },
   { failed: boolean }
 > {
-  state = { failed: false };
+  override state = { failed: false };
   static getDerivedStateFromError() { return { failed: true }; }
-  render() {
+  override render() {
     return this.state.failed ? <RecommendationsFallback /> : this.props.children;
   }
 }

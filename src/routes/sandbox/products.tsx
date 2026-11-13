@@ -8,9 +8,9 @@ import { matchesCatalogCategory, catalogCategoryNames } from "../../lib/catalog-
 const PAGE_SIZE = 24;
 
 export const Route = createFileRoute("/sandbox/products")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    collection: typeof search.collection === "string" ? search.collection : undefined,
-    category: typeof search.category === "string" ? search.category : undefined,
+  validateSearch: (search: Record<string, unknown>): { collection?: string | undefined; category?: string | undefined } => ({
+    collection: typeof search["collection"] === "string" ? (search["collection"] as string) : undefined,
+    category: typeof search["category"] === "string" ? (search["category"] as string) : undefined,
   }),
   head: () => ({ meta: [
     { title: "Sandbox Product Catalog | Wheel Refurb" },
@@ -125,7 +125,7 @@ function SandboxProducts() {
                   aria-label="Previous page"><ChevronLeft size={16} /> Previous</button>
                 {pageNumbers.map((number, index) => (
                   <span key={number} className="inline-flex items-center gap-2">
-                    {index > 0 && number - pageNumbers[index - 1] > 1 && (
+                    {index > 0 && number - (pageNumbers[index - 1] ?? number) > 1 && (
                       <span className="px-1 text-muted-foreground" aria-hidden="true">…</span>
                     )}
                     <button type="button" onClick={() => setPage(number)}

@@ -65,7 +65,7 @@ export function useProductShortDescription(colorCode: string, fallback: string):
         if (!response.ok) return;
         const rows = (await response.json()) as ShortDescriptionProduct[];
         if (!cancelled && Array.isArray(rows) && rows.length > 0) {
-          setDescription(formatProductShortDescription(rows[0]));
+          setDescription(formatProductShortDescription(rows[0]!));
         }
       } catch {
         // Retain the approved copy when product metadata is unavailable.

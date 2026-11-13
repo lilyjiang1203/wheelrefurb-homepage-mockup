@@ -19,6 +19,7 @@ import { Route as ProductFinderCustomFinishRouteImport } from './routes/product-
 import { Route as ProductFinderOemRestoreRouteImport } from './routes/product-finder.oem-restore'
 import { Route as ProductsAudiAnthraciteLv7dRouteImport } from './routes/products.audi-anthracite-lv7d'
 import { Route as SandboxProductsRouteImport } from './routes/sandbox/products'
+import { Route as SandboxSharePreviewRouteImport } from './routes/sandbox/share-preview'
 import { Route as SandboxProductsItemNoRouteImport } from './routes/sandbox/products_.$itemNo'
 
 const IndexRoute = IndexRouteImport.update({
@@ -74,6 +75,11 @@ const SandboxProductsRoute = SandboxProductsRouteImport.update({
   path: '/sandbox/products',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SandboxSharePreviewRoute = SandboxSharePreviewRouteImport.update({
+  id: '/sandbox/share-preview',
+  path: '/sandbox/share-preview',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SandboxProductsItemNoRoute = SandboxProductsItemNoRouteImport.update({
   id: '/sandbox/products_/$itemNo',
   path: '/sandbox/products/$itemNo',
@@ -91,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/product-finder/oem-restore': typeof ProductFinderOemRestoreRoute
   '/products/audi-anthracite-lv7d': typeof ProductsAudiAnthraciteLv7dRoute
   '/sandbox/products': typeof SandboxProductsRoute
+  '/sandbox/share-preview': typeof SandboxSharePreviewRoute
   '/sandbox/products/$itemNo': typeof SandboxProductsItemNoRoute
 }
 export interface FileRoutesByTo {
@@ -104,6 +111,7 @@ export interface FileRoutesByTo {
   '/product-finder/oem-restore': typeof ProductFinderOemRestoreRoute
   '/products/audi-anthracite-lv7d': typeof ProductsAudiAnthraciteLv7dRoute
   '/sandbox/products': typeof SandboxProductsRoute
+  '/sandbox/share-preview': typeof SandboxSharePreviewRoute
   '/sandbox/products/$itemNo': typeof SandboxProductsItemNoRoute
 }
 export interface FileRoutesById {
@@ -118,6 +126,7 @@ export interface FileRoutesById {
   '/product-finder/oem-restore': typeof ProductFinderOemRestoreRoute
   '/products/audi-anthracite-lv7d': typeof ProductsAudiAnthraciteLv7dRoute
   '/sandbox/products': typeof SandboxProductsRoute
+  '/sandbox/share-preview': typeof SandboxSharePreviewRoute
   '/sandbox/products_/$itemNo': typeof SandboxProductsItemNoRoute
 }
 export interface FileRouteTypes {
@@ -133,6 +142,7 @@ export interface FileRouteTypes {
     | '/product-finder/oem-restore'
     | '/products/audi-anthracite-lv7d'
     | '/sandbox/products'
+    | '/sandbox/share-preview'
     | '/sandbox/products/$itemNo'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -146,6 +156,7 @@ export interface FileRouteTypes {
     | '/product-finder/oem-restore'
     | '/products/audi-anthracite-lv7d'
     | '/sandbox/products'
+    | '/sandbox/share-preview'
     | '/sandbox/products/$itemNo'
   id:
     | '__root__'
@@ -159,6 +170,7 @@ export interface FileRouteTypes {
     | '/product-finder/oem-restore'
     | '/products/audi-anthracite-lv7d'
     | '/sandbox/products'
+    | '/sandbox/share-preview'
     | '/sandbox/products_/$itemNo'
   fileRoutesById: FileRoutesById
 }
@@ -173,6 +185,7 @@ export interface RootRouteChildren {
   ProductFinderOemRestoreRoute: typeof ProductFinderOemRestoreRoute
   ProductsAudiAnthraciteLv7dRoute: typeof ProductsAudiAnthraciteLv7dRoute
   SandboxProductsRoute: typeof SandboxProductsRoute
+  SandboxSharePreviewRoute: typeof SandboxSharePreviewRoute
   SandboxProductsItemNoRoute: typeof SandboxProductsItemNoRoute
 }
 
@@ -248,6 +261,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SandboxProductsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sandbox/share-preview': {
+      id: '/sandbox/share-preview'
+      path: '/sandbox/share-preview'
+      fullPath: '/sandbox/share-preview'
+      preLoaderRoute: typeof SandboxSharePreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sandbox/products_/$itemNo': {
       id: '/sandbox/products_/$itemNo'
       path: '/sandbox/products/$itemNo'
@@ -269,6 +289,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProductFinderOemRestoreRoute: ProductFinderOemRestoreRoute,
   ProductsAudiAnthraciteLv7dRoute: ProductsAudiAnthraciteLv7dRoute,
   SandboxProductsRoute: SandboxProductsRoute,
+  SandboxSharePreviewRoute: SandboxSharePreviewRoute,
   SandboxProductsItemNoRoute: SandboxProductsItemNoRoute,
 }
 export const routeTree = rootRouteImport

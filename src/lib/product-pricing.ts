@@ -44,7 +44,7 @@ export async function fetchProductPrices(colorCode: string): Promise<PricedVaria
   if (!products.length) return [];
 
   const rows = await fetchJson<VariantRow[]>(
-    `product_variants?select=id,size,unit,price,currency_code,status,inventory_quantity&product_id=eq.${products[0].id}&is_dummy=eq.false&order=size.asc`,
+    `product_variants?select=id,size,unit,price,currency_code,status,inventory_quantity&product_id=eq.${products[0]!.id}&is_dummy=eq.false&order=size.asc`,
   );
 
   return rows.map((row) => ({
