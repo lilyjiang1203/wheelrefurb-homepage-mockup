@@ -47,4 +47,4 @@
 - [x] Finder final UX: contextual Contact assistance in color step 3 and custom finish step 1; verified Audi imagery, hide unavailable product photos, neutral system classification; all three flows verified with live demo data.
 - [x] Build Your Coating Kit section on Audi product page — dynamic from wheelrefurb-shopify (coating_systems/coating_system_products/products/product_variants), layer order, Current Product badge, variant sizes with inventory gating, kit summary, disabled cart button; verified in browser
 - [x] Customer reviews on product page (sandbox, local state only)
-- [ ] Private preview: purchase section Share control, version A (text link) vs B (icon button + tooltip), desktop + mobile
+- [x] Private preview: purchase section Share control, version A (text link) vs B (icon button + tooltip), desktop + mobile
