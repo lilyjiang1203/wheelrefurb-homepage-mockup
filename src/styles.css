@@ -2608,3 +2608,34 @@ html { scroll-behavior: smooth; }
 .sp-corner{position:absolute;top:0;right:0;display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;border:1px solid var(--border);border-radius:999px;background:none;color:var(--muted-foreground);cursor:pointer}
 .sp-corner:hover{border-color:var(--foreground);color:var(--foreground)}
 .sp-note{min-height:1rem;font-size:.75rem;color:var(--muted-foreground);margin-top:.4rem}
+
+/* Iron Grip poster concepts (private sandbox) — palette from IronGrip Style Guide v1 */
+.igp { --ig-ink: oklch(0.2 0.008 240); --ig-steel: oklch(0.31 0.012 250); --ig-blue: oklch(0.51 0.11 240); --ig-alloy: oklch(0.965 0.002 250); --ig-line: oklch(0.91 0.005 250); --ig-muted: oklch(0.5 0.015 250); --ig-white: oklch(1 0 0);
+  background: var(--ig-alloy); color: var(--ig-ink); min-height: 100vh; padding: 48px 32px 80px; font-family: Inter, system-ui, sans-serif; }
+.igp-top { max-width: 1400px; margin: 0 auto 32px; }
+.igp-eyebrow, .igp-kicker { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ig-blue); }
+.igp-title { font-family: "Barlow Semi Condensed", sans-serif; font-weight: 700; font-size: 40px; text-transform: uppercase; margin: 6px 0; }
+.igp-sub { color: var(--ig-muted); }
+.igp-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+@media (max-width: 900px) { .igp-grid { grid-template-columns: 1fr; } }
+.igp-item { margin: 0; }
+.igp-poster { position: relative; aspect-ratio: 3 / 2; overflow: hidden; border: 1px solid var(--ig-line); container-type: inline-size; }
+.igp-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.igp-copy { position: absolute; left: 5.5cqw; top: 6cqw; bottom: 6cqw; width: 38cqw; display: flex; flex-direction: column; }
+.igp-logo { display: flex; align-items: center; gap: 1.2cqw; font-family: "Barlow Semi Condensed", sans-serif; font-weight: 700; font-size: 2.4cqw; letter-spacing: .04em; line-height: 1; margin-bottom: auto; }
+.igp-logo small { display: block; font-size: .5em; letter-spacing: .3em; font-weight: 600; margin-top: .3em; }
+.igp-mark { border: 2px solid currentColor; padding: .25em .3em; }
+.igp-copy .igp-kicker { font-size: 1.3cqw; margin: 0 0 1cqw; }
+.igp-h { font-family: "Barlow Semi Condensed", sans-serif; font-weight: 700; text-transform: uppercase; font-size: 5.6cqw; line-height: .95; margin: 0 0 1.6cqw; }
+.igp-line { font-size: 1.45cqw; line-height: 1.45; color: var(--ig-muted); margin: 0 0 2.4cqw; }
+.igp-cta { align-self: flex-start; background: var(--ig-blue); color: var(--ig-white); font-size: 1.3cqw; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: 1.1cqw 2cqw; }
+.igp-chip { position: absolute; right: 3.5cqw; bottom: 3.5cqw; background: var(--ig-white); border: 1px solid var(--ig-line); padding: 1cqw 1.6cqw; display: flex; flex-direction: column; font-size: 1.25cqw; }
+.igp-chip strong { font-family: "Barlow Semi Condensed", sans-serif; font-weight: 600; font-size: 1.6cqw; }
+.igp-chip span { color: var(--ig-muted); letter-spacing: .08em; text-transform: uppercase; }
+.igp-cool .igp-logo, .igp-cool .igp-h { color: var(--ig-ink); }
+.igp-warm .igp-logo, .igp-warm .igp-h { color: var(--ig-ink); }
+.igp-cap { margin-top: 10px; font-size: 13px; color: var(--ig-muted); }
+.igp-poster { background: var(--ig-white); }
+.igp-img { left: 36%; width: 64%; object-position: 30% center; }
+.igp-copy { width: 28cqw; }
+.igp-h { font-size: 4.4cqw; }

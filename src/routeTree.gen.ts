@@ -18,6 +18,7 @@ import { Route as ProductFinderChangeWheelColorRouteImport } from './routes/prod
 import { Route as ProductFinderCustomFinishRouteImport } from './routes/product-finder.custom-finish'
 import { Route as ProductFinderOemRestoreRouteImport } from './routes/product-finder.oem-restore'
 import { Route as ProductsAudiAnthraciteLv7dRouteImport } from './routes/products.audi-anthracite-lv7d'
+import { Route as SandboxIrongripPostersRouteImport } from './routes/sandbox/irongrip-posters'
 import { Route as SandboxProductsRouteImport } from './routes/sandbox/products'
 import { Route as SandboxSharePreviewRouteImport } from './routes/sandbox/share-preview'
 import { Route as SandboxProductsItemNoRouteImport } from './routes/sandbox/products_.$itemNo'
@@ -70,6 +71,11 @@ const ProductsAudiAnthraciteLv7dRoute =
     path: '/products/audi-anthracite-lv7d',
     getParentRoute: () => rootRouteImport,
   } as any)
+const SandboxIrongripPostersRoute = SandboxIrongripPostersRouteImport.update({
+  id: '/sandbox/irongrip-posters',
+  path: '/sandbox/irongrip-posters',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SandboxProductsRoute = SandboxProductsRouteImport.update({
   id: '/sandbox/products',
   path: '/sandbox/products',
@@ -96,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/product-finder/custom-finish': typeof ProductFinderCustomFinishRoute
   '/product-finder/oem-restore': typeof ProductFinderOemRestoreRoute
   '/products/audi-anthracite-lv7d': typeof ProductsAudiAnthraciteLv7dRoute
+  '/sandbox/irongrip-posters': typeof SandboxIrongripPostersRoute
   '/sandbox/products': typeof SandboxProductsRoute
   '/sandbox/share-preview': typeof SandboxSharePreviewRoute
   '/sandbox/products/$itemNo': typeof SandboxProductsItemNoRoute
@@ -110,6 +117,7 @@ export interface FileRoutesByTo {
   '/product-finder/custom-finish': typeof ProductFinderCustomFinishRoute
   '/product-finder/oem-restore': typeof ProductFinderOemRestoreRoute
   '/products/audi-anthracite-lv7d': typeof ProductsAudiAnthraciteLv7dRoute
+  '/sandbox/irongrip-posters': typeof SandboxIrongripPostersRoute
   '/sandbox/products': typeof SandboxProductsRoute
   '/sandbox/share-preview': typeof SandboxSharePreviewRoute
   '/sandbox/products/$itemNo': typeof SandboxProductsItemNoRoute
@@ -125,6 +133,7 @@ export interface FileRoutesById {
   '/product-finder/custom-finish': typeof ProductFinderCustomFinishRoute
   '/product-finder/oem-restore': typeof ProductFinderOemRestoreRoute
   '/products/audi-anthracite-lv7d': typeof ProductsAudiAnthraciteLv7dRoute
+  '/sandbox/irongrip-posters': typeof SandboxIrongripPostersRoute
   '/sandbox/products': typeof SandboxProductsRoute
   '/sandbox/share-preview': typeof SandboxSharePreviewRoute
   '/sandbox/products_/$itemNo': typeof SandboxProductsItemNoRoute
@@ -141,6 +150,7 @@ export interface FileRouteTypes {
     | '/product-finder/custom-finish'
     | '/product-finder/oem-restore'
     | '/products/audi-anthracite-lv7d'
+    | '/sandbox/irongrip-posters'
     | '/sandbox/products'
     | '/sandbox/share-preview'
     | '/sandbox/products/$itemNo'
@@ -155,6 +165,7 @@ export interface FileRouteTypes {
     | '/product-finder/custom-finish'
     | '/product-finder/oem-restore'
     | '/products/audi-anthracite-lv7d'
+    | '/sandbox/irongrip-posters'
     | '/sandbox/products'
     | '/sandbox/share-preview'
     | '/sandbox/products/$itemNo'
@@ -169,6 +180,7 @@ export interface FileRouteTypes {
     | '/product-finder/custom-finish'
     | '/product-finder/oem-restore'
     | '/products/audi-anthracite-lv7d'
+    | '/sandbox/irongrip-posters'
     | '/sandbox/products'
     | '/sandbox/share-preview'
     | '/sandbox/products_/$itemNo'
@@ -184,6 +196,7 @@ export interface RootRouteChildren {
   ProductFinderCustomFinishRoute: typeof ProductFinderCustomFinishRoute
   ProductFinderOemRestoreRoute: typeof ProductFinderOemRestoreRoute
   ProductsAudiAnthraciteLv7dRoute: typeof ProductsAudiAnthraciteLv7dRoute
+  SandboxIrongripPostersRoute: typeof SandboxIrongripPostersRoute
   SandboxProductsRoute: typeof SandboxProductsRoute
   SandboxSharePreviewRoute: typeof SandboxSharePreviewRoute
   SandboxProductsItemNoRoute: typeof SandboxProductsItemNoRoute
@@ -254,6 +267,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsAudiAnthraciteLv7dRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sandbox/irongrip-posters': {
+      id: '/sandbox/irongrip-posters'
+      path: '/sandbox/irongrip-posters'
+      fullPath: '/sandbox/irongrip-posters'
+      preLoaderRoute: typeof SandboxIrongripPostersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sandbox/products': {
       id: '/sandbox/products'
       path: '/sandbox/products'
@@ -288,6 +308,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProductFinderCustomFinishRoute: ProductFinderCustomFinishRoute,
   ProductFinderOemRestoreRoute: ProductFinderOemRestoreRoute,
   ProductsAudiAnthraciteLv7dRoute: ProductsAudiAnthraciteLv7dRoute,
+  SandboxIrongripPostersRoute: SandboxIrongripPostersRoute,
   SandboxProductsRoute: SandboxProductsRoute,
   SandboxSharePreviewRoute: SandboxSharePreviewRoute,
   SandboxProductsItemNoRoute: SandboxProductsItemNoRoute,
